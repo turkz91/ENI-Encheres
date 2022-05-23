@@ -1,6 +1,6 @@
 package fr.eni.encheres.bo;
 
-public class Utilisateurs {
+public class Utilisateur {
 
 	private int no_utilisateur;
 	private String pseudo;
@@ -15,7 +15,7 @@ public class Utilisateurs {
 	private int credit;
 	private boolean administrateur;
 
-	public Utilisateurs(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
 		super();
 		this.no_utilisateur = no_utilisateur;
@@ -33,13 +33,13 @@ public class Utilisateurs {
 	}
 
 	// Without no_utilisateur
-	public Utilisateurs(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
 		super();
 	}
 
 	// without no_utilisateur & without telephone (can be null in db)
-	public Utilisateurs(String pseudo, String nom, String prenom, String email, String rue, String code_postal,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String code_postal,
 			String ville, String mot_de_passe, int credit, boolean administrateur) {
 		super();
 	}
