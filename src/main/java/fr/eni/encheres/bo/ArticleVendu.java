@@ -15,7 +15,10 @@ public class ArticleVendu {
 	private int no_categorie;
 	
 	
-	
+	public ArticleVendu() {
+		super();
+	}
+
 	public ArticleVendu(int no_article, String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, int prix_initial, int priv_vente, int no_utilisateur, int no_categorie) {
 		super();
