@@ -6,9 +6,8 @@ public class Categorie {
 	private String libelle;
 	
 	public Categorie(int no_categorie, String libelle) {
-		super();
-		this.no_categorie = no_categorie;
-		this.libelle = libelle;
+		setNo_categorie(no_categorie);
+		setLibelle(libelle);
 	}
 
 	public int getNo_categorie() {
