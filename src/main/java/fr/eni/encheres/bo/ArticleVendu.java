@@ -19,29 +19,12 @@ public class ArticleVendu {
 	public ArticleVendu(int no_article, String nom_article, String description, Date date_debut_encheres,
 			Date date_fin_encheres, int prix_initial, int priv_vente, int no_utilisateur, int no_categorie) {
 		super();
-		this.no_article = no_article;
-		this.nom_article = nom_article;
-		this.description = description;
-		this.date_debut_encheres = date_debut_encheres;
-		this.date_fin_encheres = date_fin_encheres;
-		this.prix_initial = prix_initial;
-		this.priv_vente = priv_vente;
-		this.no_utilisateur = no_utilisateur;
-		this.no_categorie = no_categorie;
 	}
 	
 	// Without no_article
 	public ArticleVendu(String nom_article, String description, Date date_debut_encheres,
 			Date date_fin_encheres, int prix_initial, int priv_vente, int no_utilisateur, int no_categorie) {
 		super();
-		this.nom_article = nom_article;
-		this.description = description;
-		this.date_debut_encheres = date_debut_encheres;
-		this.date_fin_encheres = date_fin_encheres;
-		this.prix_initial = prix_initial;
-		this.priv_vente = priv_vente;
-		this.no_utilisateur = no_utilisateur;
-		this.no_categorie = no_categorie;
 	}
 	
 	// Without no_article & prix_final
@@ -55,15 +38,6 @@ public class ArticleVendu {
 		public ArticleVendu(String nom_article, String description, Date date_debut_encheres,
 				Date date_fin_encheres, int no_utilisateur, int no_categorie) {
 			super();
-			this.no_article = no_article;
-			this.nom_article = nom_article;
-			this.description = description;
-			this.date_debut_encheres = date_debut_encheres;
-			this.date_fin_encheres = date_fin_encheres;
-			this.prix_initial = prix_initial;
-			this.priv_vente = priv_vente;
-			this.no_utilisateur = no_utilisateur;
-			this.no_categorie = no_categorie;
 		}
 	
 	public int getNo_article() {
