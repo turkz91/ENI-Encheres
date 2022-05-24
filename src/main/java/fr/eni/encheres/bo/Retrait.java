@@ -11,11 +11,10 @@ public class Retrait {
 	private String ville;
 	
 	public Retrait(int no_article, String rue, String code_postal, String ville) {
-		super();
-		this.no_article = no_article;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
+		setNo_article(no_article);
+		setRue(rue);
+		setCode_postal(code_postal);
+		setVille(ville);
 	}
 
 	public int getNo_article() {
