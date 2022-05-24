@@ -17,31 +17,49 @@ public class Utilisateur {
 
 	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		super();
-		this.no_utilisateur = no_utilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.mot_de_passe = mot_de_passe;
-		this.credit = credit;
-		this.administrateur = administrateur;
+		setNo_utilisateur(no_utilisateur);
+		setPseudo(pseudo);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setTelephone(telephone);
+		setRue(rue);
+		setCode_postal(code_postal);
+		setVille(ville);
+		setMot_de_passe(mot_de_passe);
+		setCredit(credit);
+		setAdministrateur(administrateur);
 	}
 
 	// Without no_utilisateur
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		super();
+		setPseudo(pseudo);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setTelephone(telephone);
+		setRue(rue);
+		setCode_postal(code_postal);
+		setVille(ville);
+		setMot_de_passe(mot_de_passe);
+		setCredit(credit);
+		setAdministrateur(administrateur);
 	}
 
 	// without no_utilisateur & without telephone (can be null in db)
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String code_postal,
 			String ville, String mot_de_passe, int credit, boolean administrateur) {
-		super();
+		setPseudo(pseudo);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setRue(rue);
+		setCode_postal(code_postal);
+		setVille(ville);
+		setMot_de_passe(mot_de_passe);
+		setCredit(credit);
+		setAdministrateur(administrateur);
 	}
 
 	public int getNo_utilisateur() {
