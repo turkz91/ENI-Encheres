@@ -5,8 +5,24 @@ import java.time.LocalDate;
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *
  */
+/**
+ * @author ephra
+ *
+ */
+/**
+ * @author ephra
+ *
+ */
+/**
+ * @author ephra
+ *
+ */
+/**
+ * @author ephra
+ *
+ */
 public class ArticleVendu {
-
+	
 	private int no_article;
 	private String nom_article;
 	private String description;
@@ -16,8 +32,16 @@ public class ArticleVendu {
 	private int prix_vente;
 	private int no_utilisateur;
 	private int no_categorie;
-
-	// Without no_article, prix_initial & prix_final
+	
+	/**
+	 * Constructeur Article vendu - sans no_article, prix_initial, prix_final
+	 * @param nom_article
+	 * @param description
+	 * @param date_debut_encheres
+	 * @param date_fin_encheres
+	 * @param no_utilisateur
+	 * @param no_categorie
+	 */
 	public ArticleVendu(String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, int no_utilisateur, int no_categorie) {
 		setNom_article(nom_article);
@@ -27,21 +51,52 @@ public class ArticleVendu {
 		setNo_utilisateur(no_utilisateur);
 		setNo_categorie(no_categorie);
 	}
-
-	// Without no_article & prix_final
+	
+	/**
+	 * Constructeur Article vendu - sans no_article, prix_final
+	 * @param nom_article
+	 * @param description
+	 * @param date_debut_encheres
+	 * @param date_fin_encheres
+	 * @param prix_initial
+	 * @param no_utilisateur
+	 * @param no_categorie
+	 */
 	public ArticleVendu(String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, int prix_initial, int no_utilisateur, int no_categorie) {
 		this(nom_article,description,date_debut_encheres,date_fin_encheres,no_utilisateur,no_categorie);
 		setPrix_initial(prix_initial);
 	}
-
-	// Without no_article
+	
+	/**
+	 * Constructeur Article vendu - sans no_article
+	 * @param nom_article
+	 * @param description
+	 * @param date_debut_encheres
+	 * @param date_fin_encheres
+	 * @param prix_initial
+	 * @param prix_vente
+	 * @param no_utilisateur
+	 * @param no_categorie
+	 */
 	public ArticleVendu(String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, int prix_initial, int prix_vente, int no_utilisateur, int no_categorie) {
 		this(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,no_utilisateur,no_categorie);setNom_article(nom_article);
 		setPrix_vente(prix_vente);
 	}
 	
+	/**
+	 * Constructeur Article vendu 
+	 * @param no_article
+	 * @param nom_article
+	 * @param description
+	 * @param date_debut_encheres
+	 * @param date_fin_encheres
+	 * @param prix_initial
+	 * @param prix_vente
+	 * @param no_utilisateur
+	 * @param no_categorie
+	 */
 	public ArticleVendu(int no_article, String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, int prix_initial, int prix_vente, int no_utilisateur, int no_categorie) {
 		this(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie);setNom_article(nom_article);

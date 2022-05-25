@@ -13,6 +13,13 @@ public class Retrait {
 	private String code_postal;
 	private String ville;
 	
+	/**
+	 * Constructeur Retrait 
+	 * @param no_article
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 */	
 	public Retrait(int no_article, String rue, String code_postal, String ville) {
 		setNo_article(no_article);
 		setRue(rue);
