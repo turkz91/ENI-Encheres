@@ -8,7 +8,17 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>  
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>InstallCategorie</servlet-name>
+  	<jsp-file>/WEB-INF/install/categorieInit.jsp</jsp-file>  	
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>InstallCategorie</servlet-name>
+  	<url-pattern>/install/1/categories</url-pattern>
+  </servlet-mapping>  
 </web-app>
 
 
