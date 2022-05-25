@@ -4,7 +4,7 @@
 package fr.eni.encheres.dal;
 
 /**
- * @author ephra
+ * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *
  */
 public abstract class DAOFactory {

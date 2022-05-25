@@ -2,7 +2,10 @@
  * 
  */
 package fr.eni.encheres.bo;
-
+/**
+ * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
+ *
+ */
 public class Retrait {
 	
 	private int no_article;
