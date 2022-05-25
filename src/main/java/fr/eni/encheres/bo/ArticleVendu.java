@@ -10,15 +10,27 @@ public class ArticleVendu {
 	private LocalDate date_debut_encheres;
 	private LocalDate date_fin_encheres;
 	private int prix_initial;
-	private int priv_vente;
+	private int prix_vente;
 	private int no_utilisateur;
 	private int no_categorie;
 	
 	
-	
+	public ArticleVendu() {
+		super();
+	}
+
 	public ArticleVendu(int no_article, String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, int prix_initial, int priv_vente, int no_utilisateur, int no_categorie) {
 		super();
+		setNo_article(no_article);
+		setNom_article(nom_article);
+		setDescription(description);
+		setDate_debut_encheres(date_debut_encheres);
+		setDate_fin_encheres(date_fin_encheres);
+		setPrix_initial(prix_initial);
+		setPrix_vente(priv_vente);
+		setNo_utilisateur(no_utilisateur);
+		setNo_categorie(no_categorie);
 	}
 	
 	// Without no_article
@@ -76,11 +88,11 @@ public class ArticleVendu {
 	public void setPrix_initial(int prix_initial) {
 		this.prix_initial = prix_initial;
 	}
-	public int getPriv_vente() {
-		return priv_vente;
+	public int getPrix_vente() {
+		return prix_vente;
 	}
-	public void setPriv_vente(int priv_vente) {
-		this.priv_vente = priv_vente;
+	public void setPrix_vente(int prix_vente) {
+		this.prix_vente = prix_vente;
 	}
 	public int getNo_utilisateur() {
 		return no_utilisateur;
