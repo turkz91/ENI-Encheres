@@ -36,6 +36,18 @@ public abstract class CodesResultatDAL {
 	public static final int CREATE_USER_SQL=10021;
 	
 	/**
+	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 */
+	public static final int UPDATE_USER_NULL=10022;
+	
+	/**
+	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 */
+	public static final int UPDATE_USER_ID_ERROR=10023;
+	
+	
+	
+	/**
 	 * Echec général lors de l'installation des catégories intial 
 	 *   - InstallCategorieDAL.java
 	 */

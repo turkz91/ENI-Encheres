@@ -12,19 +12,17 @@ public class Enchere {
 	private LocalDateTime date_enchere;
 	private int montant_enchere;
 	
-	public Enchere(int no_utilisateur, int no_article, LocalDateTime date_enchere, int montant_enchere) {
-		setNo_utilisateur(no_utilisateur);
-		setNo_article(no_article);
-		setDate_enchere(date_enchere);
-		setMontant_enchere(montant_enchere);
-	}
-	
 	// Without no_utilisateur
 	// Pourquoi? un enchère aurait besoin d'un no_utilisateur toujours non?
 	public Enchere(int no_article, LocalDateTime date_enchere, int montant_enchere) {
 		setNo_article(no_article);
 		setDate_enchere(date_enchere);
 		setMontant_enchere(montant_enchere);
+	}
+	
+	public Enchere(int no_utilisateur, int no_article, LocalDateTime date_enchere, int montant_enchere) {
+		this(no_article,date_enchere,montant_enchere);
+		setNo_utilisateur(no_utilisateur);
 	}
 
 	public int getNo_utilisateur() {

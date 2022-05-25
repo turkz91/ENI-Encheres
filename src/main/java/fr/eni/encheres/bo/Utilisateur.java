@@ -19,37 +19,6 @@ public class Utilisateur {
 	private int credit;
 	private boolean administrateur;
 
-	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		setNo_utilisateur(no_utilisateur);
-		setPseudo(pseudo);
-		setNom(nom);
-		setPrenom(prenom);
-		setEmail(email);
-		setTelephone(telephone);
-		setRue(rue);
-		setCode_postal(code_postal);
-		setVille(ville);
-		setMot_de_passe(mot_de_passe);
-		setCredit(credit);
-		setAdministrateur(administrateur);
-	}
-
-	// Without no_utilisateur
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		setPseudo(pseudo);
-		setNom(nom);
-		setPrenom(prenom);
-		setEmail(email);
-		setTelephone(telephone);
-		setRue(rue);
-		setCode_postal(code_postal);
-		setVille(ville);
-		setMot_de_passe(mot_de_passe);
-		setCredit(credit);
-		setAdministrateur(administrateur);
-	}
 
 	// without no_utilisateur & without telephone (can be null in db)
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String code_postal,
@@ -64,6 +33,18 @@ public class Utilisateur {
 		setMot_de_passe(mot_de_passe);
 		setCredit(credit);
 		setAdministrateur(administrateur);
+	}
+
+	// Without no_utilisateur
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
+		this(pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur);
+		setTelephone(telephone);
+	}
+	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
+		this(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur);
+		setNo_utilisateur(no_utilisateur);
 	}
 
 	public int getNo_utilisateur() {

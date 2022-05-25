@@ -13,10 +13,10 @@ import fr.eni.encheres.bo.Utilisateur;
  *
  */
 public interface UtilisateurDAO {
-	public void createUser(Utilisateur user) throws BusinessException;
+	public Utilisateur createUser(Utilisateur user) throws BusinessException;
 	public Utilisateur findUser();
 	public List<String> userEmails();
 	public List<String> userPseudo();
-	public Utilisateur updateUser();
+	public Utilisateur updateUser(Utilisateur user) throws BusinessException;
 	public void deleteUser();
 }

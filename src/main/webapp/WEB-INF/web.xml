@@ -18,7 +18,17 @@
   <servlet-mapping>
   	<servlet-name>InstallCategorie</servlet-name>
   	<url-pattern>/install/1/categories</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>TestUserDAL</servlet-name>
+  	<jsp-file>/WEB-INF/install/userTest.jsp</jsp-file>  	
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>TestUserDAL</servlet-name>
+  	<url-pattern>/install/2/users</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

@@ -7,15 +7,16 @@ public class Categorie {
 
 	private int no_categorie;
 	private String libelle;
-	
-	public Categorie(int no_categorie, String libelle) {
-		setNo_categorie(no_categorie);
-		setLibelle(libelle);
-	}
+
 	
 	// Without no_categorie
 	public Categorie(String libelle) {
 		setLibelle(libelle);
+	}
+	
+	public Categorie(int no_categorie, String libelle) {
+		this(libelle);
+		setNo_categorie(no_categorie);
 	}
 
 	public int getNo_categorie() {

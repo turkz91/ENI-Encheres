@@ -1,4 +1,4 @@
-package fr.eni.encheres.dal;
+package fr.eni.encheres.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.dal.ArticleEnchereDAO;
+import fr.eni.encheres.dal.CodesResultatDAL;
+import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.bll.BusinessException;
 
 /**

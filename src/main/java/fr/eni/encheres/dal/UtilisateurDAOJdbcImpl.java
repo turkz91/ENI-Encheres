@@ -15,7 +15,7 @@ import fr.eni.encheres.bo.Utilisateur;
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *
  */
-public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
+class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String CREATE_USER = "INSERT INTO UTILISATEURS "
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
@@ -23,14 +23,16 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 //			+ "no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur "
 //			+ "FROM UTILISATEURS "
 //			+ "WHERE (no_utilisateur = ?)";
-//	private final String USER_EMAILS="SELECT email"
+//	private final String USERS_EMAILS="SELECT email"
 //			+ "FROM UTILISATEURS";
-//	private final String USER_PSEUDO="SELECT pseudo"
+//	private final String USERS_PSEUDOS="SELECT pseudo"
 //			+ "FROM UTILISATEURS";
-//	private final String UPDATE_USER="";
+	private final String UPDATE_USER="UPDATE UTILISATEURS "
+			+ "SET pseudo=?, nom=?, prenom=?,email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? "
+			+ "WHERE no_utilisateur=?";
 
 	@Override
-	public void createUser(Utilisateur user) throws BusinessException {
+	public Utilisateur createUser(Utilisateur user) throws BusinessException {
 		if (user == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.CREATE_USER_NULL);
@@ -41,13 +43,14 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmtUser.setString(1, user.getPseudo());
 			pstmtUser.setString(2, user.getNom());
 			pstmtUser.setString(3, user.getPrenom());
-			pstmtUser.setString(4, user.getTelephone());
-			pstmtUser.setString(5, user.getRue());
-			pstmtUser.setString(6, user.getCode_postal());
-			pstmtUser.setString(7, user.getVille());
-			pstmtUser.setString(8, user.getMot_de_passe());
-			pstmtUser.setInt(9, user.getCredit());
-			pstmtUser.setInt(10, user.getAdministrateur());
+			pstmtUser.setString(4, user.getEmail());
+			pstmtUser.setString(5, user.getTelephone());
+			pstmtUser.setString(6, user.getRue());
+			pstmtUser.setString(7, user.getCode_postal());
+			pstmtUser.setString(8, user.getVille());
+			pstmtUser.setString(9, user.getMot_de_passe());
+			pstmtUser.setInt(10, user.getCredit());
+			pstmtUser.setInt(11, user.getAdministrateur());
 			pstmtUser.executeUpdate();
 			ResultSet rsUser = pstmtUser.getGeneratedKeys();
 			if (rsUser.next()) {
@@ -61,6 +64,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			businessException.ajouterErreur(CodesResultatDAL.CREATE_USER_SQL);
 			throw businessException;
 		}
+		return user;
 
 	}
 
@@ -71,9 +75,41 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur updateUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public Utilisateur updateUser(Utilisateur user) throws BusinessException {
+		if (user == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_USER_NULL);
+			throw businessException;
+		}
+		if (Integer.valueOf(user.getNo_utilisateur()) == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_USER_ID_ERROR);
+			throw businessException;			
+		}
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtUser = cnx.prepareStatement(CREATE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmtUser.setString(1, user.getPseudo());
+			pstmtUser.setString(2, user.getNom());
+			pstmtUser.setString(3, user.getPrenom());
+			pstmtUser.setString(4, user.getEmail());
+			pstmtUser.setString(5, user.getTelephone());
+			pstmtUser.setString(6, user.getRue());
+			pstmtUser.setString(7, user.getCode_postal());
+			pstmtUser.setString(8, user.getVille());
+			pstmtUser.setString(9, user.getMot_de_passe());
+			pstmtUser.setInt(10, user.getCredit());
+			pstmtUser.setInt(11, user.getAdministrateur());
+			pstmtUser.setInt(12, user.getNo_utilisateur());
+			pstmtUser.executeUpdate();
+			pstmtUser.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.CREATE_USER_SQL);
+			throw businessException;
+		}
+		return user;
+
 	}
 
 	@Override
