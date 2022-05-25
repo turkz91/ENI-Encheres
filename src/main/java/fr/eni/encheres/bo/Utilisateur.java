@@ -34,32 +34,13 @@ public class Utilisateur {
 	// Without no_utilisateur
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		setPseudo(pseudo);
-		setNom(nom);
-		setPrenom(prenom);
-		setEmail(email);
-		setTelephone(telephone);
-		setRue(rue);
-		setCode_postal(code_postal);
-		setVille(ville);
-		setMot_de_passe(mot_de_passe);
-		setCredit(credit);
-		setAdministrateur(administrateur);
+		super();
 	}
 
 	// without no_utilisateur & without telephone (can be null in db)
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String code_postal,
 			String ville, String mot_de_passe, int credit, boolean administrateur) {
-		setPseudo(pseudo);
-		setNom(nom);
-		setPrenom(prenom);
-		setEmail(email);
-		setRue(rue);
-		setCode_postal(code_postal);
-		setVille(ville);
-		setMot_de_passe(mot_de_passe);
-		setCredit(credit);
-		setAdministrateur(administrateur);
+		super();
 	}
 
 	public int getNo_utilisateur() {
