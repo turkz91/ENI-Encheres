@@ -1,5 +1,8 @@
 package fr.eni.encheres.bo;
-
+/**
+ * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
+ *
+ */
 public class Categorie {
 
 	private int no_categorie;
@@ -7,6 +10,11 @@ public class Categorie {
 	
 	public Categorie(int no_categorie, String libelle) {
 		setNo_categorie(no_categorie);
+		setLibelle(libelle);
+	}
+	
+	// Without no_categorie
+	public Categorie(String libelle) {
 		setLibelle(libelle);
 	}
 

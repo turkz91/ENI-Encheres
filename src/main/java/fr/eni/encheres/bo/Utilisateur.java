@@ -1,5 +1,9 @@
 package fr.eni.encheres.bo;
 
+/**
+ * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
+ *
+ */
 public class Utilisateur {
 
 	private int no_utilisateur;
@@ -34,13 +38,32 @@ public class Utilisateur {
 	// Without no_utilisateur
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		super();
+		setPseudo(pseudo);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setTelephone(telephone);
+		setRue(rue);
+		setCode_postal(code_postal);
+		setVille(ville);
+		setMot_de_passe(mot_de_passe);
+		setCredit(credit);
+		setAdministrateur(administrateur);
 	}
 
 	// without no_utilisateur & without telephone (can be null in db)
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String code_postal,
 			String ville, String mot_de_passe, int credit, boolean administrateur) {
-		super();
+		setPseudo(pseudo);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setRue(rue);
+		setCode_postal(code_postal);
+		setVille(ville);
+		setMot_de_passe(mot_de_passe);
+		setCredit(credit);
+		setAdministrateur(administrateur);
 	}
 
 	public int getNo_utilisateur() {
@@ -133,6 +156,12 @@ public class Utilisateur {
 
 	public boolean isAdministrateur() {
 		return administrateur;
+	}
+	public int getAdministrateur() {
+		if (administrateur)			
+			return 1;
+		else
+			return 0;
 	}
 
 	public void setAdministrateur(boolean administrateur) {
