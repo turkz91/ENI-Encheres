@@ -7,6 +7,7 @@ import fr.eni.encheres.dal.ArticleEnchereDAO;
 import fr.eni.encheres.dal.DAOFactory;
 
 public class EnchereManager {
+	
 	private ArticleEnchereDAO articleEnchereDAO;
 
 	public EnchereManager(ArticleEnchereDAO articleEnchereDAO) {
@@ -19,6 +20,12 @@ public class EnchereManager {
 
 		BusinessException businessException = new BusinessException();
 		this.checkNomArticle(nom_article, businessException);
+		this.checkDescription(description, businessException);
+		this.checkDateDebutEnchere(date_debut_encheres, businessException);
+		this.checkPrixInitial(prix_initial, businessException);
+		
+		
+		
 		
 		ArticleVendu articleVendu = null;
 		
