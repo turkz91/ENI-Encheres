@@ -15,5 +15,5 @@ public interface ArticleEnchereDAO {
 
 	public void createArticle(ArticleVendu article) throws BusinessException ;
 	public void createEnchere();
-	public void createCategorie(Categorie categorie) throws BusinessException;
+	public Categorie createCategorie(Categorie categorie) throws BusinessException;
 }

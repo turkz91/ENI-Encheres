@@ -22,7 +22,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String CREATE_ARTICLE = "INSERT INTO ARTICLE_VENDUS "
 			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, no_utilisateur, no_categorie)"
 			+ "VALUES (?,?,?,?,?,?)";
-	private final String CREATE_CATEGORIE = "INSER INTO CATEGORIE (libelle) VALUES (?)";
+	private final String CREATE_CATEGORIE = "INSERT INTO CATEGORIES (libelle) VALUES (?)";
 	
 	@Override
 	public void createArticle(ArticleVendu article) throws BusinessException {
@@ -39,6 +39,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			pstmtArticle.setDate(4,Date.valueOf(article.getDate_fin_encheres()));
 			pstmtArticle.setInt(5,article.getNo_utilisateur());
 			pstmtArticle.setInt(6,article.getNo_categorie());
+			pstmtArticle.executeUpdate();
 			ResultSet rsArticle = pstmtArticle.getGeneratedKeys();
 			if (rsArticle.next()) {
 				article.setNo_article(rsArticle.getInt(1));
@@ -48,7 +49,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-
+			businessException.ajouterErreur(CodesResultatDAL.CREATE_ARTICLE_SQL);
 			throw businessException;
 		}
 		
@@ -61,7 +62,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	}
 
 	@Override
-	public void createCategorie(Categorie categorie) throws BusinessException {
+	public Categorie createCategorie(Categorie categorie) throws BusinessException {
 		if (categorie == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.CREATE_CATEGORIE_NULL);
@@ -70,6 +71,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtCategorie = cnx.prepareStatement(CREATE_CATEGORIE, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmtCategorie.setString(1, categorie.getLibelle());
+			pstmtCategorie.executeUpdate();
 			ResultSet rsCategorie = pstmtCategorie.getGeneratedKeys();
 			if (rsCategorie.next()) {
 				categorie.setNo_categorie(rsCategorie.getInt(1));
@@ -79,10 +81,10 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-
+			businessException.ajouterErreur(CodesResultatDAL.CREATE_CATEGORIE_SQL);
 			throw businessException;
 		}
-		
+		return categorie;
 	}
 
 }

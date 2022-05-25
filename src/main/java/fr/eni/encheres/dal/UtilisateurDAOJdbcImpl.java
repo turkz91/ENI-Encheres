@@ -4,7 +4,6 @@
 package fr.eni.encheres.dal;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
@@ -49,6 +48,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmtUser.setString(8, user.getMot_de_passe());
 			pstmtUser.setInt(9, user.getCredit());
 			pstmtUser.setInt(10, user.getAdministrateur());
+			pstmtUser.executeUpdate();
 			ResultSet rsUser = pstmtUser.getGeneratedKeys();
 			if (rsUser.next()) {
 				user.setNo_utilisateur(rsUser.getInt(1));
@@ -58,7 +58,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-
+			businessException.ajouterErreur(CodesResultatDAL.CREATE_USER_SQL);
 			throw businessException;
 		}
 

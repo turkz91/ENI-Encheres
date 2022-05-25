@@ -11,14 +11,35 @@ public abstract class CodesResultatDAL {
 	public static final int CREATE_ARTICLE_NULL=10000;
 	
 	/**
+	 * Echec général quand tentative d'ajouter un ARTICLE dans la DB
+	 */
+	public static final int CREATE_ARTICLE_SQL=10001;
+	
+	/**
 	 * Echec général quand tentative d'ajouter une CATEGORIE null
 	 */
-	public static final int CREATE_CATEGORIE_NULL=10001;
+	public static final int CREATE_CATEGORIE_NULL=10010;
+	
+	/**
+	 * Echec général quand tentative d'ajouter une CATEGORIE dans la DB
+	 */
+	public static final int CREATE_CATEGORIE_SQL=10011;
 	
 	/**
 	 * Echec général quand tentative d'ajouter une USER null
 	 */
-	public static final int CREATE_USER_NULL=10002;
+	public static final int CREATE_USER_NULL=10020;
+	
+	/**
+	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 */
+	public static final int CREATE_USER_SQL=10021;
+	
+	/**
+	 * Echec général lors de l'installation des catégories intial 
+	 *   - InstallCategorieDAL.java
+	 */
+	public static final int INSTALL_CATEGORIES_INIT=50000;
 	
 	
 	
