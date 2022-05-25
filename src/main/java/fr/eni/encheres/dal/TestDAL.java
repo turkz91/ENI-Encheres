@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class TestDAL
+ *  @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
+ *
  */
 @WebServlet("/test/TestDAL")
 public class TestDAL extends HttpServlet {
@@ -23,7 +25,6 @@ public class TestDAL extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		DAOFactory.getArticleEnchereDAO();
 		try {
@@ -43,7 +44,6 @@ public class TestDAL extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -8,6 +8,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+/**
+ * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
+ *
+ */
 abstract class ConnectionProvider {
 	private static DataSource dataSource;
 	
