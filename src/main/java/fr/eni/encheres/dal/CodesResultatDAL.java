@@ -41,14 +41,19 @@ public abstract class CodesResultatDAL {
 	public static final int CREATE_USER_SQL=10021;
 	
 	/**
-	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 * Echec général quand tentative d'ajouter d'un USER dans la DB
 	 */
 	public static final int UPDATE_USER_NULL=10022;
 	
 	/**
-	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 * Echec général quand tentative d'ajouter d'un USER sans ID dans la DB
 	 */
 	public static final int UPDATE_USER_ID_ERROR=10023;
+	
+	/**
+	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 */
+	public static final int UPDATE_USER_ERROR=10024;
 	
 	/**
 	 * Echec général quand tentative d'ajouter une ENCHERE null

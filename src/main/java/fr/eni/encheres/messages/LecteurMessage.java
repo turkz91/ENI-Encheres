@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 
 /**
  * Cette classe permet de lire le contenu du fichier messages_erreur.properties
- * @author Administrator
+ * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *
  */
 public abstract class LecteurMessage {

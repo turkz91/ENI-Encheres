@@ -87,7 +87,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;			
 		}
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmtUser = cnx.prepareStatement(CREATE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmtUser = cnx.prepareStatement(UPDATE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmtUser.setString(1, user.getPseudo());
 			pstmtUser.setString(2, user.getNom());
 			pstmtUser.setString(3, user.getPrenom());
@@ -105,7 +105,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.CREATE_USER_SQL);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_USER_ERROR);
 			throw businessException;
 		}
 		return user;
