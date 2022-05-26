@@ -1,4 +1,5 @@
 package fr.eni.encheres.bo;
+import java.sql.Date;
 /**
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *

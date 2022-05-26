@@ -1,5 +1,6 @@
 package fr.eni.encheres.bo;
 
+import java.sql.Date;
 import java.time.LocalDate;
 /**
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
@@ -101,6 +102,17 @@ public class ArticleVendu {
 			LocalDate date_fin_encheres, int prix_initial, int prix_vente, int no_utilisateur, int no_categorie) {
 		this(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie);setNom_article(nom_article);
 		setNo_article(no_article);
+	}
+
+	public ArticleVendu(String nom_article, String description, Date date_debut_enchere, Date date_fin_enchere, int prix_initial, int prix_vente, int no_utilisateur, int no_categorie) {
+		setNom_article(nom_article);
+		setDescription(description);
+		setDate_debut_encheres(date_debut_encheres);
+		setDate_fin_encheres(date_fin_encheres);
+		setPrix_initial(prix_initial);
+		setPrix_vente(prix_vente);
+		setNo_utilisateur(no_utilisateur);
+		setNo_categorie(no_categorie);
 	}
 
 	public int getNo_article() {
