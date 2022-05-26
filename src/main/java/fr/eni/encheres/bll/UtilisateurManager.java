@@ -12,7 +12,8 @@ public class UtilisateurManager {
 	private UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
 
 	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, String confirmation) {
+			String rue, String codePostal, String ville, String motDePasse, String confirmation)
+			throws BusinessException {
 
 		BusinessException businessException = new BusinessException();
 
@@ -30,11 +31,12 @@ public class UtilisateurManager {
 		this.checkVille(ville, businessException);
 		this.checkMotDePasse(motDePasse, confirmation, businessException);
 
-		// TO DO create rules to validate an utilisateur
-
 		if (!businessException.hasErreurs()) {
 			utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse,
 					credit, administrateur);
+			this.utilisateurDAO.createUser(utilisateur);
+		} else {
+			throw businessException;
 		}
 
 		return utilisateur;
@@ -78,13 +80,13 @@ public class UtilisateurManager {
 	public void checkEmail(String email, BusinessException businessException) {
 
 		// Only letters and "-" accepted for firstname ( in case of composed first name)
-				String regex = "^[A-Za-z0-9-_]+@+[A-Za-z0-9-_]+.+[A-Za-z]{2,4}$";
-				Pattern pattern = Pattern.compile(regex);
-				Matcher matcher = pattern.matcher(email);
-				if (email == null || email.length() > 20 || matcher.matches() == false) {
-					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_ERREUR);
-				}
-		
+		String regex = "^[A-Za-z0-9-_]+@+[A-Za-z0-9-_]+.+[A-Za-z]{2,4}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
+		if (email == null || email.length() > 20 || matcher.matches() == false) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_ERREUR);
+		}
+
 	}
 
 	public void checkTelephone(String telephone, BusinessException businessException) {
@@ -115,14 +117,14 @@ public class UtilisateurManager {
 	}
 
 	public void checkVille(String ville, BusinessException businessException) {
-		
+
 		// Only letters accepted
-				String regex = "(^[a-zA-Z]{1,30}$)";
-				Pattern pattern = Pattern.compile(regex);
-				Matcher matcher = pattern.matcher(ville);
-				if (ville == null || matcher.matches() == false) {
-					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_VILLE_ERREUR);
-				}
+		String regex = "(^[a-zA-Z]{1,30}$)";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(ville);
+		if (ville == null || matcher.matches() == false) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_VILLE_ERREUR);
+		}
 	}
 
 	public void checkMotDePasse(String motDePasse, String confirmation, BusinessException businessException) {

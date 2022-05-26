@@ -16,6 +16,11 @@ public abstract class CodesResultatDAL {
 	public static final int CREATE_ARTICLE_SQL=10001;
 	
 	/**
+	 * Echec général quand tentative de récupérer un ARTICLE dans la DB
+	 */
+	public static final int SELECT_ARTICLE_SQL=10002;
+	
+	/**
 	 * Echec général quand tentative d'ajouter une CATEGORIE null
 	 */
 	public static final int CREATE_CATEGORIE_NULL=10010;
@@ -45,13 +50,30 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int UPDATE_USER_ID_ERROR=10023;
 	
+	/**
+	 * Echec général quand tentative d'ajouter une ENCHERE null
+	 */
+	public static final int CREATE_ENCHERE_NULL = 10030;
 	
+	/**
+	 * Echec général quand tentative d'ajouter une ENCHERE dans la DB
+	 */
+	public static final int CREATE_ENCHERE_SQL = 10031;
+	
+	/**
+	 * Echec général quand tentative de récupérer une ENCHERE dans la DB
+	 */
+	public static final int SELECT_ENCHERE_SQL = 10032;
 	
 	/**
 	 * Echec général lors de l'installation des catégories intial 
 	 *   - InstallCategorieDAL.java
 	 */
 	public static final int INSTALL_CATEGORIES_INIT=50000;
+
+	
+
+	
 	
 	
 	
