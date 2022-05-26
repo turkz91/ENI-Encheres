@@ -18,9 +18,20 @@ public class Utilisateur {
 	private String mot_de_passe;
 	private int credit;
 	private boolean administrateur;
-
-
-	// without no_utilisateur & without telephone (can be null in db)
+	
+	/**
+	 * Constructeur Utilisateur - sans no_utilisateur, telephone
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 * @param mot_de_passe
+	 * @param credit
+	 * @param administrateur
+	 */
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String code_postal,
 			String ville, String mot_de_passe, int credit, boolean administrateur) {
 		setPseudo(pseudo);
@@ -34,13 +45,42 @@ public class Utilisateur {
 		setCredit(credit);
 		setAdministrateur(administrateur);
 	}
-
-	// Without no_utilisateur
+	
+	/**
+	 * Constructeur Utilisateur - sans no_utilisateur
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 * @param mot_de_passe
+	 * @param credit
+	 * @param administrateur
+	 */
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
 		this(pseudo,nom,prenom,email,rue,code_postal,ville,mot_de_passe,credit,administrateur);
 		setTelephone(telephone);
 	}
+	
+	/**
+	 * Constructeur Utilisateur
+	 * @param no_utilisateur
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 * @param mot_de_passe
+	 * @param credit
+	 * @param administrateur
+	 */
 	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
 		this(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur);
