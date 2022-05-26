@@ -10,6 +10,8 @@
 		<meta name="description" content="Page d'inscription">
 		<meta name="author" content="co-authored by BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain">
 		<title>Inscription</title>
+		<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/faviconEni.ico">
+		<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/faviconEni.png">
 		<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="<%=request.getContextPath()%>/css/eniStyle.css" rel="stylesheet">
 		<link href="<%=request.getContextPath()%>/css/inscription.css" rel="stylesheet">
