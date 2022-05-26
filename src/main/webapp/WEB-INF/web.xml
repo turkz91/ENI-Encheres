@@ -29,6 +29,16 @@
   	<servlet-name>TestUserDAL</servlet-name>
   	<url-pattern>/install/2/users</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Inscription</servlet-name>
+  	<jsp-file>/WEB-INF/inscription.jsp</jsp-file>  	
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>Inscription</servlet-name>
+  	<url-pattern>/inscription-utilisateur</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

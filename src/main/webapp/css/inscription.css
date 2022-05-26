@@ -1,18 +1,17 @@
 @charset "UTF-8";
 
-h1 {
-	text-align: center;
+.eni-form-footer input, .eni-form-footer a {
+	height: 5rem;
 }
-
-input, label, .annuler {
-	margin : 8px;
+.eni-form-footer a {
+	line-height: 3.7rem;
 }
-
-input[type="submit"], button {
-	height: 80px;
-	width : 200px;
+.eni-form-footer input {
+	box-shadow: 0px 1rem 2rem #00bd2bad;
 }
-
-section {
-	margin-top: 100px;
+.eni-form-footer input:hover {
+	cursor: pointer;
+}
+.eni-form-footer a {
+	box-shadow: 0px 1rem 2rem #ff5666ab;
 }
