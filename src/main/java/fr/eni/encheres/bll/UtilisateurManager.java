@@ -36,6 +36,7 @@ public class UtilisateurManager {
 					credit, administrateur);
 			this.utilisateurDAO.createUser(utilisateur);
 		} else {
+			System.out.println("Erreur survenue" + businessException.getListeCodesErreur());
 			throw businessException;
 		}
 
