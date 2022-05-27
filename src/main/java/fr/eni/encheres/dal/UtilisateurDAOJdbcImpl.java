@@ -72,29 +72,20 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	public Utilisateur selectUser(int no_utilisateur) throws BusinessException {
 
 		Utilisateur utilisateur = null;
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER);
 			pstmtUser.setInt(1, no_utilisateur);
-			
+
 			ResultSet rsUser = pstmtUser.getGeneratedKeys();
 			rsUser = pstmtUser.executeQuery();
-			
+
 			while (rsUser.next()) {
-				utilisateur = new Utilisateur(
-						rsUser.getInt("no_utilisateur"),
-						rsUser.getString("pseudo"),
-						rsUser.getString("nom"),
-						rsUser.getString("prenom"),
-						rsUser.getString("email"),
-						rsUser.getString("email"),
-						rsUser.getString("telephone"),
-						rsUser.getString("rue"),
-						rsUser.getString("code_postal"),
-						rsUser.getString("mot_de_passe"),
-						rsUser.getInt("credit"),
-						rsUser.getBoolean("administrateur")
-						);
+				utilisateur = new Utilisateur(rsUser.getInt("no_utilisateur"), rsUser.getString("pseudo"),
+						rsUser.getString("nom"), rsUser.getString("prenom"), rsUser.getString("email"),
+						rsUser.getString("email"), rsUser.getString("telephone"), rsUser.getString("rue"),
+						rsUser.getString("code_postal"), rsUser.getString("mot_de_passe"), rsUser.getInt("credit"),
+						rsUser.getBoolean("administrateur"));
 			}
 			rsUser.close();
 			pstmtUser.close();
@@ -105,7 +96,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;
 		}
 		return utilisateur;
-		
+
 	}
 
 	@Override
@@ -154,33 +145,32 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmtUser.setInt(1, no_utilisateur);
 			pstmtUser.execute();
 			pstmtUser.close();
-			
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_USER_SQL);
 			throw businessException;
 		}
-		
-	
+
 	}
 
 	@Override
 	public List<String> selectUsersEmails() throws BusinessException {
 
-		List<String> userMailsList = new ArrayList<String>();
+		List<String> usersMailsList = new ArrayList<String>();
 		String mailsList = null;
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			Statement stmt = cnx.createStatement();
-			
+
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs = stmt.executeQuery(SELECT_MAILS_LIST);
-			
+
 			while (rs.next()) {
-				mailsList = (rs.getString("mot_de_passe"));
-				
-						userMailsList.add(mailsList);			
+				mailsList = (rs.getString("email"));
+
+				usersMailsList.add(mailsList);
 			}
 			rs.close();
 			stmt.close();
@@ -190,13 +180,35 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_SQL);
 			throw businessException;
 		}
-		return userMailsList;
+		return usersMailsList;
 	}
 
 	@Override
-	public List<String> selectUsersPseuros() throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> selectUsersPseudos() throws BusinessException {
+
+		List<String> usersPseudosList = new ArrayList<String>();
+		String pseudosList = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			Statement stmt = cnx.createStatement();
+
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs = stmt.executeQuery(SELECT_MAILS_LIST);
+
+			while (rs.next()) {
+				pseudosList = (rs.getString("pseudo"));
+
+				usersPseudosList.add(pseudosList);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_SQL);
+			throw businessException;
+		}
+		return usersPseudosList;
 	}
 
 }
