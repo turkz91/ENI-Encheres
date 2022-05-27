@@ -99,7 +99,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.CREATE_USER_SQL);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_SQL);
 			throw businessException;
 		}
 		return utilisateur;
@@ -146,12 +146,28 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public void deleteUser(int no_utilisateur) throws BusinessException {
-		// TODO Auto-generated method stub
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtUser = cnx.prepareStatement(DELETE_USER);
+			pstmtUser.setInt(1, no_utilisateur);
+			pstmtUser.execute();
+			pstmtUser.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_USER_SQL);
+			throw businessException;
+		}
+		
+	
 	}
 
 	@Override
 	public List<String> selectUsersEmails() throws BusinessException {
-		// TODO Auto-generated method stub
+
+		
+		
 		return null;
 	}
 

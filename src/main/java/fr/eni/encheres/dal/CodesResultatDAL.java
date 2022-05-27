@@ -5,6 +5,7 @@ package fr.eni.encheres.dal;
  */
 public abstract class CodesResultatDAL {
 	
+	//------------------ ERRORS FOR ARTICLES ------------------
 	/**
 	 * Echec général quand tentative d'ajouter un ARTICLE null
 	 */
@@ -20,6 +21,9 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int SELECT_ARTICLE_SQL=10002;
 	
+	
+	//------------------ ERRORS FOR CATEGORIES ------------------
+	
 	/**
 	 * Echec général quand tentative d'ajouter une CATEGORIE null
 	 */
@@ -30,31 +34,45 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int CREATE_CATEGORIE_SQL=10011;
 	
-	/**
+	
+	//------------------ ERRORS FOR USERS ------------------
+	/** CREATE
 	 * Echec général quand tentative d'ajouter une USER null
 	 */
 	public static final int CREATE_USER_NULL=10020;
 	
-	/**
+	/**CREATE
 	 * Echec général quand tentative d'ajouter une USER dans la DB
 	 */
 	public static final int CREATE_USER_SQL=10021;
 	
-	/**
+	/**SELECT
+	 * Echec général quand tentative de récupération d'un USER dans la DB
+	 */
+	public static final int SELECT_USER_SQL=10024;
+	
+	/**UPDATE
 	 * Echec général quand tentative d'ajouter d'un USER dans la DB
 	 */
 	public static final int UPDATE_USER_NULL=10022;
 	
-	/**
+	/**UPDATE
 	 * Echec général quand tentative d'ajouter d'un USER sans ID dans la DB
 	 */
 	public static final int UPDATE_USER_ID_ERROR=10023;
 	
-	/**
+	/**UPDATE
 	 * Echec général quand tentative d'ajouter une USER dans la DB
 	 */
 	public static final int UPDATE_USER_ERROR=10024;
 	
+	/**DELETE
+	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 */
+	public static final int DELETE_USER_SQL=10025;
+	
+	
+	//------------------ ERRORS FOR BIDS ------------------
 	/**
 	 * Echec général quand tentative d'ajouter une ENCHERE null
 	 */
