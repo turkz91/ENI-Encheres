@@ -1,7 +1,10 @@
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light eni-bg-light">
 		<div class="container">
-			<a href="<%=request.getContextPath()%>" class="navbar-brand">ENI-Enchères</a>
+			<a href="<%=request.getContextPath()%>" class="navbar-brand">
+				<img src="<%=request.getContextPath()%>/images/logoEni.png" height="40">
+				ENI-Enchères
+			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigateur" aria-controls="navigateur" aria-expanded="false" aria-label="Navigateur">
 				<span class="navbar-toggler-icon"></span>
 		  	</button>
