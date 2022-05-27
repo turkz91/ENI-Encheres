@@ -7,13 +7,20 @@ public class Categorie {
 
 	private int no_categorie;
 	private String libelle;
-
 	
-	// Without no_categorie
+	/**
+	 * Constructeur Categorie - sans no_categorie
+	 * @param libelle
+	 */
 	public Categorie(String libelle) {
 		setLibelle(libelle);
 	}
 	
+	/**
+	 * Constructeur Categorie
+	 * @param no_categorie
+	 * @param libelle
+	 */
 	public Categorie(int no_categorie, String libelle) {
 		this(libelle);
 		setNo_categorie(no_categorie);

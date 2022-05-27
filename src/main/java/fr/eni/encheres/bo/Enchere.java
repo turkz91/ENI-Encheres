@@ -1,4 +1,5 @@
 package fr.eni.encheres.bo;
+import java.sql.Date;
 /**
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *
@@ -12,7 +13,12 @@ public class Enchere {
 	private LocalDateTime date_enchere;
 	private int montant_enchere;
 	
-	// Without no_utilisateur
+	/**
+	 * Constructeur Enchere - sans no_utilisateur
+	 * @param no_article
+	 * @param date_enchere
+	 * @param montant_enchere
+	 */
 	// Pourquoi? un enchère aurait besoin d'un no_utilisateur toujours non?
 	public Enchere(int no_article, LocalDateTime date_enchere, int montant_enchere) {
 		setNo_article(no_article);
@@ -20,6 +26,13 @@ public class Enchere {
 		setMontant_enchere(montant_enchere);
 	}
 	
+	/**
+	 * Constructeur Enchere 
+	 * @param no_utilisateur
+	 * @param no_article
+	 * @param date_enchere
+	 * @param montant_enchere
+	 */	
 	public Enchere(int no_utilisateur, int no_article, LocalDateTime date_enchere, int montant_enchere) {
 		this(no_article,date_enchere,montant_enchere);
 		setNo_utilisateur(no_utilisateur);

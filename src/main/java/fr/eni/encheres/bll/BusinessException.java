@@ -10,7 +10,6 @@ public class BusinessException extends Exception{
 	private List <Integer> listeCodesErreur;
 
 	public BusinessException() {
-		super();
 		this.listeCodesErreur = new ArrayList<>();
 	}
 	
