@@ -6,6 +6,8 @@ package fr.eni.encheres.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bll.BusinessException;
@@ -166,9 +168,29 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public List<String> selectUsersEmails() throws BusinessException {
 
+		List<String> userMailsList = new ArrayList<String>();
+		String mailsList = null;
 		
-		
-		return null;
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			Statement stmt = cnx.createStatement();
+			
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs = stmt.executeQuery(SELECT_MAILS_LIST);
+			
+			while (rs.next()) {
+				mailsList = (rs.getString("mot_de_passe"));
+				
+						userMailsList.add(mailsList);			
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_SQL);
+			throw businessException;
+		}
+		return userMailsList;
 	}
 
 	@Override
