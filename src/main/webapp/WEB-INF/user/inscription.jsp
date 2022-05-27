@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<% 
-	String pageTitle = "Ici le titre de la page qui est créée";
+	String pageTitle = "Inscription";
 	%>
 	<%@ include file="../partials/head.jspf"%>
 

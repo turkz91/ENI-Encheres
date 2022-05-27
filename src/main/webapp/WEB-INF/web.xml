@@ -41,8 +41,18 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>LoginUser</servlet-name>
+  	<jsp-file>/WEB-INF/user/login.jsp</jsp-file>  	
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>LoginUser</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
   	<servlet-name>ArticleVente</servlet-name>
-  	<jsp-file>/WEB-INF/article/vente.jsp</jsp-file>  	
+  	<jsp-file>/WEB-INF/article/venteArticle.jsp</jsp-file>  	
   </servlet>
   
   <servlet-mapping>
