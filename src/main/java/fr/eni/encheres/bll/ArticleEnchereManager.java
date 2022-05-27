@@ -8,11 +8,11 @@ import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.ArticleEnchereDAO;
 import fr.eni.encheres.dal.DAOFactory;
 
-public class EnchereManager {
+public class ArticleEnchereManager {
 
 	private ArticleEnchereDAO articleEnchereDAO;
 
-	public EnchereManager(ArticleEnchereDAO articleEnchereDAO) {
+	public ArticleEnchereManager(ArticleEnchereDAO articleEnchereDAO) {
 		this.articleEnchereDAO = DAOFactory.getArticleEnchereDAO();
 	}
 

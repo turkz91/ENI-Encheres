@@ -15,8 +15,7 @@ import fr.eni.encheres.bo.Utilisateur;
 public interface UtilisateurDAO {
 	public Utilisateur createUser(Utilisateur user) throws BusinessException;
 	public Utilisateur selectUser(int no_utilisateur) throws BusinessException;
-	public List<String> selectUsersEmails() throws BusinessException;
-	public List<String> selectUsersPseudos() throws BusinessException;
+	public Utilisateur selectUserbyDetails(String pseudo, String email) throws BusinessException;
 	public Utilisateur updateUser(Utilisateur user) throws BusinessException;
 	public void deleteUser(int no_utilisateur) throws BusinessException;
 }
