@@ -25,5 +25,6 @@ public interface ArticleEnchereDAO {
 	// CATEGORIES
 	public Categorie createCategorie(Categorie categorie) throws BusinessException;
 
+	// TO DO SelectCategorie
 	
 }
