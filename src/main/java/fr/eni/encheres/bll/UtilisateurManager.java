@@ -58,7 +58,7 @@ public class UtilisateurManager {
 	public void checkNom(String nom, BusinessException businessException) {
 
 		// Only letters accepted for lastname
-		String regex = "^[A-Za-z]{1,30}$";
+		String regex = "^[A-Za-z_ ]{1,30}$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(nom);
 		if (nom == null || matcher.matches() == false) {
@@ -120,7 +120,7 @@ public class UtilisateurManager {
 	public void checkVille(String ville, BusinessException businessException) {
 
 		// Only letters accepted
-		String regex = "(^[a-zA-Z]{1,30}$)";
+		String regex = "(^[a-zA-Z_ ]{1,30}$)";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(ville);
 		if (ville == null || matcher.matches() == false) {

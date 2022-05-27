@@ -47,25 +47,23 @@ public class ServletInscription extends HttpServlet {
 		try {
 			utilisateur = utilisateurManager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation);
 		} catch (BusinessException ex) {
-			request.setAttribute("error", ex.getListeCodesErreur());
+			request.setAttribute("listeCodesErreur", ex.getListeCodesErreur());
 			ex.printStackTrace();
 		} catch (Exception ex) {
 			List<Integer> listeCodesErreur = new ArrayList<>();
 			listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_ERREUR);
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
 		}
-		
-//		TO TEST THE FLOW OF INFORMATIONS
-//		request.setAttribute("pseudo", pseudo);	
-//		request.setAttribute("nom", nom);
-//		request.setAttribute("prenom", prenom);
-//		request.setAttribute("email", email);
-//		request.setAttribute("telephone", telephone);
-//		request.setAttribute("rue", rue);
-//		request.setAttribute("codePostal", codePostal);
-//		request.setAttribute("ville", ville);
-//		request.setAttribute("motDePasse", motDePasse);
-//		request.setAttribute("confirmation", confirmation);
+		request.setAttribute("user", utilisateur);
+//		If user setAttribute
+		request.setAttribute("pseudo", pseudo);	
+		request.setAttribute("nom", nom);
+		request.setAttribute("prenom", prenom);
+		request.setAttribute("email", email);
+		request.setAttribute("telephone", telephone);
+		request.setAttribute("rue", rue);
+		request.setAttribute("codePostal", codePostal);
+		request.setAttribute("ville", ville);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/inscription.jsp");
 		rd.forward(request, response);
