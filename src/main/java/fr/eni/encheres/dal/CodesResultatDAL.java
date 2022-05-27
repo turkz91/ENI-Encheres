@@ -7,17 +7,17 @@ public abstract class CodesResultatDAL {
 	
 	//------------------ ERRORS FOR ARTICLES ------------------
 	/**
-	 * Echec général quand tentative d'ajouter un ARTICLE null
+	 * Une tentative d'enregistrement d'un article inexistant a eu lieu.
 	 */
 	public static final int CREATE_ARTICLE_NULL=10000;
 	
 	/**
-	 * Echec général quand tentative d'ajouter un ARTICLE dans la DB
+	 * Une erreur est survenue lors de l'enregistrement des informations de l'article dans la DB.
 	 */
 	public static final int CREATE_ARTICLE_SQL=10001;
 	
 	/**
-	 * Echec général quand tentative de récupérer un ARTICLE dans la DB
+	 * Une erreur est survenue lors de la sélection de l'article dans la DB
 	 */
 	public static final int SELECT_ARTICLE_SQL=10002;
 	
@@ -25,68 +25,79 @@ public abstract class CodesResultatDAL {
 	//------------------ ERRORS FOR CATEGORIES ------------------
 	
 	/**
-	 * Echec général quand tentative d'ajouter une CATEGORIE null
+	 * Une tentative d'enregistrement d'une catégorie inexistante a eu lieu.
 	 */
 	public static final int CREATE_CATEGORIE_NULL=10010;
 	
 	/**
-	 * Echec général quand tentative d'ajouter une CATEGORIE dans la DB
+	 * Une erreur est survenue lors de l'enregistrement des informations de la catégorie dans la DB.
 	 */
 	public static final int CREATE_CATEGORIE_SQL=10011;
 	
 	
 	//------------------ ERRORS FOR USERS ------------------
 	/** CREATE
-	 * Echec général quand tentative d'ajouter une USER null
+	 * Une tentative d'enregistrement d'un utilisateur inexistant a eu lieu.
 	 */
 	public static final int CREATE_USER_NULL=10020;
 	
 	/**CREATE
-	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 * Une erreur  est survenue lors de l'enregistrement des informations de l'utilisateur dans la DB.
 	 */
 	public static final int CREATE_USER_SQL=10021;
 	
 	/**SELECT
-	 * Echec général quand tentative de récupération d'un USER dans la DB
+	 * Une erreur est survenue lors de la tentative de récupération d'un USER dans la DB
 	 */
-	public static final int SELECT_USER_SQL=10024;
+	public static final int SELECT_USER_SQL=10022;
+	
+	/**SELECT
+	 * Une erreur est survenue lors de la tentative de récupération de la liste des pseudos dans la DB
+	 */
+	public static final int SELECT_PSEUDOS_LIST_SQL=10023;
+	
+	/**SELECT
+	 * Une erreur est survenue lors de la tentative de récupération de la liste des emails dans la DB
+	 */
+	public static final int SELECT_EMAIL_LIST_SQL=10024;
+	
 	
 	/**UPDATE
-	 * Echec général quand tentative d'ajouter d'un USER dans la DB
+	 * Une erreur est survenue lors de la tentative de mise à jour d'un USER dans la DB
 	 */
-	public static final int UPDATE_USER_NULL=10022;
+	public static final int UPDATE_USER_NULL=10025;
 	
 	/**UPDATE
-	 * Echec général quand tentative d'ajouter d'un USER sans ID dans la DB
+	 * Une erreur est survenue lors de la tentative d'ajouter d'un USER sans ID dans la DB
 	 */
-	public static final int UPDATE_USER_ID_ERROR=10023;
+	public static final int UPDATE_USER_ID_ERROR=10026;
 	
 	/**UPDATE
-	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 * Une erreur est survenue lors de la tentative d'ajouter une USER dans la DB
 	 */
-	public static final int UPDATE_USER_ERROR=10024;
+	public static final int UPDATE_USER_ERROR=10027;
 	
 	/**DELETE
-	 * Echec général quand tentative d'ajouter une USER dans la DB
+	 * Une erreur est survenue lors de la tentative de suppression USER dans la DB
 	 */
-	public static final int DELETE_USER_SQL=10025;
+	public static final int DELETE_USER_SQL=10028;
 	
 	
 	//------------------ ERRORS FOR BIDS ------------------
 	/**
 	 * Echec général quand tentative d'ajouter une ENCHERE null
 	 */
-	public static final int CREATE_ENCHERE_NULL = 10030;
+	public static final int CREATE_ENCHERE_NULL = 10100;
 	
 	/**
 	 * Echec général quand tentative d'ajouter une ENCHERE dans la DB
 	 */
-	public static final int CREATE_ENCHERE_SQL = 10031;
+	public static final int CREATE_ENCHERE_SQL = 10101;
 	
 	/**
 	 * Echec général quand tentative de récupérer une ENCHERE dans la DB
 	 */
-	public static final int SELECT_ENCHERE_SQL = 10032;
+	public static final int SELECT_ENCHERE_SQL = 10102;
 	
 	/**
 	 * Echec général lors de l'installation des catégories intial 
