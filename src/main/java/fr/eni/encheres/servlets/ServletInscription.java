@@ -21,29 +21,19 @@ public class ServletInscription extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
-
-		String pseudo;
-		String nom;
-		String prenom;
-		String email;
-		String telephone;
-		String rue;
-		String codePostal;
-		String ville;
-		String motDePasse;
-		String confirmation;
-
-		pseudo = request.getParameter("pseudo");
-		nom = request.getParameter("nom");
-		prenom = request.getParameter("prenom");
-		email = request.getParameter("email");
-		telephone = request.getParameter("telephone");
-		rue = request.getParameter("rue");
-		codePostal = request.getParameter("code-postal");
-		ville = request.getParameter("ville");
-		motDePasse = request.getParameter("mot-de-passe");
-		confirmation = request.getParameter("confirmation");
+		
+		String pseudo = request.getParameter("pseudo");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String telephone = request.getParameter("telephone");
+		String rue = request.getParameter("rue");
+		String codePostal = request.getParameter("code-postal");
+		String ville = request.getParameter("ville");
+		String motDePasse = request.getParameter("mot-de-passe");
+		String confirmation = request.getParameter("confirmation");
 
 		request.setAttribute("pseudo", pseudo);
 		request.setAttribute("nom", nom);
