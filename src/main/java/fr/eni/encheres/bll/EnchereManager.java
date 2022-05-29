@@ -103,6 +103,7 @@ public class EnchereManager {
 		}
 	}
 
+	//  TO DO A modifier ou supprimer si tout sera vérifié par la méthode ckeckMontant
 	public void checkMontantEnchere(int prix_initial, int montant, BusinessException businessException) {
 		if (montant <= prix_initial) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_ENCHERE_MONTANT_ERREUR);
@@ -111,11 +112,19 @@ public class EnchereManager {
 	
 	 // Methods to validate a bid
 	
-	public void checkDateEnchere (List<Enchere> listeEncheres, LocalDateTime date_enchere, BusinessException businessException) {
+	public void checkMontant (List<Integer> listeMontants, int montant, BusinessException businessException) {
 		
-	}
-	
-	public void checkMontant (List<Enchere> listeEncheres, int montant, BusinessException businessException) {
+		int montantMax = 0;
+		
+		for (int valMontant : listeMontants) {
+			if(valMontant > montantMax) {
+				montantMax = valMontant;
+			}
+			
+			if (montant <= montantMax) {
+				businessException.ajouterErreur(CodesResultatBLL.REGLE_ENCHERE_MONTANT_ERREUR);
+			}
+		}
 		
 	}
 }
