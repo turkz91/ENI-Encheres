@@ -120,10 +120,33 @@ public abstract class CodesResultatDAL {
 	public static final int SELECT_ALL_ENCHERES_SQL = 10104;
 	
 	/**
+	 * Une erreur est survenue lors de la mise à jour d'une enchère innexistante
+	 */
+	public static final int UPDATE_ENCHERE_NULL = 10105;
+	
+	/**
+	 * Une erreur est survenue lors de la mise à jour d'une enchère pour un numero d'article innexistant
+	 */
+	public static final int UPDATE_ENCHERE_NO_ARTICLE_NULL = 10106;
+	
+	/**
+	 * Une erreur est survenue lors de la mise à jour d'une enchère pour un numero utilisateur innexistant
+	 */
+	public static final int UPDATE_ENCHERE_NO_UTILISATEUR_NULL = 10107;
+	
+	/**
+	 * Une erreur est survenue lors de l'enregistrement la mise à jour d'une enchère dans la DB
+	 */
+	public static final int UPDATE_USER_SQL = 10108;
+	/**
 	 * Echec général lors de l'installation des catégories intial 
 	 *   - InstallCategorieDAL.java
 	 */
 	public static final int INSTALL_CATEGORIES_INIT=50000;
+
+
+
+	
 
 
 

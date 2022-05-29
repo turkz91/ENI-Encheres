@@ -45,7 +45,9 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String SELECT_ENCHERE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_utilisateur = ? AND no_article = ?";
 	private final String SELECT_ALL_MONTANTS_ENCHERES = "SELECT montant FROM ENCHERES";
 	private final String SELECT_ALL_ENCHERES = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
-	private final String UPDATE_ENCHERE = ""; // TO DO
+	private final String UPDATE_ENCHERE = "UPDATE ENCHERES"
+			+ "SET no_utilisateur = ?, no_article = ?, date_enchere = ?, montant_enchere = ?"
+			+ "WHERE no_utilisateur = ? AND no_enchere = ?";
 	private final String DELETE_ENCHERE = ""; // TO DO
 
 	// METHODS FOR ARTICLES
@@ -204,6 +206,44 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		return listeEncheres;
 	}
 
+	@Override
+	public void updateEnchere(Enchere enchere) throws BusinessException {
+		if (enchere == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_NULL);
+			throw businessException;
+		}
+		if (Integer.valueOf(enchere.getNo_article()) == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_NO_ARTICLE_NULL);
+			throw businessException;
+		}
+		if (Integer.valueOf(enchere.getNo_utilisateur()) == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_NO_UTILISATEUR_NULL);
+			throw businessException;
+		}
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtEnchere = cnx.prepareStatement(UPDATE_ENCHERE);
+
+			pstmtEnchere.setInt(1, enchere.getNo_utilisateur());
+			pstmtEnchere.setInt(2, enchere.getNo_article());
+			pstmtEnchere.setObject(3, enchere.getDate_enchere());
+			pstmtEnchere.setInt(4, enchere.getMontant_enchere());
+			pstmtEnchere.setInt(5, enchere.getNo_utilisateur());
+			pstmtEnchere.setInt(6, enchere.getNo_article());
+			
+			pstmtEnchere.executeUpdate();
+			pstmtEnchere.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_USER_SQL);
+			throw businessException;
+		};
+	}
+	
 	// METHODS FOR CATEGORIES
 	@Override
 	public Categorie createCategorie(Categorie categorie) throws BusinessException {
@@ -231,6 +271,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return categorie;
 	}
+
+	
 
 
 
