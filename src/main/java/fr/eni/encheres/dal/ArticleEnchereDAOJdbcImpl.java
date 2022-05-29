@@ -31,6 +31,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			+ "VALUES (?,?,?,?,?,?)";
 	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
 			+ "FROM ARTICLES_VENDUS WHERE no_article = ?";
+	private final String SELECT_ALL_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+			+ "FROM ARTICLES_VENDUS";
 	private final String UPDATE_ARTICLE = ""; // TO DO
 	private final String DELETE_ARTICLE = ""; // TO DO
 
@@ -117,7 +119,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		ArticleVendu article = null;
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_ALL_MONTANTS_ENCHERES);
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_ALL_ARTICLES);
 			ResultSet rs = pstmtArticle.executeQuery();
 			while (rs.next()) {
 				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
