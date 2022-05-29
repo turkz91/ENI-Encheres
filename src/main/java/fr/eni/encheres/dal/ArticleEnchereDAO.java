@@ -3,6 +3,8 @@
  */
 package fr.eni.encheres.dal;
 
+import java.util.List;
+
 import fr.eni.encheres.bll.BusinessException;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
@@ -21,6 +23,7 @@ public interface ArticleEnchereDAO {
 	// ENCHERES
 	public void createEnchere(Enchere enchere) throws BusinessException;
 	public Enchere selectEnchere(ArticleVendu article) throws BusinessException;
+	public List<Enchere> selectAllEncheres() throws BusinessException;
 	
 	// CATEGORIES
 	public Categorie createCategorie(Categorie categorie) throws BusinessException;

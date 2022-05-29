@@ -36,8 +36,16 @@ public class CodesResultatBLL {
 	public static final int REGLE_UTILISATEUR_VILLE_ERREUR = 20013;
 	
 	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_ERREUR = 20014;
+	
+	public static final int REGLE_UTILISATEUR_PSEUDO_UNIQUE = 20015;
+	
+	public static final int REGLE_UTILISATEUR_EMAIL_UNIQUE = 20016;
 
 	// Errors from Enchere
 	
-	public static final int REGLE_ENCHERE_MONTANT_ERREUR = 20015;
+	public static final int REGLE_ENCHERE_MONTANT_ERREUR = 20020;
+	
+	
+
+	
 }
