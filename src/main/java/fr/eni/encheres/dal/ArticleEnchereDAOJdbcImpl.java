@@ -43,6 +43,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String CREATE_ENCHERE = "INSERT INTO ENCHERES"
 			+ "(no_utilisateur, no_article, date_enchere, montant_enchere)" + "VALUES (?,?,?,?)";
 	private final String SELECT_ENCHERE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_utilisateur = ? AND no_article = ?";
+	private final String SELECT_ALL_MONTANTS_ENCHERES = "SELECT montant FROM ENCHERES";
 	private final String SELECT_ALL_ENCHERES = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
 	private final String UPDATE_ENCHERE = ""; // TO DO
 	private final String DELETE_ENCHERE = ""; // TO DO
@@ -156,6 +157,30 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	}
 	
 	@Override
+	public List<Integer> selectAllMontantsEncheres(ArticleVendu article) throws BusinessException {
+
+
+		List<Integer> listeMontants = new ArrayList<Integer>();
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtEnchere = cnx.prepareStatement(SELECT_ALL_MONTANTS_ENCHERES);
+			ResultSet rs = pstmtEnchere.executeQuery();
+			if (rs.next()) {
+				int montant = rs.getInt("montant_enchere");
+				listeMontants.add(montant);
+			}
+			pstmtEnchere.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_MONTANTS_ENCHERES_SQL);
+		}
+		return listeMontants;
+	}
+	
+	@Override
 	public List<Enchere> selectAllEncheres() throws BusinessException {
 		
 		List<Enchere> listeEncheres = new ArrayList<Enchere>();
@@ -206,6 +231,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return categorie;
 	}
+
+
 
 	
 

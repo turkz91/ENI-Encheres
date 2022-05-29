@@ -23,6 +23,7 @@ public interface ArticleEnchereDAO {
 	// ENCHERES
 	public void createEnchere(Enchere enchere) throws BusinessException;
 	public Enchere selectEnchere(ArticleVendu article) throws BusinessException;
+	public List<Integer> selectAllMontantsEncheres (ArticleVendu article) throws BusinessException;
 	public List<Enchere> selectAllEncheres() throws BusinessException;
 	
 	// CATEGORIES

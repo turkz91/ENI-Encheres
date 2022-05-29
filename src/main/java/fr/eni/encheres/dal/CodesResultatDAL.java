@@ -108,16 +108,24 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int SELECT_ENCHERE_SQL = 10102;
 	
+	
+	/**
+	 * Une erreur est survenue lors de la récupération des montants des enchères pour l'article sélectionné dans la DB
+	 */
+	public static final int SELECT_ALL_MONTANTS_ENCHERES_SQL = 10103;
+	
 	/**
 	 * Une erreur est survenue lors de la récupération des enchères pour l'article sélectionné dans la DB
 	 */
-	public static final int SELECT_ALL_ENCHERES_SQL = 10103;
+	public static final int SELECT_ALL_ENCHERES_SQL = 10104;
 	
 	/**
 	 * Echec général lors de l'installation des catégories intial 
 	 *   - InstallCategorieDAL.java
 	 */
 	public static final int INSTALL_CATEGORIES_INIT=50000;
+
+
 
 	
 
