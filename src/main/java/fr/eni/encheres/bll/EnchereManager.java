@@ -53,6 +53,16 @@ public class EnchereManager {
 		BusinessException businessException = new BusinessException();
 
 		Enchere enchere = null;
+		
+		// First sept : check montant > prix_initial
+		this.checkMontantPrixInitial(no_article, montant_enchere, businessException);
+		
+		ArticleVendu article = articleEnchereDAO.selectArticle(no_article);
+		
+		List<Integer> listeMontants = articleEnchereDAO.selectAllMontantsEncheres(article);
+		
+		// Second sept : check montant > montant max actuel
+		this.checkMontantMaxEncheres(listeMontants, montant_enchere, businessException);
 
 		if (!businessException.hasErreurs()) {
 			enchere = new Enchere(no_utilisateur, no_article, date_enchere, montant_enchere);
@@ -112,7 +122,7 @@ public class EnchereManager {
 	
 	 // Methods to validate a bid
 	
-	public void checkMontantMax (List<Integer> listeMontants, int montant, BusinessException businessException) {
+	public void checkMontantMaxEncheres (List<Integer> listeMontants, int montant, BusinessException businessException) {
 		
 		int montantMax = 0;
 		
