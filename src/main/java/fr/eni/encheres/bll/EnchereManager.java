@@ -112,7 +112,7 @@ public class EnchereManager {
 	
 	 // Methods to validate a bid
 	
-	public void checkMontant (List<Integer> listeMontants, int montant, BusinessException businessException) {
+	public void checkMontantMax (List<Integer> listeMontants, int montant, BusinessException businessException) {
 		
 		int montantMax = 0;
 		
