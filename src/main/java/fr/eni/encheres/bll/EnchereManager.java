@@ -104,7 +104,7 @@ public class EnchereManager {
 	}
 
 	//  TO DO A modifier ou supprimer si tout sera vérifié par la méthode ckeckMontant
-	public void checkMontantEnchere(int prix_initial, int montant, BusinessException businessException) {
+	public void checkMontantPrixInitial(int prix_initial, int montant, BusinessException businessException) {
 		if (montant <= prix_initial) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_ENCHERE_MONTANT_ERREUR);
 		}
