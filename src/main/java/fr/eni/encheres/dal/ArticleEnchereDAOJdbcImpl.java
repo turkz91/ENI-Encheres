@@ -39,7 +39,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String SELECT_CATEGORIE = "SELECT libelle FROM CATEGORIES WHERE no_categorie = ?";
 	private final String UPDATE_CATEGORIE = ""; // TO DO
 	private final String DELETE_CATEGORIE = ""; // TO DO
-	
+
 	// SQL REQUESTS FOR ENCHERES
 	private final String CREATE_ENCHERE = "INSERT INTO ENCHERES"
 			+ "(no_utilisateur, no_article, date_enchere, montant_enchere)" + "VALUES (?,?,?,?)";
@@ -113,38 +113,30 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	public List<ArticleVendu> selectAllArticles() throws BusinessException {
 
 		List<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
-		
+
 		ArticleVendu article = null;
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_ALL_MONTANTS_ENCHERES);
 			ResultSet rs = pstmtArticle.executeQuery();
 			while (rs.next()) {
-				article = new ArticleVendu(
-				rs.getInt("no_article"),
-				rs.getString("nom_article"),
-				rs.getString("description"),
-				(rs.getDate("date_debut_encheres")).toLocalDate(),
-				(rs.getDate("date_fin_encheres")).toLocalDate(),
-				rs.getInt("prix_initial"),
-				rs.getInt("prix_vente"),
-				rs.getInt("no_utilisateur"),
-				rs.getInt("no_categorie")
-				);
+				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(),
+						(rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
 				listeArticles.add(article);
 			}
 			pstmtArticle.close();
 			cnx.close();
-
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_MONTANTS_ENCHERES_SQL);
 		}
-		
 		return listeArticles;
 	}
-	
+
 	// METHODS FOR BIDS
 
 	@Override
@@ -194,13 +186,12 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return enchere;
 	}
-	
+
 	@Override
 	public List<Integer> selectAllMontantsEncheres(ArticleVendu article) throws BusinessException {
 
-
 		List<Integer> listeMontants = new ArrayList<Integer>();
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtEnchere = cnx.prepareStatement(SELECT_ALL_MONTANTS_ENCHERES);
 			ResultSet rs = pstmtEnchere.executeQuery();
@@ -218,12 +209,12 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return listeMontants;
 	}
-	
+
 	@Override
 	public List<Enchere> selectAllEncheres() throws BusinessException {
-		
+
 		List<Enchere> listeEncheres = new ArrayList<Enchere>();
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtEnchere = cnx.prepareStatement(SELECT_ALL_ENCHERES);
 			ResultSet rs = pstmtEnchere.executeQuery();
@@ -260,7 +251,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_NO_UTILISATEUR_NULL);
 			throw businessException;
 		}
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtEnchere = cnx.prepareStatement(UPDATE_ENCHERE);
 
@@ -270,7 +261,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			pstmtEnchere.setInt(4, enchere.getMontant_enchere());
 			pstmtEnchere.setInt(5, enchere.getNo_utilisateur());
 			pstmtEnchere.setInt(6, enchere.getNo_article());
-			
+
 			pstmtEnchere.executeUpdate();
 			pstmtEnchere.close();
 		} catch (Exception ex) {
@@ -278,9 +269,10 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_SQL);
 			throw businessException;
-		};
+		}
+		;
 	}
-	
+
 	// METHODS FOR CATEGORIES
 	@Override
 	public Categorie createCategorie(Categorie categorie) throws BusinessException {
@@ -308,13 +300,5 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return categorie;
 	}
-
-
-
-	
-
-
-
-	
 
 }
