@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +109,42 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		return article;
 	}
 
+	@Override
+	public List<ArticleVendu> selectAllArticles() throws BusinessException {
+
+		List<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
+		
+		ArticleVendu article = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_ALL_MONTANTS_ENCHERES);
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				article = new ArticleVendu(
+				rs.getInt("no_article"),
+				rs.getString("nom_article"),
+				rs.getString("description"),
+				(rs.getDate("date_debut_encheres")).toLocalDate(),
+				(rs.getDate("date_fin_encheres")).toLocalDate(),
+				rs.getInt("prix_initial"),
+				rs.getInt("prix_vente"),
+				rs.getInt("no_utilisateur"),
+				rs.getInt("no_categorie")
+				);
+				listeArticles.add(article);
+			}
+			pstmtArticle.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_MONTANTS_ENCHERES_SQL);
+		}
+		
+		return listeArticles;
+	}
+	
 	// METHODS FOR BIDS
 
 	@Override
@@ -239,7 +276,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.UPDATE_USER_SQL);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_SQL);
 			throw businessException;
 		};
 	}
@@ -271,6 +308,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return categorie;
 	}
+
+
 
 	
 

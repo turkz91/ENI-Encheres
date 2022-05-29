@@ -19,6 +19,7 @@ public interface ArticleEnchereDAO {
 	// ARTICLES
 	public void createArticle(ArticleVendu article) throws BusinessException ;
 	public ArticleVendu selectArticle(int no_article) throws BusinessException;	
+	public List<ArticleVendu> selectAllArticles () throws BusinessException;
 	
 	// ENCHERES
 	public void createEnchere(Enchere enchere) throws BusinessException;

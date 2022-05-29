@@ -137,7 +137,7 @@ public abstract class CodesResultatDAL {
 	/**
 	 * Une erreur est survenue lors de l'enregistrement la mise à jour d'une enchère dans la DB
 	 */
-	public static final int UPDATE_USER_SQL = 10108;
+	public static final int UPDATE_ENCHERE_SQL = 10108;
 	/**
 	 * Echec général lors de l'installation des catégories intial 
 	 *   - InstallCategorieDAL.java
