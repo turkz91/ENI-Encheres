@@ -40,12 +40,15 @@ public class CodesResultatBLL {
 	public static final int REGLE_UTILISATEUR_PSEUDO_UNIQUE = 20015;
 	
 	public static final int REGLE_UTILISATEUR_EMAIL_UNIQUE = 20016;
+	
+	
+
+	public static final int REGLE_UTILISATEUR_NON_EXISTANT = 20015;
+	
+	public static final int  REGLE_UTILISATEUR_MDP_FAUX = 20016;
 
 	// Errors from Enchere
 	
 	public static final int REGLE_ENCHERE_MONTANT_ERREUR = 20020;
-	
-	
 
-	
 }

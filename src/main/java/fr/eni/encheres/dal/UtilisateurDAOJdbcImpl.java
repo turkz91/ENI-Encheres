@@ -6,9 +6,6 @@ package fr.eni.encheres.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.eni.encheres.bll.BusinessException;
 import fr.eni.encheres.bo.Utilisateur;
@@ -26,6 +23,12 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ "FROM UTILISATEURS " + "WHERE (no_utilisateur = ?)";
 	private final String SELECT_USER_BY_PSEUDO = "SELECT " + "pseudo" + "FROM UTILISATEURS " + "WHERE (pseudo = ?)";
 	private final String SELECT_USER_BY_EMAIL = "SELECT " + "email" + "FROM UTILISATEURS " + "WHERE (email = ?)";
+
+//	private final String SELECT_MAILS_LIST = "SELECT email" + "FROM UTILISATEURS";
+//	private final String SELECT_PSEUDOS_LIST = "SELECT pseudo" + "FROM UTILISATEURS";
+	private final String SELECT_USER_BY_DETAILS ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur"
+			+ " FROM UTILISATEURS"
+			+ " WHERE pseudo=? OR email=?";
 	private final String UPDATE_USER = "UPDATE UTILISATEURS "
 			+ "SET pseudo=?, nom=?, prenom=?,email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? "
 			+ "WHERE no_utilisateur=?";
@@ -205,5 +208,95 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_USER_SQL);
 			throw businessException;
 		}
-	}	
+
+	}
+
+	@Override
+	public Utilisateur selectUserbyDetails(String pseudo, String email) throws BusinessException {
+		
+		Utilisateur utilisateur = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_DETAILS);
+			pstmtUser.setString(1, pseudo);
+			pstmtUser.setString(2, email);
+
+			ResultSet rsUser = pstmtUser.executeQuery();
+
+			if (rsUser.next()) {
+				utilisateur = new Utilisateur(rsUser.getInt("no_utilisateur"), rsUser.getString("pseudo"),
+						rsUser.getString("nom"), rsUser.getString("prenom"), rsUser.getString("email"),
+						rsUser.getString("telephone"), rsUser.getString("rue"),
+						rsUser.getString("code_postal"),rsUser.getString("ville"), rsUser.getString("mot_de_passe"), rsUser.getInt("credit"),
+						rsUser.getBoolean("administrateur"));
+			}
+			rsUser.close();
+			pstmtUser.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_SQL);
+			throw businessException;
+		}
+		return utilisateur;
+		
+//		List<String> usersMailsList = new ArrayList<String>();
+//		String mailsList = null;
+//
+//		try (Connection cnx = ConnectionProvider.getConnection()) {
+//			Statement stmt = cnx.createStatement();
+//
+//			ResultSet rs = stmt.getGeneratedKeys();
+//			rs = stmt.executeQuery(SELECT_MAILS_LIST);
+//
+//			while (rs.next()) {
+//				mailsList = (rs.getString("email"));
+//
+//				usersMailsList.add(mailsList);
+//			}
+//			rs.close();
+//			stmt.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			BusinessException businessException = new BusinessException();
+//			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_SQL);
+//			throw businessException;
+//		}
+//		return usersMailsList;
+	}
+
+	@Override
+	public Utilisateur selectUser(int no_utilisateur) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public List<String> selectUserbyPseudo(String pseudo) throws BusinessException {
+//		
+//		List<String> usersPseudosList = new ArrayList<String>();
+//		String pseudosList = null;
+//
+//		try (Connection cnx = ConnectionProvider.getConnection()) {
+//			Statement stmt = cnx.createStatement();
+//
+//			ResultSet rs = stmt.getGeneratedKeys();
+//			rs = stmt.executeQuery(SELECT_MAILS_LIST);
+//
+//			while (rs.next()) {
+//				pseudosList = (rs.getString("pseudo"));
+//
+//				usersPseudosList.add(pseudosList);
+//			}
+//			rs.close();
+//			stmt.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			BusinessException businessException = new BusinessException();
+//			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_SQL);
+//			throw businessException;
+//		}
+//		return usersPseudosList;
+//	}
+
 }

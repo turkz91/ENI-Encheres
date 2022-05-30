@@ -5,15 +5,32 @@
 	<% 
 	String pageTitle = "Login";
 	%>
+	<%@ page
+		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.Utilisateur"%>
 	<%@ include file="../partials/head.jspf"%>
 
 	<body>
+		
 		<%@ include file="../partials/header.jspf"%>
         <div class="container pt-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-md-7 col-lg-5">
-                    <div class="col-12 pb-5">
-                        <form class="form" action="" method="post">
+                    <div class="col-12 pb-5">                    	
+					<%
+					@SuppressWarnings("unchecked")
+					List<Integer> listeCodesErreur = (List<Integer>) request.getAttribute("listeCodesErreur");
+					if (listeCodesErreur != null) {
+					%>
+					<p class="text-center text-danger">Erreur, l'utilisateur n'a pas pu être ajouté :</p>
+					<%
+					for (int codeErreur : listeCodesErreur) {
+					%>
+					<p class="text-center"><%=LecteurMessage.getMessageErreur(codeErreur)%></p>
+					<%
+					}
+					}
+					%>
+                        <form class="form" action="<%=request.getContextPath()%>/UtilisateurLogin" method="post">
                             <div class="form-row pb-2">
                                 <label for="username" class="col-5 col-form-label col-form-label-lg">Identifiant:</label>
                                 <div class="col-7">
@@ -23,7 +40,7 @@
                             <div class="form-row py-2">
                                 <label for="motDePasse" class="col-5 col-form-label col-form-label-lg eni-lbl-login">Mot de Passe:</label><br>
                                 <div class="col-7">
-                                	<input type="text" name="motDePasse" id="motDePasse" class="form-control">
+                                	<input type="password" name="motDePasse" id="motDePasse" class="form-control">
                             	</div>
                             </div>
                             <div class="form-row pt-3">
