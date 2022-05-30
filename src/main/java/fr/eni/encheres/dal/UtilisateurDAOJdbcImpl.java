@@ -107,10 +107,10 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_PSEUDO);
 			pstmtUser.setString(1, pseudo);
-			pstmtUser.executeQuery();
-       		ResultSet rsUser = pstmtUser.getGeneratedKeys();
-
-
+			//pstmtUser.executeQuery();
+			//ResultSet rsUser = pstmtUser.getGeneratedKeys();
+			ResultSet rsUser = pstmtUser.executeQuery();
+			
 			if (rsUser.next()) {
 				pseudoInDb = rsUser.getString("pseudo");
 			}
@@ -205,5 +205,5 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_USER_SQL);
 			throw businessException;
 		}
-	}	
+	}
 }
