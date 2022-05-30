@@ -10,3 +10,11 @@ nav.navbar .navbar-nav .nav-item .nav-link {
 nav.navbar .navbar-brand {
 	font-size : 1.45rem;
 }
+.form-control {
+    border-radius: 2.25rem;
+}
+
+.form-check-inline {
+    display: inline-block;
+    margin-right: 2.75rem;
+}
