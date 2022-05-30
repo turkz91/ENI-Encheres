@@ -31,6 +31,12 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String SELECT_USER_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE (pseudo = ?)";
 	private final String SELECT_USER_BY_EMAIL = "SELECT " + "email" + "FROM UTILISATEURS " + "WHERE (email = ?)";
 
+//	private final String SELECT_MAILS_LIST = "SELECT email" + "FROM UTILISATEURS";
+//	private final String SELECT_PSEUDOS_LIST = "SELECT pseudo" + "FROM UTILISATEURS";
+	private final String SELECT_USER_BY_DETAILS ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur"
+			+ " FROM UTILISATEURS"
+			+ " WHERE pseudo=? OR email=?";
+
 	private final String UPDATE_USER = "UPDATE UTILISATEURS "
 			+ "SET pseudo=?, nom=?, prenom=?,email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? "
 			+ "WHERE no_utilisateur=?";
@@ -211,7 +217,6 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;
 		}
 
-
 	}
 
 	@Override
@@ -301,8 +306,4 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 //		}
 //		return usersPseudosList;
 //	}
-
-
-
-
 }

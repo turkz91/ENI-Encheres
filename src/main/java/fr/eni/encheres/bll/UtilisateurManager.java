@@ -86,6 +86,27 @@ public class UtilisateurManager {
 		}
 	}
 
+	public Utilisateur loginUtilisateur(String userDetails, String motDePasse) throws BusinessException {
+
+		BusinessException businessException = new BusinessException();
+		Utilisateur utilisateur = null;
+		if (userDetails == null || motDePasse == null) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_ERREUR);
+		} else {
+			utilisateur = utilisateurDAO.selectUserbyDetails(userDetails, motDePasse);
+		}
+		if (utilisateur == null) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_NON_EXISTANT);
+		}
+
+		if (utilisateur.getMot_de_passe().equals(motDePasse)) {
+			return utilisateur;
+		} else {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MDP_FAUX);
+		}
+		throw businessException;
+	}
+
 	public void checkNom(String nom, BusinessException businessException) {
 
 		// Only letters accepted for lastname
@@ -118,10 +139,10 @@ public class UtilisateurManager {
 		if (email == null || email.length() > 20 || matcher.matches() == false) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_ERREUR);
 		}
-		
+
 		String pseudoInDb = null;
 		pseudoInDb = utilisateurDAO.selectUserByEmail(email);
-		if (email == pseudoInDb ) {
+		if (email == pseudoInDb) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_UNIQUE);
 			throw businessException;
 		}

@@ -9,9 +9,8 @@ import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.ArticleEnchereDAO;
 import fr.eni.encheres.dal.DAOFactory;
 
-
+//This class manage ArticleVendu and bids
 public class ArticleEnchereManager {
-
 
 	private ArticleEnchereDAO articleEnchereDAO;
 
