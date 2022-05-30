@@ -18,14 +18,19 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String CREATE_USER = "INSERT INTO UTILISATEURS "
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
-	private final String SELECT_USER = "SELECT "
+	private final String SELECT_USER_BY_ID = "SELECT "
 			+ "no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur"
 			+ "FROM UTILISATEURS " + "WHERE (no_utilisateur = ?)";
+
 //	private final String SELECT_MAILS_LIST = "SELECT email" + "FROM UTILISATEURS";
 //	private final String SELECT_PSEUDOS_LIST = "SELECT pseudo" + "FROM UTILISATEURS";
 	private final String SELECT_USER_BY_DETAILS ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur"
 			+ " FROM UTILISATEURS"
 			+ " WHERE pseudo=? OR email=?";
+
+	private final String SELECT_USER_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE (pseudo = ?)";
+	private final String SELECT_USER_BY_EMAIL = "SELECT " + "email" + "FROM UTILISATEURS " + "WHERE (email = ?)";
+
 	private final String UPDATE_USER = "UPDATE UTILISATEURS "
 			+ "SET pseudo=?, nom=?, prenom=?,email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? "
 			+ "WHERE no_utilisateur=?";
@@ -69,12 +74,12 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur selectUser(int no_utilisateur) throws BusinessException {
+	public Utilisateur selectUserById(int no_utilisateur) throws BusinessException {
 
 		Utilisateur utilisateur = null;
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER);
+			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_ID);
 			pstmtUser.setInt(1, no_utilisateur);
 
 			ResultSet rsUser = pstmtUser.getGeneratedKeys();
@@ -97,6 +102,59 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return utilisateur;
 
+	}
+
+	@Override
+	public String selectUserByPseudo(String pseudo) throws BusinessException {
+
+		String pseudoInDb = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_PSEUDO);
+			pstmtUser.setString(1, pseudo);
+			pstmtUser.executeQuery();
+       		ResultSet rsUser = pstmtUser.getGeneratedKeys();
+
+
+			if (rsUser.next()) {
+				pseudoInDb = rsUser.getString("pseudo");
+			}
+			rsUser.close();
+			pstmtUser.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_BY_PSEUDO_SQL);
+			throw businessException;
+		}
+		return pseudoInDb;
+
+	}
+
+	@Override
+	public String selectUserByEmail(String email) throws BusinessException {
+
+		String emailInDb = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_EMAIL);
+			pstmtUser.setString(1, email);
+
+			ResultSet rsUser = pstmtUser.getGeneratedKeys();
+			rsUser = pstmtUser.executeQuery();
+
+			while (rsUser.next()) {
+				emailInDb = rsUser.getString("email");
+			}
+			rsUser.close();
+			pstmtUser.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_BY_EMAIL_SQL);
+			throw businessException;
+		}
+		return emailInDb;
 	}
 
 	@Override
@@ -152,6 +210,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_USER_SQL);
 			throw businessException;
 		}
+
 
 	}
 
@@ -209,6 +268,12 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 //		return usersMailsList;
 	}
 
+	@Override
+	public Utilisateur selectUser(int no_utilisateur) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 //	@Override
 //	public List<String> selectUserbyPseudo(String pseudo) throws BusinessException {
 //		
@@ -236,5 +301,8 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 //		}
 //		return usersPseudosList;
 //	}
+
+
+
 
 }

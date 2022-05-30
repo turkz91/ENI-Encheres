@@ -61,26 +61,35 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int SELECT_EMAIL_LIST_SQL=10024;
 	
+	/**SELECT
+	 * Une erreur est survenue lors de la recherche par pseudo de l'utilisateur dans la DB
+	 */
+	public static final int SELECT_USER_BY_PSEUDO_SQL = 10025;
+	
+	/**SELECT
+	 * Une erreur est survenue lors de la recherche par pseudo de l'utilisateur dans la DB
+	 */
+	public static final int SELECT_USER_BY_EMAIL_SQL = 10026;
 	
 	/**UPDATE
 	 * Une erreur est survenue lors de la tentative de mise à jour d'un USER dans la DB
 	 */
-	public static final int UPDATE_USER_NULL=10025;
+	public static final int UPDATE_USER_NULL=10027;
 	
 	/**UPDATE
 	 * Une erreur est survenue lors de la tentative d'ajouter d'un USER sans ID dans la DB
 	 */
-	public static final int UPDATE_USER_ID_ERROR=10026;
+	public static final int UPDATE_USER_ID_ERROR=10028;
 	
 	/**UPDATE
 	 * Une erreur est survenue lors de la tentative d'ajouter une USER dans la DB
 	 */
-	public static final int UPDATE_USER_ERROR=10027;
+	public static final int UPDATE_USER_ERROR=10029;
 	
 	/**DELETE
 	 * Une erreur est survenue lors de la tentative de suppression USER dans la DB
 	 */
-	public static final int DELETE_USER_SQL=10028;
+	public static final int DELETE_USER_SQL=10030;
 	
 	
 	//------------------ ERRORS FOR BIDS ------------------
@@ -99,11 +108,51 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int SELECT_ENCHERE_SQL = 10102;
 	
+	
+	/**
+	 * Une erreur est survenue lors de la récupération des montants des enchères pour l'article sélectionné dans la DB
+	 */
+	public static final int SELECT_ALL_MONTANTS_ENCHERES_SQL = 10103;
+	
+	/**
+	 * Une erreur est survenue lors de la récupération des enchères pour l'article sélectionné dans la DB
+	 */
+	public static final int SELECT_ALL_ENCHERES_SQL = 10104;
+	
+	/**
+	 * Une erreur est survenue lors de la mise à jour d'une enchère innexistante
+	 */
+	public static final int UPDATE_ENCHERE_NULL = 10105;
+	
+	/**
+	 * Une erreur est survenue lors de la mise à jour d'une enchère pour un numero d'article innexistant
+	 */
+	public static final int UPDATE_ENCHERE_NO_ARTICLE_NULL = 10106;
+	
+	/**
+	 * Une erreur est survenue lors de la mise à jour d'une enchère pour un numero utilisateur innexistant
+	 */
+	public static final int UPDATE_ENCHERE_NO_UTILISATEUR_NULL = 10107;
+	
+	/**
+	 * Une erreur est survenue lors de l'enregistrement la mise à jour d'une enchère dans la DB
+	 */
+	public static final int UPDATE_ENCHERE_SQL = 10108;
 	/**
 	 * Echec général lors de l'installation des catégories intial 
 	 *   - InstallCategorieDAL.java
 	 */
 	public static final int INSTALL_CATEGORIES_INIT=50000;
+
+
+
+	
+
+
+
+	
+
+	
 
 	
 

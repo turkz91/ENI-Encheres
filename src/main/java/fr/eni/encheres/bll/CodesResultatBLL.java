@@ -44,4 +44,12 @@ public class CodesResultatBLL {
 	// Errors from Enchere
 	
 	public static final int REGLE_ENCHERE_MONTANT_ERREUR = 20030;
+
+	public static final int REGLE_UTILISATEUR_PSEUDO_UNIQUE = 20015;
+	
+	public static final int REGLE_UTILISATEUR_EMAIL_UNIQUE = 20016;
+	
+	
+
+
 }
