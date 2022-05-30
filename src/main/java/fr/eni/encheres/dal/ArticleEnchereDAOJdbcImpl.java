@@ -3,17 +3,19 @@
  */
 package fr.eni.encheres.dal;
 
-import fr.eni.encheres.bo.ArticleVendu;
-import fr.eni.encheres.bo.Categorie;
-import fr.eni.encheres.bo.Enchere;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.encheres.bll.BusinessException;
+import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Enchere;
 
 /**
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
@@ -21,24 +23,16 @@ import fr.eni.encheres.bll.BusinessException;
  */
 class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 
-	// SQL REQUESTS FOR UTILISATEURS
-	private final String CREATE_UTILISATEUR = "INSERT INTO UTILISATEURS"
-			+ "(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur)"
-			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private final String SELECT_UTILISATEUR = "SELECT pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur"
-			+ "FROM UTILISATEURS WHERE no_utilisateur=?";
-	private final String UPDATE_UTILISATEUR = ""; // TO DO
-	private final String DELETE_UTILISATEUR = ""; // TO DO
-
 	// SQL REQUESTS FOR ARTICLES
 	private final String CREATE_ARTICLE = "INSERT INTO ARTICLES_VENDUS "
 			// prix_initial can be null, but if the user inform a price, it wont be recorded
 			// ?
 			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, no_utilisateur, no_categorie)"
 			+ "VALUES (?,?,?,?,?,?)";
-
 	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
 			+ "FROM ARTICLES_VENDUS WHERE no_article = ?";
+	private final String SELECT_ALL_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+			+ "FROM ARTICLES_VENDUS";
 	private final String UPDATE_ARTICLE = ""; // TO DO
 	private final String DELETE_ARTICLE = ""; // TO DO
 
@@ -47,12 +41,16 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String SELECT_CATEGORIE = "SELECT libelle FROM CATEGORIES WHERE no_categorie = ?";
 	private final String UPDATE_CATEGORIE = ""; // TO DO
 	private final String DELETE_CATEGORIE = ""; // TO DO
-	// SQL REQUESTS FOR ENCHERES
 
+	// SQL REQUESTS FOR ENCHERES
 	private final String CREATE_ENCHERE = "INSERT INTO ENCHERES"
 			+ "(no_utilisateur, no_article, date_enchere, montant_enchere)" + "VALUES (?,?,?,?)";
 	private final String SELECT_ENCHERE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_utilisateur = ? AND no_article = ?";
-	private final String UPDATE_ENCHERE = ""; // TO DO
+	private final String SELECT_ALL_MONTANTS_ENCHERES = "SELECT montant FROM ENCHERES";
+	private final String SELECT_ALL_ENCHERES = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
+	private final String UPDATE_ENCHERE = "UPDATE ENCHERES"
+			+ "SET no_utilisateur = ?, no_article = ?, date_enchere = ?, montant_enchere = ?"
+			+ "WHERE no_utilisateur = ? AND no_enchere = ?";
 	private final String DELETE_ENCHERE = ""; // TO DO
 
 	// METHODS FOR ARTICLES
@@ -113,6 +111,34 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		return article;
 	}
 
+	@Override
+	public List<ArticleVendu> selectAllArticles() throws BusinessException {
+
+		List<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
+
+		ArticleVendu article = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_ALL_ARTICLES);
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(),
+						(rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				listeArticles.add(article);
+			}
+			pstmtArticle.close();
+			cnx.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_MONTANTS_ENCHERES_SQL);
+		}
+		return listeArticles;
+	}
+
 	// METHODS FOR BIDS
 
 	@Override
@@ -161,6 +187,92 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_ENCHERE_SQL);
 		}
 		return enchere;
+	}
+
+	@Override
+	public List<Integer> selectAllMontantsEncheres(ArticleVendu article) throws BusinessException {
+
+		List<Integer> listeMontants = new ArrayList<Integer>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtEnchere = cnx.prepareStatement(SELECT_ALL_MONTANTS_ENCHERES);
+			ResultSet rs = pstmtEnchere.executeQuery();
+			if (rs.next()) {
+				int montant = rs.getInt("montant_enchere");
+				listeMontants.add(montant);
+			}
+			pstmtEnchere.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_MONTANTS_ENCHERES_SQL);
+		}
+		return listeMontants;
+	}
+
+	@Override
+	public List<Enchere> selectAllEncheres() throws BusinessException {
+
+		List<Enchere> listeEncheres = new ArrayList<Enchere>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtEnchere = cnx.prepareStatement(SELECT_ALL_ENCHERES);
+			ResultSet rs = pstmtEnchere.executeQuery();
+			if (rs.next()) {
+				Enchere enchere = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"),
+						(LocalDateTime) rs.getObject("date_enchere"), rs.getInt("montant_enchere"));
+				listeEncheres.add(enchere);
+			}
+			pstmtEnchere.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_ENCHERES_SQL);
+		}
+		return listeEncheres;
+	}
+
+	@Override
+	public void updateEnchere(Enchere enchere) throws BusinessException {
+		if (enchere == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_NULL);
+			throw businessException;
+		}
+		if (Integer.valueOf(enchere.getNo_article()) == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_NO_ARTICLE_NULL);
+			throw businessException;
+		}
+		if (Integer.valueOf(enchere.getNo_utilisateur()) == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_NO_UTILISATEUR_NULL);
+			throw businessException;
+		}
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtEnchere = cnx.prepareStatement(UPDATE_ENCHERE);
+
+			pstmtEnchere.setInt(1, enchere.getNo_utilisateur());
+			pstmtEnchere.setInt(2, enchere.getNo_article());
+			pstmtEnchere.setObject(3, enchere.getDate_enchere());
+			pstmtEnchere.setInt(4, enchere.getMontant_enchere());
+			pstmtEnchere.setInt(5, enchere.getNo_utilisateur());
+			pstmtEnchere.setInt(6, enchere.getNo_article());
+
+			pstmtEnchere.executeUpdate();
+			pstmtEnchere.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_SQL);
+			throw businessException;
+		}
+		;
 	}
 
 	// METHODS FOR CATEGORIES
