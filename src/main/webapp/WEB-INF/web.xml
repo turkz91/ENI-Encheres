@@ -77,7 +77,7 @@
   
   <servlet-mapping>
   	<servlet-name>ArticlesListe</servlet-name>
-  	<url-pattern>/</url-pattern>
+  	<url-pattern>/a</url-pattern>
   </servlet-mapping>
 </web-app>
 

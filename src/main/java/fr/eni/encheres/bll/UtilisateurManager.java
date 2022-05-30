@@ -43,7 +43,30 @@ public class UtilisateurManager {
 
 		return utilisateur;
 	}
-
+<<<<<<< HEAD
+	
+	public Utilisateur loginUtilisateur(String userDetails, String motDePasse) throws BusinessException {
+		
+		BusinessException businessException = new BusinessException();
+		Utilisateur utilisateur = null;
+		if(userDetails == null || motDePasse == null) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_ERREUR);
+		} else {
+			utilisateur = utilisateurDAO.selectUserbyDetails(userDetails, motDePasse);			
+		}
+		if (utilisateur == null) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_NON_EXISTANT);			
+		}
+		
+		if (utilisateur.getMot_de_passe().equals(motDePasse)) {
+			return utilisateur;			
+		}
+		else {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MDP_FAUX);
+		}
+		throw businessException;
+	}
+	
 	public void checkPseudo(String pseudo, BusinessException businessException) throws BusinessException {
 
 
