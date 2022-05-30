@@ -3,7 +3,7 @@
   <display-name>Eni-Enchères</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
+    <welcome-file>/WEB-INF/article/accueil.jsp</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
@@ -51,6 +51,16 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>CompteUser</servlet-name>
+  	<jsp-file>/WEB-INF/user/compte.jsp</jsp-file>  	
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>CompteUser</servlet-name>
+  	<url-pattern>/compte</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
   	<servlet-name>ArticleVente</servlet-name>
   	<jsp-file>/WEB-INF/article/venteArticle.jsp</jsp-file>  	
   </servlet>
@@ -58,6 +68,16 @@
   <servlet-mapping>
   	<servlet-name>ArticleVente</servlet-name>
   	<url-pattern>/article-vente</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ArticlesListe</servlet-name>
+  	<jsp-file>/WEB-INF/article/accueil.jsp</jsp-file>  	
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ArticlesListe</servlet-name>
+  	<url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>
 
