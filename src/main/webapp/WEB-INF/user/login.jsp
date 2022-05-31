@@ -1,37 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-String pageTitle = "Login";
-String pageDescription = "Page liste des enchères";
-String extraCSS = request.getContextPath() + "/css/loginStyle.css";
-%>
 <%@ page
 	import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.Utilisateur"%>
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Page liste des enchères">
-		<meta name="author"
-			content="co-authored by BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain">
-		<title>Login</title>
-		<link rel="shortcut icon" type="image/x-icon"
-			href="<%=request.getContextPath()%>/images/faviconEni.ico">
-		<link rel="icon" type="image/png"
-			href="<%=request.getContextPath()%>/images/faviconEni.png">
-		<link
-			href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css"
-			rel="stylesheet">
-		<link href="<%=request.getContextPath()%>/css/eniStyle.css"
-			rel="stylesheet">
-		<link href="<%=request.getContextPath()%>/css/login.css"
-			rel="stylesheet">
-	</head>
+
+	<jsp:include page='../partials/head.jsp'>
+	    <jsp:param name="extraCSS" value='<%=request.getContextPath()+"/css/login.css"%>' />
+	    <jsp:param name="pageTitle" value='Login' />
+	    <jsp:param name="pageDescription" value='Page liste des enchères pour Eni-Enchères' />
+	</jsp:include>
+	
 	<body>	
-		<%@ include file="/WEB-INF/partials/header.jspf"%>	
+		
+		<jsp:include page='../partials/header.jsp'>
+		    <jsp:param name="pageTitle" value='Login' />
+		</jsp:include>	
+		
 		<main class="container py-5">
 			<div class="row justify-content-center align-items-center">
 				<div class="col-12 col-md-7 col-lg-5">
@@ -53,7 +38,7 @@ String extraCSS = request.getContextPath() + "/css/loginStyle.css";
 						}
 						%>
 						<form class="form"
-							action="<%=request.getContextPath()%>/UtilisateurLogin"
+							action="<%=request.getContextPath()%>/login"
 							method="post">
 							<div class="form-row pb-2">
 								<label for="username"

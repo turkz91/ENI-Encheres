@@ -3,21 +3,23 @@
     
 <!DOCTYPE html>
 <html lang="fr">
-	<% 
-	String pageTitle = "Compte";
-	%>
-	<%@ include file="../partials/head.jspf"%>
+	<jsp:include page='../partials/head.jsp'>
+	    <jsp:param name="extraCSS" value='<%=request.getContextPath()+"/css/inscription.css"%>' />
+	    <jsp:param name="pageTitle" value='Compte' />
+	    <jsp:param name="pageDescription" value='Profile compte pour Eni-Enchères' />
+	</jsp:include>
 
 	<body>
 	<%@ page
 		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.Utilisateur"%>
-		
-		<%@ include file="../partials/header.jspf"%>
-		
+				
+		<jsp:include page='../partials/header.jsp'>
+		    <jsp:param name="pageTitle" value='Compte' />
+		</jsp:include>	
 		<main class="py-3">
 			
 			<h1 class="text-center h3 mb-4">
-				Information Compte - ${ !empty user.pseudo ? user.pseudo : '' }
+				Information Compte - ${ !empty sessionScope.user.pseudo ? sessionScope.user.pseudo : '' }
 			</h1>
 			<%
 			@SuppressWarnings("unchecked")
@@ -38,33 +40,33 @@
  				<div class="form-row align-items-center justify-content-center mb-3"> 
 					<label for="pseudo" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Pseudo : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="pseudo" name="pseudo" class="form-control" value="${ !empty user.pseudo ? user.pseudo : '' }">
+						<input type="text" id="pseudo" name="pseudo" class="form-control" value="${ !empty sessionScope.user.pseudo ? sessionScope.user.pseudo : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="nom" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Nom : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="nom" name="nom" class="form-control" value="${ !empty user.nom ? user.nom : '' }">
+						<input type="text" id="nom" name="nom" class="form-control" value="${ !empty sessionScope.user.nom ? sessionScope.user.nom : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="prenom" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Prénom : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="prenom" name="prenom" class="form-control" value="${ !empty user.prenom ? user.prenom : '' }">
+						<input type="text" id="prenom" name="prenom" class="form-control" value="${ !empty sessionScope.user.prenom ? sessionScope.user.prenom : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="email" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Email : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="email" id="email" name="email" class="form-control" value="${ !empty user.email ? user.email : '' }">
+						<input type="email" id="email" name="email" class="form-control" value="${ !empty sessionScope.user.email ? sessionScope.user.email : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="telephone" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Téléphone : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="telephone" name="telephone" class="form-control" value="${ !empty user.telephone ? user.telephone : '' }">
+						<input type="text" id="telephone" name="telephone" class="form-control" value="">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
@@ -77,13 +79,13 @@
 				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="code-postal" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Code Postal : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="code-postal" name="code-postal" class="form-control" value="${ !empty user.code_postal ? user.code_postal : '' }">
+						<input type="text" id="code-postal" name="code-postal" class="form-control" value="">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="ville" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Ville : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="ville" name="ville" class="form-control" value="${ !empty user.ville ? user.ville : '' }">
+						<input type="text" id="ville" name="ville" class="form-control" value="">
 					</div>
 				</div>
 				
@@ -114,7 +116,7 @@
 				
 				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="mot-de-passe" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg eni-mdp-label">
-						Crédit : ${ !empty user.credit ? user.credit : '' }
+						Crédit : ${ !empty sessionScope.user.credit ? sessionScope.user.credit : '' }
 					</label>
 					<div class="col-6 col-md-4 col-lg-3"></div>
 					<div class="w-100 d-block d-md-none"></div>
