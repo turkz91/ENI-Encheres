@@ -31,6 +31,15 @@
   </servlet-mapping>
   
   <servlet>
+	<servlet-name>ServletInscription</servlet-name>
+	<servlet-class>fr.eni.encheres.servlets.UtilisateurInscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ServletInscription</servlet-name>
+	<url-pattern>/utilisateur/inscription</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
   	<servlet-name>Inscription</servlet-name>
   	<jsp-file>/WEB-INF/user/inscription.jsp</jsp-file>  	
   </servlet>
@@ -38,6 +47,15 @@
   <servlet-mapping>
   	<servlet-name>Inscription</servlet-name>
   	<url-pattern>/inscription-utilisateur</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>UtilisateurLogin</servlet-name>
+	<servlet-class>fr.eni.encheres.servlets.UtilisateurLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>UtilisateurLogin</servlet-name>
+	<url-pattern>/utilisateur/login</url-pattern>
   </servlet-mapping>
   
   <servlet>

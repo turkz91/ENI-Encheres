@@ -2,12 +2,13 @@
 
 .btn-block.eni-btn-connexion {
 	height:100%;
-	box-shadow: 0 1rem 2rem #00bd2bad;
+	box-shadow: 1rem 1rem 1rem #6cb3ff;
 }
 
 .eni-btn-nvCompte {
 	height : 8rem;
-	box-shadow: 0 1rem 2rem #00bd2bad;
+	box-shadow: 1rem 1rem 1rem #6cb3ff;
+	line-height: 7rem;
 }
 
 .eni-btn-nvCompte:hover, .btn-block.eni-btn-connexion:hover  {

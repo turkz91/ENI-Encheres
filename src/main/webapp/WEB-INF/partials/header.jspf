@@ -18,7 +18,7 @@
 		  				<%}else {%>
 		  				class="nav-link"
 		  				<%}%> 
-		  				  href="#">Enchères</a>
+		  				  href="<%=request.getContextPath()%>">Enchères</a>
 		  			</li>
 		  			<c:choose>
 			  			<c:when test="${!empty user}">
@@ -35,7 +35,7 @@
 				  			</li>
 				  			<li class="nav-item">
 				  				<a 
-				  				<% if (pageTitle == "Profil") {%>
+				  				<% if (pageTitle == "Compte") {%>
 				  				class="nav-link active"
 				  				<%}else {%>
 				  				class="nav-link"

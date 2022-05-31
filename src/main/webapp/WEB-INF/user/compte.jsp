@@ -14,14 +14,10 @@
 		
 		<%@ include file="../partials/header.jspf"%>
 		
-		<main class="py-5">
+		<main class="py-3">
 			
 			<h1 class="text-center h3 mb-4">
-				<% if(session.getAttribute("user") != null) {%>
-				Créer un compte
-				<% }else {%>
-				Compte Utilisateur
-				<% } %>
+				Information Compte - ${ !empty user.pseudo ? user.pseudo : '' }
 			</h1>
 			<%
 			@SuppressWarnings("unchecked")
@@ -39,7 +35,7 @@
 			%>
 			<form class="container eni-compteAction" action="" method="post">
 				
- 				<div class="form-row justify-content-center mb-3"> 
+ 				<div class="form-row align-items-center justify-content-center mb-3"> 
 					<label for="pseudo" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Pseudo : </label>
 					<div class="col-6 col-md-4 col-lg-3">
 						<input type="text" id="pseudo" name="pseudo" class="form-control" value="${ !empty user.pseudo ? user.pseudo : '' }">
@@ -52,7 +48,7 @@
 					</div>
 				</div>
 				
-				<div class="form-row justify-content-center mb-3">
+				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="prenom" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Prénom : </label>
 					<div class="col-6 col-md-4 col-lg-3">
 						<input type="text" id="prenom" name="prenom" class="form-control" value="${ !empty user.prenom ? user.prenom : '' }">
@@ -65,7 +61,7 @@
 					</div>
 				</div>
 				
-				<div class="form-row justify-content-center mb-3">
+				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="telephone" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Téléphone : </label>
 					<div class="col-6 col-md-4 col-lg-3">
 						<input type="text" id="telephone" name="telephone" class="form-control" value="${ !empty user.telephone ? user.telephone : '' }">
@@ -78,7 +74,7 @@
 					</div>
 				</div>
 				
-				<div class="form-row justify-content-center mb-3">
+				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="code-postal" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Code Postal : </label>
 					<div class="col-6 col-md-4 col-lg-3">
 						<input type="text" id="code-postal" name="code-postal" class="form-control" value="${ !empty user.code_postal ? user.code_postal : '' }">
@@ -91,8 +87,20 @@
 					</div>
 				</div>
 				
-				<div class="form-row justify-content-center mb-3">
-					<label for="mot-de-passe" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg eni-mdp-label">Mot de passe : </label>
+				<div class="form-row align-items-center justify-content-center mb-3">
+					<label for="ancien-mot-de-passe" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg eni-mdp-label">Mot de passe actuel:</label>
+					<div class="col-6 col-md-4 col-lg-3">
+						<input type="password" id="ancien-mot-de-passe" name="ancien-mot-de-passe" class="form-control">
+					</div>
+					<div class="w-100 d-block d-md-none"></div>
+					<div class="d-none d-md-block col-lg-1"></div>
+					<label class="col-5 col-sm-4 col-lg-2"></label>				
+					<div class="col-6 col-md-4 col-lg-3">
+					</div>
+				</div>
+				
+				<div class="form-row align-items-center justify-content-center mb-3">
+					<label for="mot-de-passe" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg eni-mdp-label">Nouveau mot de passe:</label>
 					<div class="col-6 col-md-4 col-lg-3">
 						<input type="password" id="mot-de-passe" name="mot-de-passe" class="form-control">
 					</div>
@@ -104,13 +112,29 @@
 					</div>
 				</div>
 				
-				<div class="form-row justify-content-center eni-form-footer pb-5 pt-4">
+				<div class="form-row align-items-center justify-content-center mb-3">
+					<label for="mot-de-passe" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg eni-mdp-label">
+						Crédit : ${ !empty user.credit ? user.credit : '' }
+					</label>
+					<div class="col-6 col-md-4 col-lg-3"></div>
+					<div class="w-100 d-block d-md-none"></div>
+					<div class="d-none d-md-block col-lg-1"></div>
+					<label class="col-5 col-sm-4 col-lg-2"></label>
+					<div class="col-6 col-md-4 col-lg-3">
+					</div>
+				</div>
+				
+				<div class="form-row align-items-center justify-content-center eni-form-footer pb-5 pt-4">
 					<div class="col-5 col-md-4 col-lg-3 text-center pb-4">
-						<input class="btn btn-success btn-lg btn-block" type="submit" value="Créer">	
+						<input class="btn btn-success btn-lg btn-block" type="submit" value="Enregistrer">	
 					</div>
 					<div class="col-1"></div>
 					<div class="col-5 col-md-4 col-lg-3 text-center pb-4">
-						<a class="btn btn-danger btn-lg btn-block" href="#">Annuler</a>
+						<a class="btn btn-danger btn-lg btn-block" 
+						 onclick="return confirm('Êtes vous sur de vouloir supprimer vôtre compte?');" 
+						 href="#" >
+						 	Supprimer mon compte
+						</a>
 					</div>
 				</div>
 	

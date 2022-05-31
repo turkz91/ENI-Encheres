@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +14,8 @@ import fr.eni.encheres.bll.BusinessException;
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Utilisateur;
 
-@WebServlet("/Utilisateur/Inscription")
-public class ServletInscription extends HttpServlet {
+
+public class UtilisateurInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,32 +42,31 @@ public class ServletInscription extends HttpServlet {
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = null;
+		Boolean errorSaver = true;
 		
 		try {
 			utilisateur = utilisateurManager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation);
-		} catch (BusinessException ex) {
-			request.setAttribute("listeCodesErreur", ex.getListeCodesErreur());
-			ex.printStackTrace();
 		} catch (Exception ex) {
-			List<Integer> listeCodesErreur = new ArrayList<>();
-			listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_ERREUR);
-			request.setAttribute("listeCodesErreur", listeCodesErreur);
+			if (ex instanceof BusinessException) {
+				request.setAttribute("listeCodesErreur", ((BusinessException) ex).getListeCodesErreur());
+				ex.printStackTrace();				
+			}
+			else {
+				List<Integer> listeCodesErreur = new ArrayList<>();
+				listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_ERREUR);
+				request.setAttribute("listeCodesErreur", listeCodesErreur);				
+			}
+			errorSaver = false;
 		}
 		request.setAttribute("user", utilisateur);
-//		If user setAttribute
-		request.setAttribute("pseudo", pseudo);	
-		request.setAttribute("nom", nom);
-		request.setAttribute("prenom", prenom);
-		request.setAttribute("email", email);
-		request.setAttribute("telephone", telephone);
-		request.setAttribute("rue", rue);
-		request.setAttribute("codePostal", codePostal);
-		request.setAttribute("ville", ville);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/compte.jsp");
-		rd.forward(request, response);
-		
-		// DO POST VERS MANAGER
+		if (errorSaver) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/compte.jsp");
+			rd.forward(request, response);			
+		}
+		else {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/inscription.jsp");
+			rd.forward(request, response);			
+		}
 	}
 
 }
