@@ -67,6 +67,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmtArticle.setString(1, article.getNom_article());
 			pstmtArticle.setString(2, article.getDescription());
+			//pstmtArticle.setDate(3, Date.valueOf(article.getDate_debut_encheres()));
+			//pstmtArticle.setDate(4, Date.valueOf(article.getDate_fin_encheres()));
 			pstmtArticle.setDate(3, Date.valueOf(article.getDate_debut_encheres()));
 			pstmtArticle.setDate(4, Date.valueOf(article.getDate_fin_encheres()));
 			pstmtArticle.setInt(5, article.getNo_utilisateur());

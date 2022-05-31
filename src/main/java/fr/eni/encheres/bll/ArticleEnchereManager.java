@@ -12,16 +12,11 @@ import fr.eni.encheres.dal.DAOFactory;
 //This class manage ArticleVendu and bids
 public class ArticleEnchereManager {
 
-	private ArticleEnchereDAO articleEnchereDAO;
+	private ArticleEnchereDAO articleEnchereDAO = DAOFactory.getArticleEnchereDAO();
 
-	public ArticleEnchereManager(ArticleEnchereDAO articleEnchereDAO) {
-		this.articleEnchereDAO = DAOFactory.getArticleEnchereDAO();
-	}
-
-	
 	// Methods for Articles
 	
-	public void ajouterArticle(String nom_article, String description, LocalDate date_debut_encheres,
+	public ArticleVendu ajouterArticle(String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, int prix_initial, int no_utilisateur, int no_categorie)
 			throws BusinessException {
 
@@ -41,6 +36,8 @@ public class ArticleEnchereManager {
 		} else {
 			throw businessException;
 		}
+		
+		return articleVendu;
 	}
 	
 	
@@ -134,6 +131,16 @@ public class ArticleEnchereManager {
 				businessException.ajouterErreur(CodesResultatBLL.REGLE_ENCHERE_MONTANT_ERREUR);
 			}
 		}
+		
+	}
+	
+	public String localDateToString (LocalDate date) {
+		
+		String dateString = null;
+		
+		dateString = date.toString();
+		
+		return dateString;
 		
 	}
 }
