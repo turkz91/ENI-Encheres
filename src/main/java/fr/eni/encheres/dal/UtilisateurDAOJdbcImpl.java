@@ -19,29 +19,15 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 	private final String SELECT_USER_BY_ID = "SELECT "
-			+ "no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur"
-			+ "FROM UTILISATEURS " + "WHERE (no_utilisateur = ?)";
-
-//	private final String SELECT_MAILS_LIST = "SELECT email" + "FROM UTILISATEURS";
-//	private final String SELECT_PSEUDOS_LIST = "SELECT pseudo" + "FROM UTILISATEURS";
-	private final String SELECT_USER_BY_DETAILS ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur"
-			+ " FROM UTILISATEURS"
-			+ " WHERE pseudo=? OR email=?";
-
-	private final String SELECT_USER_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE (pseudo = ?)";
-	private final String SELECT_USER_BY_EMAIL = "SELECT " + "email" + "FROM UTILISATEURS " + "WHERE (email = ?)";
-
-
-
-//	private final String SELECT_MAILS_LIST = "SELECT email" + "FROM UTILISATEURS";
-//	private final String SELECT_PSEUDOS_LIST = "SELECT pseudo" + "FROM UTILISATEURS";
-
-
-
-	private final String UPDATE_USER = "UPDATE UTILISATEURS "
-			+ "SET pseudo=?, nom=?, prenom=?,email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? "
+			+ "no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur "
+			+ "FROM UTILISATEURS WHERE (no_utilisateur = ?)";
+	private final String SELECT_USER_BY_DETAILS = "SELECT "
+			+ "no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur "
+			+ "FROM UTILISATEURS WHERE pseudo=? OR email=?";
+	private final String UPDATE_USER = "UPDATE UTILISATEURS SET "
+			+ "pseudo=?, nom=?, prenom=?,email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? "
 			+ "WHERE no_utilisateur=?";
-	private final String DELETE_USER = "DELETE FROM UTILISATEURS" + "WHERE no_utilisateur = ?";
+	private final String DELETE_USER = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 	@Override
 	public Utilisateur createUser(Utilisateur user) throws BusinessException {
@@ -119,10 +105,10 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_PSEUDO);
 			pstmtUser.setString(1, pseudo);
-			//pstmtUser.executeQuery();
-			//ResultSet rsUser = pstmtUser.getGeneratedKeys();
+			// pstmtUser.executeQuery();
+			// ResultSet rsUser = pstmtUser.getGeneratedKeys();
 			ResultSet rsUser = pstmtUser.executeQuery();
-			
+
 			if (rsUser.next()) {
 				pseudoInDb = rsUser.getString("pseudo");
 			}
@@ -218,12 +204,11 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;
 		}
 
-
 	}
 
 	@Override
 	public Utilisateur selectUserbyDetails(String pseudo, String email) throws BusinessException {
-		
+
 		Utilisateur utilisateur = null;
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -236,8 +221,8 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			if (rsUser.next()) {
 				utilisateur = new Utilisateur(rsUser.getInt("no_utilisateur"), rsUser.getString("pseudo"),
 						rsUser.getString("nom"), rsUser.getString("prenom"), rsUser.getString("email"),
-						rsUser.getString("telephone"), rsUser.getString("rue"),
-						rsUser.getString("code_postal"),rsUser.getString("ville"), rsUser.getString("mot_de_passe"), rsUser.getInt("credit"),
+						rsUser.getString("telephone"), rsUser.getString("rue"), rsUser.getString("code_postal"),
+						rsUser.getString("ville"), rsUser.getString("mot_de_passe"), rsUser.getInt("credit"),
 						rsUser.getBoolean("administrateur"));
 			}
 			rsUser.close();
@@ -249,7 +234,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;
 		}
 		return utilisateur;
-		
+
 //		List<String> usersMailsList = new ArrayList<String>();
 //		String mailsList = null;
 //
