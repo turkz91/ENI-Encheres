@@ -48,7 +48,7 @@
 			}
 			}
 			%>
-			<form class="container eni-compteAction" action="<%=request.getContextPath()%>/Inscription" method="post">
+			<form class="container eni-compteAction" action="<%=request.getContextPath()%>/Utilisateur/Inscription" method="post">
 				
  				<div class="form-row justify-content-center mb-3"> 
 					<label for="pseudo" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Pseudo : </label>

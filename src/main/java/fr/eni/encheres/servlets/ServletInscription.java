@@ -15,7 +15,7 @@ import fr.eni.encheres.bll.BusinessException;
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Utilisateur;
 
-@WebServlet("/Inscription")
+@WebServlet("/Utilisateur/Inscription")
 public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -65,7 +65,7 @@ public class ServletInscription extends HttpServlet {
 		request.setAttribute("codePostal", codePostal);
 		request.setAttribute("ville", ville);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/inscription.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/compte.jsp");
 		rd.forward(request, response);
 		
 		// DO POST VERS MANAGER
