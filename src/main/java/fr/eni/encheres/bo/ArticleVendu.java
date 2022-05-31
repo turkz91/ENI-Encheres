@@ -115,6 +115,7 @@ public class ArticleVendu {
 		setNo_categorie(no_categorie);
 	}
 
+
 	public int getNo_article() {
 		return no_article;
 	}

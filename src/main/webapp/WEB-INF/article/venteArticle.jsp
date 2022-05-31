@@ -2,20 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Page d'inscription">
-		<meta name="author" content="co-authored by BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain">
-		<title>Nouvelle Vente</title>
-		<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/faviconEni.ico">
-		<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/faviconEni.png">
-		<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="<%=request.getContextPath()%>/css/eniStyle.css" rel="stylesheet">
-		<link href="<%=request.getContextPath()%>/css/inscription.css" rel="stylesheet">
-	</head>
+	<% 
+	String pageTitle = "Vente";
+	%>
+	<%@ include file="../partials/head.jspf"%>
 	<body>	
 		<%@ include file="../partials/header.jspf"%>
 		

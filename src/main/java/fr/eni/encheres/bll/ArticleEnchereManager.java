@@ -2,20 +2,25 @@ package fr.eni.encheres.bll;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.ArticleEnchereDAO;
 import fr.eni.encheres.dal.DAOFactory;
 
-public class EnchereManager {
+//This class manage ArticleVendu and bids
+public class ArticleEnchereManager {
 
 	private ArticleEnchereDAO articleEnchereDAO;
 
-	public EnchereManager(ArticleEnchereDAO articleEnchereDAO) {
+	public ArticleEnchereManager(ArticleEnchereDAO articleEnchereDAO) {
 		this.articleEnchereDAO = DAOFactory.getArticleEnchereDAO();
 	}
 
+	
+	// Methods for Articles
+	
 	public void ajouterArticle(String nom_article, String description, LocalDate date_debut_encheres,
 			LocalDate date_fin_encheres, int prix_initial, int no_utilisateur, int no_categorie)
 			throws BusinessException {
@@ -37,6 +42,9 @@ public class EnchereManager {
 			throw businessException;
 		}
 	}
+	
+	
+	// Methods for bids
 
 	public void ajouterEnchere(int no_utilisateur, int no_article, LocalDateTime date_enchere, int montant_enchere)
 			throws BusinessException {
@@ -44,6 +52,16 @@ public class EnchereManager {
 		BusinessException businessException = new BusinessException();
 
 		Enchere enchere = null;
+		
+		// First sept : check montant > prix_initial
+		this.checkMontantPrixInitial(no_article, montant_enchere, businessException);
+		
+		ArticleVendu article = articleEnchereDAO.selectArticle(no_article);
+		
+		List<Integer> listeMontants = articleEnchereDAO.selectAllMontantsEncheres(article);
+		
+		// Second sept : check montant > montant max actuel
+		this.checkMontantMaxEncheres(listeMontants, montant_enchere, businessException);
 
 		if (!businessException.hasErreurs()) {
 			enchere = new Enchere(no_utilisateur, no_article, date_enchere, montant_enchere);
@@ -53,6 +71,8 @@ public class EnchereManager {
 			throw businessException;
 		}
 	}
+	
+	// Methods to validate an Article
 
 	public void checkNomArticle(String nom_article, BusinessException businessException) {
 
@@ -92,9 +112,28 @@ public class EnchereManager {
 		}
 	}
 
-	public void checkMontantEnchere(int prix_initial, int montant, BusinessException businessException) {
+	//  TO DO A modifier ou supprimer si tout sera vérifié par la méthode ckeckMontant
+	public void checkMontantPrixInitial(int prix_initial, int montant, BusinessException businessException) {
 		if (montant <= prix_initial) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_ENCHERE_MONTANT_ERREUR);
 		}
+	}
+	
+	 // Methods to validate a bid
+	
+	public void checkMontantMaxEncheres (List<Integer> listeMontants, int montant, BusinessException businessException) {
+		
+		int montantMax = 0;
+		
+		for (int valMontant : listeMontants) {
+			if(valMontant > montantMax) {
+				montantMax = valMontant;
+			}
+			
+			if (montant <= montantMax) {
+				businessException.ajouterErreur(CodesResultatBLL.REGLE_ENCHERE_MONTANT_ERREUR);
+			}
+		}
+		
 	}
 }

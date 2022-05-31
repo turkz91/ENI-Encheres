@@ -1,4 +1,5 @@
-<header>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<header class="pb-5">
 	<nav class="navbar navbar-expand-lg navbar-light eni-bg-light">
 		<div class="container">
 			<a href="<%=request.getContextPath()%>" class="navbar-brand">
@@ -9,19 +10,67 @@
 				<span class="navbar-toggler-icon"></span>
 		  	</button>
 		  	<div class="collapse navbar-collapse" id="navigateur">
-		  		<ul class="navbar-nav ml-auto">
+		  		<ul class="navbar-nav ml-auto">		  			
 		  			<li class="nav-item">
-		  				<a class="nav-link" href="#">Enchères</a>
+		  				<a 
+		  				<% if (pageTitle == "Enchères") {%>
+		  				class="nav-link active"
+		  				<%}else {%>
+		  				class="nav-link"
+		  				<%}%> 
+		  				  href="#">Enchères</a>
 		  			</li>
-		  			<li class="nav-item">
-		  				<a class="nav-link" href="#">Vendre un Article</a>
-		  			</li>
-		  			<li class="nav-item">
-		  				<a class="nav-link" href="#">Mon Profil</a>
-		  			</li>
-		  			<li class="nav-item">
-		  				<a class="nav-link" href="#">Déconnexion</a>
-		  			</li>
+		  			<c:choose>
+			  			<c:when test="${!empty user}">
+				  			<li class="nav-item">
+				  				<a 
+				  				<% if (pageTitle == "Vente") {%>
+				  				class="nav-link active"
+				  				<%}else {%>
+				  				class="nav-link"
+				  				<%}%> 
+				  				  href="<%=request.getContextPath()%>/article-vente">
+				  				    Vendre un Article
+				  				</a>
+				  			</li>
+				  			<li class="nav-item">
+				  				<a 
+				  				<% if (pageTitle == "Profil") {%>
+				  				class="nav-link active"
+				  				<%}else {%>
+				  				class="nav-link"
+				  				<%}%> 
+				  				  href="#">Mon Profil
+				  				</a>
+				  			</li>
+				  			<li class="nav-item">
+				  				<a class="nav-link" href="#">Déconnexion</a>
+				  			</li>			  		
+			  			</c:when>
+			  			<c:otherwise>
+				  			<li class="nav-item">
+				  				<a 
+				  				<% if (pageTitle == "Login") {%>
+				  				class="nav-link active"
+				  				<%}else {%>
+				  				class="nav-link"
+				  				<%}%> 
+				  				  href="<%=request.getContextPath()%>/login">Login
+				  				</a>
+				  			</li>		
+				  			<li class="nav-item">
+				  				<a 
+				  				<% if (pageTitle == "Inscription") {%>
+				  				class="nav-link active"
+				  				<%}else {%>
+				  				class="nav-link"
+				  				<%}%> 
+				  				  href="<%=request.getContextPath()%>/inscription-utilisateur">S'Inscrire
+				  				</a>
+				  			</li>			  			
+					    </c:otherwise>
+			  		</c:choose>
+		  			
 		  		</ul>
 		  	</div>
 	  	</div>
