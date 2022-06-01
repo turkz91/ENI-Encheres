@@ -5,12 +5,14 @@
 <%
 String pageTitle = "Vente";
 %>
-<%@ include file="../partials/head.jspf"%>
+<jsp:include page='../partials/head.jsp'>
+</jsp:include>
 <body>
 	<%@ page
 		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleVendu"%>
 
-	<%@ include file="../partials/header.jspf"%>
+	<jsp:include page='../partials/header.jsp'>
+	</jsp:include>
 
 
 	<%
@@ -54,8 +56,8 @@ String pageTitle = "Vente";
 		List<Integer> listeCodesErreur = (List<Integer>) request.getAttribute("listeCodesErreur");
 		if (listeCodesErreur != null) {
 		%>
-		<p class="text-center text-danger">Erreur, l'article n'a pas
-			pu être ajouté :</p>
+		<p class="text-center text-danger">Erreur, l'article n'a pas pu
+			être ajouté :</p>
 		<%
 		for (int codeErreur : listeCodesErreur) {
 		%>

@@ -13,7 +13,7 @@
 		  		<ul class="navbar-nav ml-auto">		  			
 		  			<li class="nav-item">
 		  				<a 
-		  				  class="nav-link ${param.pageTitle == 'Enchères' ? 'active' : '' }"
+		  				  class="nav-link ${param.pageTitle == 'Encheres' ? 'active' : '' }"
 		  				  href="<%=request.getContextPath()%>">Enchères</a>
 		  			</li>
 		  			<c:choose>
