@@ -22,7 +22,7 @@
 	</head>
 	<body>	
 		
-		<%@ include file="../partials/head.jspf"%>
+		
 		
 				<main class="py-5">
 			
