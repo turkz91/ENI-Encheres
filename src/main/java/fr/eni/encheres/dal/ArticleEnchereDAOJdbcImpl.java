@@ -27,8 +27,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String CREATE_ARTICLE = "INSERT INTO ARTICLES_VENDUS "
 			// prix_initial can be null, but if the user inform a price, it wont be recorded
 			// ?
-			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, no_utilisateur, no_categorie)"
-			+ "VALUES (?,?,?,?,?,?)";
+			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
+			+ "VALUES (?,?,?,?,?,?, ?)";
 	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
 			+ "FROM ARTICLES_VENDUS WHERE no_article = ?";
 	private final String SELECT_ALL_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
@@ -65,15 +65,14 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtArticle = cnx.prepareStatement(CREATE_ARTICLE,
 					PreparedStatement.RETURN_GENERATED_KEYS);
-			System.out.println(article);
+			System.out.println("Affichage des données articles depuis AEImpl : " + article);
 			pstmtArticle.setString(1, article.getNom_article());
 			pstmtArticle.setString(2, article.getDescription());
-			//pstmtArticle.setDate(3, Date.valueOf(article.getDate_debut_encheres()));
-			//pstmtArticle.setDate(4, Date.valueOf(article.getDate_fin_encheres()));
 			pstmtArticle.setDate(3, Date.valueOf(article.getDate_debut_encheres()));
 			pstmtArticle.setDate(4, Date.valueOf(article.getDate_fin_encheres()));
-			pstmtArticle.setInt(5, article.getNo_utilisateur());
-			pstmtArticle.setInt(6, article.getNo_categorie());
+			pstmtArticle.setInt(5, article.getPrix_initial());
+			pstmtArticle.setInt(6, article.getNo_utilisateur());
+			pstmtArticle.setInt(7, article.getNo_categorie());
 			pstmtArticle.executeUpdate();
 			ResultSet rsArticle = pstmtArticle.getGeneratedKeys();
 			if (rsArticle.next()) {
