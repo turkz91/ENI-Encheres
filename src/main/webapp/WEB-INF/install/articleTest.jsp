@@ -2,16 +2,18 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="fr">
-	<jsp:include page='../partials/head.jsp'>
-	    <jsp:param name="pageTitle" value='Vente' />
-	    <jsp:param name="pageDescription" value='Vente Article pour Eni-Enchères' />
-	</jsp:include>
+<%
+String pageTitle = "Vente";
+%>
+<jsp:include page='../partials/head.jsp'>
+</jsp:include>
 <body>
 	<%@ page
 		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleVendu"%>
+
 	<jsp:include page='../partials/header.jsp'>
-	    <jsp:param name="pageTitle" value='Vente' />
 	</jsp:include>
+
 
 	<%
 	if (session.getAttribute("user") != null) {
@@ -26,9 +28,25 @@
 			: ${ !empty codePostal ? codePostal : "" } Le mot de passe saisi : ${ !empty motDePasse ? motDePasse : "" }
 			La confirmation saisi : ${ !empty confirmation ? confirmation : "" }</p>
 	</section>
+
 	<%
 	}
 	%>
+
+	<section>
+		<h2 class="text-center h2 mb-4">TEST DE RECUPERATION DES
+			PARAMETRES</h2>
+		<p>Nom article : ${ !empty nom ? nom : "" }</p>
+		<p>Description : ${ !empty description ? description : "" }</p>
+		<p>Date début enchère : ${ !empty debut_enchere ? debut_enchere : "" }</p>
+		<p>Date fin enchère : ${ !empty fin_enchere ? fin_enchere : "" }</p>
+		<p>Prix initial : ${ !empty prix ? prix : "" }</p>
+		<p>Num utilisateur : ${ !empty utilisateur ? utilisateur : "" }</p>
+		<p>Num categorie : ${ !empty categorie ? categorie : "" }</p>
+		<p>Rue : ${ !empty rue ? rue : "" }</p>
+		<p>Code postal : ${ !empty cp ? cp : "" }</p>
+		<p>Ville : ${ !empty ville ? ville : "" }</p>
+	</section>
 	<main class="py-5">
 
 		<h1 class="text-center h2 mb-4">Nouvelle Vente</h1>
@@ -50,7 +68,7 @@
 		%>
 
 		<form class="container eni-venteAction"
-			action="<%=request.getContextPath()%>/NouvelleVente" method="post">
+			action="<%=request.getContextPath()%>/Article" method="post">
 
 			<div class="row">
 				<div class="col-lg-4">

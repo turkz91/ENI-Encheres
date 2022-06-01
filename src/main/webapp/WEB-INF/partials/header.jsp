@@ -13,34 +13,22 @@
 		  		<ul class="navbar-nav ml-auto">		  			
 		  			<li class="nav-item">
 		  				<a 
-		  				<% if (pageTitle == "Enchères") {%>
-		  				class="nav-link active"
-		  				<%}else {%>
-		  				class="nav-link"
-		  				<%}%> 
-		  				  href="#">Enchères</a>
+		  				  class="nav-link ${param.pageTitle == 'Encheres' ? 'active' : '' }"
+		  				  href="<%=request.getContextPath()%>">Enchères</a>
 		  			</li>
 		  			<c:choose>
-			  			<c:when test="${!empty user}">
+			  			<c:when test="${!empty sessionScope.user}">
 				  			<li class="nav-item">
 				  				<a 
-				  				<% if (pageTitle == "Vente") {%>
-				  				class="nav-link active"
-				  				<%}else {%>
-				  				class="nav-link"
-				  				<%}%> 
+				  				  class="nav-link  ${param.pageTitle == 'Vente' ? 'active' : '' }"
 				  				  href="<%=request.getContextPath()%>/article-vente">
 				  				    Vendre un Article
 				  				</a>
 				  			</li>
 				  			<li class="nav-item">
 				  				<a 
-				  				<% if (pageTitle == "Profil") {%>
-				  				class="nav-link active"
-				  				<%}else {%>
-				  				class="nav-link"
-				  				<%}%> 
-				  				  href="#">Mon Profil
+				  				  class="nav-link  ${param.pageTitle == 'Compte' ? 'active' : '' }"
+				  				  href="<%=request.getContextPath()%>/compte">Mon Profil
 				  				</a>
 				  			</li>
 				  			<li class="nav-item">
@@ -50,22 +38,14 @@
 			  			<c:otherwise>
 				  			<li class="nav-item">
 				  				<a 
-				  				<% if (pageTitle == "Login") {%>
-				  				class="nav-link active"
-				  				<%}else {%>
-				  				class="nav-link"
-				  				<%}%> 
+				  				  class="nav-link  ${param.pageTitle == 'Login' ? 'active' : '' }"
 				  				  href="<%=request.getContextPath()%>/login">Login
 				  				</a>
 				  			</li>		
 				  			<li class="nav-item">
 				  				<a 
-				  				<% if (pageTitle == "Inscription") {%>
-				  				class="nav-link active"
-				  				<%}else {%>
-				  				class="nav-link"
-				  				<%}%> 
-				  				  href="<%=request.getContextPath()%>/inscription-utilisateur">S'Inscrire
+				  				  class="nav-link  ${param.pageTitle == 'Inscription' ? 'active' : '' }"
+				  				  href="<%=request.getContextPath()%>/nouveau-compte">S'Inscrire
 				  				</a>
 				  			</li>			  			
 					    </c:otherwise>
