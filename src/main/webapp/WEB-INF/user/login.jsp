@@ -17,7 +17,9 @@
 		<link href="<%=request.getContextPath()%>/css/loginStyle.css" rel="stylesheet">
 		
 </head>
-
+<%
+String pageTitle = "Login";
+%>
 <body>
 
 	<%@ include file="/WEB-INF/partials/header.jspf"%>
