@@ -1,3 +1,4 @@
+<%@page import="javax.swing.text.Document"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,6 +18,7 @@
 		<link href="<%=request.getContextPath()%>/css/inscription.css" rel="stylesheet">
 		
 		<link href="<%=request.getContextPath()%>/css/listEncheresStyle.css" rel="stylesheet">
+	
 	</head>
 	<body>	
 		
@@ -48,37 +50,36 @@
 								
 						<div class="row" >		
 							<div class = "col-sm-6 col-lg-4 form-check"> 
-								<input type="radio" class="option" value="achat" name="rechercheEnchere" id="achat"   > 
-								  <label for="achat" class="subOption form-check-label">Achats</label><br>
+								<input type="radio" class="option" value="achat" name="rechercheEnchere" id="radioAchat" onchange="radioDisable()" > 
+								  <label for="achat" class="subOption form-check-label" >Achats</label><br>
 									<div class="form-check">
-									  <input type="checkbox" value="ouvertes" name="checkAchat"> 
-								 		<label for="encheresOuvertes" class="subOption form-check-label">enchères ouvertes</label>
+									  <input disabled = "disabled" type="checkbox" value="ouvertes" name="checkAchat" id="achatsOuveres"> 
+								 		<label for="encheresOuvertes" class="subOptionA form-check-label">enchères ouvertes</label>
 								 		<br>
-									  <input type="checkbox" value="enCours" name="checkAchat">
-								 		<label for="encheresEnCours" class="subOption form-check-label"> mes enchères en cour</label>
+									  <input disabled = "disabled" type="checkbox" value="enCours" name="checkAchat"id="achatsEnCours">
+								 		<label for="encheresEnCours" class="subOptionA form-check-label"> mes enchères en cour</label>
 								 		<br>
-									  <input type="checkbox" value="remportees" name="checkAchat"> 
-								 		<label for="encheresRemportees" class="form-check-label"> mes enchères remportées</label>
+									  <input disabled = "disabled" type="checkbox" value="remportees" name="checkAchat"id="achatsRemportes"> 
+								 		<label for="encheresRemportees" class="subOptionA form-check-label"> mes enchères remportées</label>
 								 		<br>
 									 </div>
 							 	</div>
 						
 							<div class = "col-sm-6 col-md-4 "> 
-						   	   	<input type="radio" value="ventes" name="rechercheEnchere" id="ventes" >
+						   	   	<input type="radio" value="ventes" name="rechercheEnchere" id="radioVentes" onchange="radioDisable() ">
 						   	   	<label for="ventes" class="option form-check-label">Mes ventes</label><br>
 						   	   		<div class="form-check">
-						   		 	  <input type="checkbox" value="enCours" name="checkAchat" id="venteEnCours">
-						   		 		<label for="venteEnCours" class="subOption form-check-label"> mes ventes en cours</label>
+						   		 	  <input disabled = "disabled" type="checkbox" value="enCours" name="checkVentes" id="venteEnCours">
+						   		 		<label for="venteEnCours" class="subOptionV form-check-label"> mes ventes en cours</label>
 						   		 		<br>
-						    		 <input type="checkbox" value="noDebutées" name="checkAchat" id="ventenoDebutées">
-						    	 	 	<label for="ventenoDebutées" class="subOption form-check-label"> ventes non débutées</label>
+						    		 <input disabled = "disabled" type="checkbox" value="noDebutées" name="checkVentes" id="ventenoDebutées">
+						    	 	 	<label for="ventenoDebutées" class="subOptionV form-check-label"> ventes non débutées</label>
 						    	 	 	<br>
-									 <input type="checkbox" value="terminées"name="checkAchat" id="venteTerminées">  
-								 		<label for="venteTerminées"class="subOption form-check-label"> ventes terminées</label>
+									 <input disabled = "disabled" type="checkbox" value="terminées"name="checkVentes" id="venteTerminées">  
+								 		<label for="venteTerminées"class="subOptionV form-check-label"> ventes terminées</label>
 								 		<br>
 								 	</div>
 							</div>
-								
 						<div align="center" class="col-sm-8 col-md-8 col-lg-4">
 						<button type="submit" class="btn btn-primary btn-lg" >Rechercher</button>
 						</div>
@@ -121,7 +122,7 @@
 								</div>
 								</section>				
 								
-									
+				
 				
 		</main>
 				
@@ -129,4 +130,16 @@
 		<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
 		<script src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	</body>
+	<script>>
+	function enable(){
+		var radio = document.getElementById("radioAchat");
+		var checkV = document.getELementByName("checkVentes");
+		var chackA = document.getELementByName("checkAchat");
+		if(radio.checked){
+			checkV.removeAttribute("disabled");
+		}else{
+			checkA.removeAttribute("disabled");
+		}
+	}
+	</script>
 </html>
