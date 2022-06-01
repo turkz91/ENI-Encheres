@@ -21,6 +21,20 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int SELECT_ARTICLE_SQL=10002;
 	
+	/**
+	 * Une erreur est survenue lors de recherche d'articles par mot clés dans la DB
+	 *  
+	 */
+	public static final int SELECT_LIST_ARTICLES_BY_KEY_WORD_SQL = 10003;
+	
+	/**
+	 * Une erreur est survenue lors de la sélection de tous les articles dans la DB
+	 *   
+	 */
+	public static final int SELECT_ALL_ARTICLES_SQL = 10004;
+	
+	
+	
 	
 	//------------------ ERRORS FOR CATEGORIES ------------------
 	
@@ -33,6 +47,12 @@ public abstract class CodesResultatDAL {
 	 * Une erreur est survenue lors de l'enregistrement des informations de la catégorie dans la DB.
 	 */
 	public static final int CREATE_CATEGORIE_SQL=10011;
+	
+	/**
+	 * Erreur lors de la récupération de la liste des catégories en base de données 
+	 *   
+	 */
+	public static final int SELECT_ALL_CATEGORIES_SQL = 10012;
 	
 	
 	//------------------ ERRORS FOR USERS ------------------
@@ -144,13 +164,14 @@ public abstract class CodesResultatDAL {
 	 * Une erreur est survenue lors de l'enregistrement la mise à jour d'une enchère dans la DB
 	 */
 	public static final int UPDATE_ENCHERE_SQL = 10108;
+	
+	//------------------ ERRORS TEST ------------------
+	
 	/**
 	 * Echec général lors de l'installation des catégories intial 
 	 *   - InstallCategorieDAL.java
 	 */
 	public static final int INSTALL_CATEGORIES_INIT=50000;
-
-	public static final int SELECT_ALL_CATEGORIES_SQL = 50002;
 
 
 

@@ -139,7 +139,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_MONTANTS_ENCHERES_SQL);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_ARTICLES_SQL);
 		}
 		return listeArticles;
 	}
@@ -167,7 +167,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_SQL);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_LIST_ARTICLES_BY_KEY_WORD_SQL);
 		}
 		return listeFiltreeArticles;
 		
@@ -337,7 +337,6 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return categorie;
 	}
-	
 
 	
 	@Override
