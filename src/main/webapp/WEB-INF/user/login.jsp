@@ -10,7 +10,7 @@
 	    <jsp:param name="pageTitle" value='Login' />
 	    <jsp:param name="pageDescription" value='Page liste des enchères pour Eni-Enchères' />
 	</jsp:include>
-	
+
 	<body>	
 		
 		<jsp:include page='../partials/header.jsp'>
@@ -81,6 +81,7 @@
 				</div>
 			</div>
 		</main>	
+    
 		<%@ include file="../partials/footer.jspf"%>
 		<%@ include file="../partials/foot.jspf"%>
 	</body>
