@@ -2,24 +2,15 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Page liste des enchères">
-		<meta name="author" content="co-authored by BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain">
-		<title>Liste des Enchères</title>
-		<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/faviconEni.ico">
-		<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/faviconEni.png">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<link href="<%=request.getContextPath()%>/css/eniStyle.css" rel="stylesheet">
-		<link href="<%=request.getContextPath()%>/css/inscription.css" rel="stylesheet">
-		
-		<link href="<%=request.getContextPath()%>/css/listEncheresStyle.css" rel="stylesheet">
-	</head>
+	<jsp:include page='../partials/head.jsp'>
+	    <jsp:param name="extraCSS" value='<%=request.getContextPath()+"/css/listEncheresStyle.css"%>' />
+	    <jsp:param name="pageTitle" value='Encheres' />
+	    <jsp:param name="pageDescription" value='Eni-Enchères' />
+	</jsp:include>
 	<body>	
-		<%@ include file="/WEB-INF/partials/header.jspf"%>
+		<jsp:include page='../partials/header.jsp'>
+		    <jsp:param name="pageTitle" value='Enchères' />
+		</jsp:include>
 		
 				<main class="py-5">
 			

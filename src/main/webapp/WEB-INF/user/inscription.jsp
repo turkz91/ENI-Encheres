@@ -2,29 +2,20 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="fr">
-	<% 
-	String pageTitle = "Inscription";
-	%>
-	<%@ include file="../partials/head.jspf"%>
+
+	<jsp:include page='../partials/head.jsp'>
+	    <jsp:param name="extraCSS" value='<%=request.getContextPath()+"/css/inscription.css"%>' />
+	    <jsp:param name="pageTitle" value='Inscription' />
+	    <jsp:param name="pageDescription" value='Page inscription pour Eni-Enchères' />
+	</jsp:include>
 
 	<body>
 	<%@ page
 		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.Utilisateur"%>
 		
-		<%@ include file="../partials/header.jspf"%>
-		
-		<% if(session.getAttribute("user") != null) {%>
-		<section>
-			<h2>TEST de récupération des paramètres</h2>
-			<p>Le pseudo saisi :  Le prénom
-				saisi : ${ !empty prenom ? prenom : '' } Le nom saisi : ${ !empty nom ? nom : '' }
-				L'email saisi : ${ !empty email ? email : '' } Le telephone saisi : ${ !empty telephone ? telephone : '' }
-				La rue saisi : ${ !empty rue ? rue : '' } La ville saisi : ${ !empty ville ? ville : '' }
-				Le code postal saisi : ${ !empty codePostal ? codePostal : '' } Le mot
-				de passe saisi : ${ !empty motDePasse ? motDePasse : '' } La
-				confirmation saisi : ${ !empty confirmation ? confirmation : '' }</p>
-		</section>
-		<% } %>
+		<jsp:include page='../partials/header.jsp'>
+		    <jsp:param name="pageTitle" value='Inscription' />
+		</jsp:include>
 		<main class="py-5">
 			
 			<h1 class="text-center h3 mb-4">
@@ -44,7 +35,7 @@
 			}
 			}
 			%>
-			<form class="container eni-compteAction" action="<%=request.getContextPath()%>/utilisateur/inscription" method="post">
+			<form class="container eni-compteAction" action="<%=request.getContextPath()%>/nouveau-compte" method="post">
 				
  				<div class="form-row justify-content-center mb-3"> 
 					<label for="pseudo" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Pseudo : </label>

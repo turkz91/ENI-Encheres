@@ -2,14 +2,16 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="fr">
-<%
-String pageTitle = "Vente";
-%>
-<%@ include file="../partials/head.jspf"%>
+	<jsp:include page='../partials/head.jsp'>
+	    <jsp:param name="pageTitle" value='Vente' />
+	    <jsp:param name="pageDescription" value='Vente Article pour Eni-Enchères' />
+	</jsp:include>
 <body>
 	<%@ page
 		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleVendu"%>
-	<%@ include file="../partials/header.jspf"%>
+	<jsp:include page='../partials/header.jsp'>
+	    <jsp:param name="pageTitle" value='Vente' />
+	</jsp:include>
 
 	<%
 	if (session.getAttribute("user") != null) {
