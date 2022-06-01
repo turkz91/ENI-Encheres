@@ -22,6 +22,7 @@
 	</head>
 	<body>	
 		
+		<%@ include file="../partials/head.jspf"%>
 		
 				<main class="py-5">
 			
@@ -32,7 +33,8 @@
 					<div>Filtres : </div>
 					
 					<div class="col-md-10 col-lg-6 col-form-label col-form-label-lg">
- 						<input type="search" id="recherche" name="recherche" class="form-control " placeholder="Le nom de l'article contient">
+ 						<input type="search" id="recherche" name="recherche" class="form-control "  placeholder="Le nom de l'article contient">
+ 						
  					</div>
  					
 					<div class="row">
@@ -50,37 +52,37 @@
 								
 						<div class="row" >		
 							<div class = "col-sm-6 col-lg-4 form-check"> 
-								<input type="radio" class="option" value="achat" name="rechercheEnchere" id="radioAchat" onchange="radioDisable()" > 
+								<input type="radio" class="option" value="achat" name="rechercheEnchere" id="radioAchat" onclick="enableCheckbox()" > 
 								  <label for="achat" class="subOption form-check-label" >Achats</label><br>
 									<div class="form-check">
-									  <input disabled = "disabled" type="checkbox" value="ouvertes" name="checkAchat" id="achatsOuveres"> 
+									  <input type="checkbox" value="ouvertes" name="checkAchat" id="achatsOuveres"> 
 								 		<label for="encheresOuvertes" class="subOptionA form-check-label">enchères ouvertes</label>
 								 		<br>
-									  <input disabled = "disabled" type="checkbox" value="enCours" name="checkAchat"id="achatsEnCours">
+									  <input type="checkbox" value="enCours" name="checkAchat"id="achatsEnCours">
 								 		<label for="encheresEnCours" class="subOptionA form-check-label"> mes enchères en cour</label>
 								 		<br>
-									  <input disabled = "disabled" type="checkbox" value="remportees" name="checkAchat"id="achatsRemportes"> 
+									  <input type="checkbox" value="remportees" name="checkAchat"id="achatsRemportes"> 
 								 		<label for="encheresRemportees" class="subOptionA form-check-label"> mes enchères remportées</label>
 								 		<br>
 									 </div>
 							 	</div>
 						
 							<div class = "col-sm-6 col-md-4 "> 
-						   	   	<input type="radio" value="ventes" name="rechercheEnchere" id="radioVentes" onchange="radioDisable() ">
+						   	   	<input type="radio" value="ventes" name="rechercheEnchere" id="radioVentes"  ">
 						   	   	<label for="ventes" class="option form-check-label">Mes ventes</label><br>
 						   	   		<div class="form-check">
-						   		 	  <input disabled = "disabled" type="checkbox" value="enCours" name="checkVentes" id="venteEnCours">
+						   		 	  <input type="checkbox" value="enCours" name="checkVentes" id="venteEnCours">
 						   		 		<label for="venteEnCours" class="subOptionV form-check-label"> mes ventes en cours</label>
 						   		 		<br>
-						    		 <input disabled = "disabled" type="checkbox" value="noDebutées" name="checkVentes" id="ventenoDebutées">
+						    		 <input type="checkbox" value="noDebutées" name="checkVentes" id="ventenoDebutées">
 						    	 	 	<label for="ventenoDebutées" class="subOptionV form-check-label"> ventes non débutées</label>
 						    	 	 	<br>
-									 <input disabled = "disabled" type="checkbox" value="terminées"name="checkVentes" id="venteTerminées">  
+									 <input type="checkbox" value="terminées"name="checkVentes" id="venteTerminées">  
 								 		<label for="venteTerminées"class="subOptionV form-check-label"> ventes terminées</label>
 								 		<br>
 								 	</div>
 							</div>
-						<div align="center" class="col-sm-8 col-md-8 col-lg-4">
+						<div align="center" class="col-sm-10 col-md-10 col-lg-4">
 						<button type="submit" class="btn btn-primary btn-lg" >Rechercher</button>
 						</div>
 						</div>
@@ -90,35 +92,36 @@
 				  <section id="encheres">
 					<div class="container">
 						<div class=row>
-							<div class="card mb-3" style="max-width: 500px;">
-				 				 <div class="row g-1">
+							<div class="card mb-3 mt-4 col-sm-10 col-md-5 col-lg-5  " style="width: 20rem;" id="cardAchat">
+				 				 <div class="row g-1 ml-2">
 				    				<div class="col-md-4">
-				     					 <img src="..." class="img-fluid rounded-start" alt="...">
+				     					 <img src="<%=request.getContextPath()%>/images/articles/articleTest.png" class="img-fluid rounded-start img-thumbnail mt-4" alt="...">
 				   					 </div>
 				    				<div class="col-md-8">
 				      					<div class="card-body">
-				        					<h5 class="card-title">Card title</h5>
-									        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-									        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+				        					<p class="souligne mb-1"><u>Nom article</u></p>
+									        <p class="card-text mb-2">Prix :</p>
+									          <p class="card-text">Fin de l'enchere :</p>
+									        <p class="card-text">Vendeur :</p>
 									     </div>
 									  </div>
 				 				 </div>
 				 			 </div>
-							<div class="card mb-3" style="max-width: 500px;">
-								 <div class="row g-2">
-								    <div class="col-md-4">
-								      <img src="..." class="img-fluid rounded-start" alt="...">
-								    </div>
-								    <div class="col-md-8">
-								      <div class="card-body">
-								        <h5 class="card-title"></h5>
-								        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-								        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-								      </div>
-								    </div>
-								  </div>
-								</div>
-								</div>
+							<div class="card mb-3 me-4 mt-4 ml-5  col-sm-10 col-md-5 col-lg-5" style="width: 28rem; id="cardVent"">
+							 <div class="row g-1 ml-2">
+				    				<div class="col-md-4">
+				     					 <img src="<%=request.getContextPath()%>/images/articles/articleTest.png" class="img-fluid rounded-start img-thumbnail mt-4" alt="...">
+				   					 </div>
+				    				<div class="col-md-8">
+				      					<div class="card-body">
+				        					<p class="souligne" mb-2><u>Nom article</u></p>
+									        <p class="card-text mb-2">Prix :</p>
+									          <p class="card-text mb-1">Retrait : 10 alle des Alouettes 44800 Saint Herbain</p>
+									        <p class="card-text">Vendeur :</p>
+									        <p class="card-text">
+									     </div>
+									  </div>
+				 				 	</div>
 								</div>
 								</section>				
 								
@@ -130,16 +133,5 @@
 		<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
 		<script src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	</body>
-	<script>>
-	function enable(){
-		var radio = document.getElementById("radioAchat");
-		var checkV = document.getELementByName("checkVentes");
-		var chackA = document.getELementByName("checkAchat");
-		if(radio.checked){
-			checkV.removeAttribute("disabled");
-		}else{
-			checkA.removeAttribute("disabled");
-		}
-	}
-	</script>
+	
 </html>
