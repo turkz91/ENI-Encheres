@@ -19,7 +19,7 @@
 		<link href="<%=request.getContextPath()%>/css/listEncheresStyle.css" rel="stylesheet">
 	</head>
 	<body>	
-		<%@ include file="/WEB-INF/partials/header.jspf"%>
+		
 		
 				<main class="py-5">
 			
@@ -36,7 +36,7 @@
 					<div class="row">
 						<div class = "col-lg-3 col-md-4 col-form-label" style="font-size: large"> Categorie </div>
 						<div class= "col-lg-3 col-md-6  col-form-label "> 
-							<select class="custom-select custom-select-md mb-3">
+							<select class="custom-select custom-select-md mb-3" name="selectCategorie">
 							   <option selected> Toutes</option>
 							   <option value="Informatique">Informatique</option>
 							   <option value="Ameublement">Ameublement</option>
@@ -48,32 +48,32 @@
 								
 						<div class="row" >		
 							<div class = "col-sm-6 col-lg-4 form-check"> 
-								<input type="radio" class="option" value="achat" name="radio" id="achat" checked  > 
+								<input type="radio" class="option" value="achat" name="rechercheEnchere" id="achat"   > 
 								  <label for="achat" class="subOption form-check-label">Achats</label><br>
 									<div class="form-check">
-									  <input type="checkbox" value="ouvertes" name="encheresOuvertes" id="encheresOuvertes" checked> 
+									  <input type="checkbox" value="ouvertes" name="checkAchat"> 
 								 		<label for="encheresOuvertes" class="subOption form-check-label">enchères ouvertes</label>
 								 		<br>
-									  <input type="checkbox" value="enCours" name="encheresEnCours" id="encheresEnCours">
+									  <input type="checkbox" value="enCours" name="checkAchat">
 								 		<label for="encheresEnCours" class="subOption form-check-label"> mes enchères en cour</label>
 								 		<br>
-									  <input type="checkbox" value="remportees" name="encheresRemportees" id="encheresRemportees"> 
+									  <input type="checkbox" value="remportees" name="checkAchat"> 
 								 		<label for="encheresRemportees" class="form-check-label"> mes enchères remportées</label>
 								 		<br>
 									 </div>
 							 	</div>
 						
 							<div class = "col-sm-6 col-md-4 "> 
-						   	   	<input type="radio" value="ventes" name="radio" id="ventes" >
+						   	   	<input type="radio" value="ventes" name="rechercheEnchere" id="ventes" >
 						   	   	<label for="ventes" class="option form-check-label">Mes ventes</label><br>
 						   	   		<div class="form-check">
-						   		 	  <input type="checkbox" value="enCours" name="venteEnCours" id="venteEnCours">
+						   		 	  <input type="checkbox" value="enCours" name="checkAchat" id="venteEnCours">
 						   		 		<label for="venteEnCours" class="subOption form-check-label"> mes ventes en cours</label>
 						   		 		<br>
-						    		 <input type="checkbox" value="noDebutées" name="ventenoDebutées" id="ventenoDebutées">
+						    		 <input type="checkbox" value="noDebutées" name="checkAchat" id="ventenoDebutées">
 						    	 	 	<label for="ventenoDebutées" class="subOption form-check-label"> ventes non débutées</label>
 						    	 	 	<br>
-									 <input type="checkbox" value="terminées"name="venteTerminées" id="venteTerminées">  
+									 <input type="checkbox" value="terminées"name="checkAchat" id="venteTerminées">  
 								 		<label for="venteTerminées"class="subOption form-check-label"> ventes terminées</label>
 								 		<br>
 								 	</div>

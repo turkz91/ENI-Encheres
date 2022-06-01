@@ -30,8 +30,8 @@
 			<div class="form-row justify-content-center mb-5">
 				<form name="login" action="Login" method="post" id="login-form">
 					<table class="form-group">
-						<tr><td scope="col" style="font-size: medium" class=" col-form-label col-form-label-lg"> Identifiant :</td><td> &nbsp; <input type=text name=txtUsername></td></tr>
-						<tr><td scope="col"> Mot de passe :</td><td>  &nbsp; <input type=password name=txtPassword></td></tr>
+						<tr><td scope="col" style="font-size: medium" class=" col-form-label col-form-label-lg"> Identifiant :</td><td> &nbsp; <input type=text name=username></td></tr>
+						<tr><td scope="col"> Mot de passe :</td><td>  &nbsp; <input type=password name=password></td></tr>
 					</table>
 				</form>
 			</div>
@@ -53,7 +53,7 @@
 				</div>
 			</div>
 		</div>		
-	
+		</div>
 </main>
 
 		
