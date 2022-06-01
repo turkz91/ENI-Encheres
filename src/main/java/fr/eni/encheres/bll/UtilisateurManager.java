@@ -47,7 +47,6 @@ public class UtilisateurManager {
 
 		return utilisateur;
 	}
-
 	public Utilisateur loginUtilisateur(String userDetails, String motDePasse) throws BusinessException {
 
 		BusinessException businessException = new BusinessException();
@@ -98,6 +97,7 @@ public class UtilisateurManager {
 			throw businessException;
 		}
 
+
 		return utilisateur;
 	}
 
@@ -110,6 +110,7 @@ public class UtilisateurManager {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_ERREUR);
 		}
 	}
+
 
 	public void checkNom(String nom, BusinessException businessException) {
 		// Only letters accepted for lastname

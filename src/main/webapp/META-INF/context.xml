@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
 	<Resource
+
 		name="jdbc/pool_cnx"		
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 		type="javax.sql.DataSource"
@@ -9,9 +10,13 @@
 		username="eni_connect"
 		password="Pa$$w0rd"
 		
+		url="jdbc:sqlserver://localhost;databasename=ENI_ENCHERES"
+		username="user_encheres"
+		password="0000"
+
+		
 		maxTotal="100"
 		maxIdle="30"
 		maxWaitMillis="10000"
 	/>
 </Context>
-
