@@ -30,6 +30,7 @@ public interface ArticleEnchereDAO {
 	// CATEGORIES
 	public Categorie createCategorie(Categorie categorie) throws BusinessException;
 
+	public List<Categorie> selectAllCategorie() throws BusinessException;
 	// TO DO SelectCategorie
 	
 }

@@ -39,6 +39,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	// SQL REQUESTS FOR CATEGORIES
 	private final String CREATE_CATEGORIE = "INSERT INTO CATEGORIES (libelle) VALUES (?)";
 	private final String SELECT_CATEGORIE = "SELECT libelle FROM CATEGORIES WHERE no_categorie = ?";
+	private final String SELECT_ALL_CATEGORIES = "SELECT libelle FROM CATEGORIES";
 	private final String UPDATE_CATEGORIE = ""; // TO DO
 	private final String DELETE_CATEGORIE = ""; // TO DO
 
@@ -278,6 +279,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	}
 
 	// METHODS FOR CATEGORIES
+	
 	@Override
 	public Categorie createCategorie(Categorie categorie) throws BusinessException {
 		if (categorie == null) {
@@ -304,5 +306,35 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return categorie;
 	}
+	
+
+	
+	@Override
+	public List<Categorie> selectAllCategorie() throws BusinessException {
+		List<Categorie> listeCategories = new ArrayList<>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtCategorie = cnx.prepareStatement(SELECT_ALL_CATEGORIES);
+			ResultSet rs = pstmtCategorie.executeQuery();
+			if (rs.next()) {
+				Categorie categorie = new Categorie(rs.getString("libelle"));
+				listeCategories.add(categorie);
+			}
+			pstmtCategorie.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_CATEGORIES_SQL);
+		}
+		return listeCategories;
+	}
+
+
+
+
+	
+
 
 }

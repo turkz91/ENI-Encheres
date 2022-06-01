@@ -150,6 +150,8 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int INSTALL_CATEGORIES_INIT=50000;
 
+	public static final int SELECT_ALL_CATEGORIES_SQL = 50002;
+
 
 
 	
