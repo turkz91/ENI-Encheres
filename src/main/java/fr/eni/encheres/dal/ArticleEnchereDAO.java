@@ -20,6 +20,7 @@ public interface ArticleEnchereDAO {
 	public void createArticle(ArticleVendu article) throws BusinessException ;
 	public ArticleVendu selectArticle(int no_article) throws BusinessException;	
 	public List<ArticleVendu> selectAllArticles () throws BusinessException;
+	public List<ArticleVendu> selectListArticlesByKeyWord (String motCle) throws BusinessException;
 	
 	// ENCHERES
 	public void createEnchere(Enchere enchere) throws BusinessException;

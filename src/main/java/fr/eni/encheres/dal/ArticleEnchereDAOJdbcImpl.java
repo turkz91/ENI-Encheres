@@ -33,6 +33,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			+ "FROM ARTICLES_VENDUS WHERE no_article = ?";
 	private final String SELECT_ALL_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
 			+ "FROM ARTICLES_VENDUS";
+	private final String SELECT_LIST_ARTICLES_BY_KEY_WORD = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+			+ "FROM ARTICLES WHERE nom_article LIKE ?";
 	private final String UPDATE_ARTICLE = ""; // TO DO
 	private final String DELETE_ARTICLE = ""; // TO DO
 
@@ -142,6 +144,35 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		return listeArticles;
 	}
 
+	@Override
+	public List<ArticleVendu> selectListArticlesByKeyWord(String motCle) throws BusinessException {
+
+		List<ArticleVendu> listeFiltreeArticles = new ArrayList<ArticleVendu>();
+		
+		ArticleVendu article = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_LIST_ARTICLES_BY_KEY_WORD);
+			pstmtArticle.setString(1, "%motCle%");
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),
+						(rs.getDate("date_debut_enchere")).toLocalDate(), (rs.getDate("date_fin_enchere")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				listeFiltreeArticles.add(article);
+			}
+			pstmtArticle.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_SQL);
+		}
+		return listeFiltreeArticles;
+		
+	}
+	
 	// METHODS FOR BIDS
 
 	@Override
@@ -330,6 +361,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return listeCategories;
 	}
+
+
 
 
 
