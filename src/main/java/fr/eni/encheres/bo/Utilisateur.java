@@ -1,11 +1,17 @@
 package fr.eni.encheres.bo;
 
+import java.io.Serializable;
+
 /**
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *
  */
-public class Utilisateur {
+public class Utilisateur implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int no_utilisateur;
 	private String pseudo;
 	private String nom;

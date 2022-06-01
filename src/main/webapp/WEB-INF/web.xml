@@ -1,55 +1,28 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>Eni-Enchères</display-name>
   <welcome-file-list>
+    <welcome-file>/WEB-INF/article/ListeEncheres.jsp</welcome-file>
+    <welcome-file>/WEB-INF/article/accueil.jsp</welcome-file>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-  	<servlet-name>InstallCategorie</servlet-name>
-  	<jsp-file>/WEB-INF/install/categorieInit.jsp</jsp-file>  	
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>InstallCategorie</servlet-name>
-  	<url-pattern>/install/1/categories</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-  	<servlet-name>TestUserDAL</servlet-name>
-  	<jsp-file>/WEB-INF/install/userTest.jsp</jsp-file>  	
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>TestUserDAL</servlet-name>
-  	<url-pattern>/install/2/users</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-  	<servlet-name>Inscription</servlet-name>
-  	<jsp-file>/WEB-INF/user/inscription.jsp</jsp-file>  	
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>Inscription</servlet-name>
-  	<url-pattern>/inscription-utilisateur</url-pattern>
-  </servlet-mapping>
-  
+  </welcome-file-list> 
+    
   <servlet>
   	<servlet-name>ArticleVente</servlet-name>
-  	<jsp-file>/WEB-INF/article/vente.jsp</jsp-file>  	
+  	<jsp-file>/WEB-INF/article/venteArticle.jsp</jsp-file>  	
   </servlet>
   
   <servlet-mapping>
   	<servlet-name>ArticleVente</servlet-name>
   	<url-pattern>/article-vente</url-pattern>
   </servlet-mapping>
+  
+  <session-config>
+  	<session-timeout>5</session-timeout>
+  </session-config>
+
 </web-app>
-
-
-

@@ -6,22 +6,6 @@ import java.time.LocalDate;
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *
  */
-/**
- * @author ephra
- *
- */
-/**
- * @author ephra
- *
- */
-/**
- * @author ephra
- *
- */
-/**
- * @author ephra
- *
- */
 public class ArticleVendu {
 	
 	private int no_article;
@@ -115,6 +99,7 @@ public class ArticleVendu {
 		setNo_categorie(no_categorie);
 	}
 
+
 	public int getNo_article() {
 		return no_article;
 	}
@@ -189,7 +174,11 @@ public class ArticleVendu {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "ArticleVendu [no_article=" + no_article + ", nom_article=" + nom_article + ", description="
+				+ description + ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres="
+				+ date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente
+				+ ", no_utilisateur=" + no_utilisateur + ", no_categorie=" + no_categorie + "]";
 	}
+
+
 }
