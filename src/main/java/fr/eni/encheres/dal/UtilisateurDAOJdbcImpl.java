@@ -151,7 +151,9 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur updateUser(Utilisateur user) throws BusinessException {
+	public void updateUser(Utilisateur user) throws BusinessException {
+		int userResult;
+		
 		if (user == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.UPDATE_USER_NULL);
@@ -177,7 +179,9 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmtUser.setInt(10, user.getCredit());
 			pstmtUser.setInt(11, user.getAdministrateur());
 			pstmtUser.setInt(12, user.getNo_utilisateur());
-			pstmtUser.executeUpdate();
+
+			userResult = pstmtUser.executeUpdate();
+			
 			pstmtUser.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -185,7 +189,11 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			businessException.ajouterErreur(CodesResultatDAL.UPDATE_USER_ERROR);
 			throw businessException;
 		}
-		return user;
+		if (userResult != 1 ) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_USER_ERROR);
+			throw businessException;			
+		}
 
 	}
 
@@ -256,8 +264,8 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			while (rsUser.next()) {
 				utilisateur = new Utilisateur(rsUser.getInt("no_utilisateur"), rsUser.getString("pseudo"),
 						rsUser.getString("nom"), rsUser.getString("prenom"), rsUser.getString("email"),
-						rsUser.getString("email"), rsUser.getString("telephone"), rsUser.getString("rue"),
-						rsUser.getString("code_postal"), rsUser.getString("mot_de_passe"),
+						rsUser.getString("telephone"), rsUser.getString("rue"), rsUser.getString("code_postal"),
+						rsUser.getString("ville"), rsUser.getString("mot_de_passe"),
 						rsUser.getInt("credit"), rsUser.getBoolean("administrateur"));
 			}
 			rsUser.close();

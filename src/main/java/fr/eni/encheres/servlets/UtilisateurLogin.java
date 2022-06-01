@@ -69,7 +69,7 @@ public class UtilisateurLogin extends HttpServlet {
 		if (errorSaver) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", utilisateur);
-			response.sendRedirect(request.getContextPath() + "/compte-update");
+			response.sendRedirect(request.getContextPath() + "/compte");
 		}
 	}
 

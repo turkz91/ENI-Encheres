@@ -28,7 +28,7 @@
 				  			<li class="nav-item">
 				  				<a 
 				  				  class="nav-link  ${param.pageTitle == 'Compte' ? 'active' : '' }"
-				  				  href="<%=request.getContextPath()%>/compte-update">Mon Profil
+				  				  href="<%=request.getContextPath()%>/compte">Mon Profil
 				  				</a>
 				  			</li>
 				  			<li class="nav-item">

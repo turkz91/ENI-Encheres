@@ -35,7 +35,7 @@
 			}
 			}
 			%>
-			<form class="container eni-compteAction" action="" method="post">
+			<form class="container eni-compteAction" action="<%=request.getContextPath()%>/compte" method="post">
 				
  				<div class="form-row align-items-center justify-content-center mb-3"> 
 					<label for="pseudo" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Pseudo : </label>
@@ -66,26 +66,26 @@
 				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="telephone" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Téléphone : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="telephone" name="telephone" class="form-control" value="">
+						<input type="text" id="telephone" name="telephone" class="form-control" value="${ !empty sessionScope.user.telephone ? sessionScope.user.telephone : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="rue" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Rue : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="rue" name="rue" class="form-control" value="${ !empty user.rue ? user.rue : '' }">
+						<input type="text" id="rue" name="rue" class="form-control" value="${ !empty sessionScope.user.rue ? sessionScope.user.rue : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row align-items-center justify-content-center mb-3">
 					<label for="code-postal" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Code Postal : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="code-postal" name="code-postal" class="form-control" value="">
+						<input type="text" id="code-postal" name="code-postal" class="form-control" value="${ !empty sessionScope.user.code_postal ? sessionScope.user.code_postal : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="ville" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Ville : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="ville" name="ville" class="form-control" value="">
+						<input type="text" id="ville" name="ville" class="form-control" value="${ !empty sessionScope.user.ville ? sessionScope.user.ville : '' }">
 					</div>
 				</div>
 				

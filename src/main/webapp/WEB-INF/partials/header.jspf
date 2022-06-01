@@ -40,7 +40,7 @@
 				  				<%}else {%>
 				  				class="nav-link"
 				  				<%}%> 
-				  				  href="#">Mon Profil
+				  				  href="<%=request.getContextPath()%>/compte">Mon Profil
 				  				</a>
 				  			</li>
 				  			<li class="nav-item">

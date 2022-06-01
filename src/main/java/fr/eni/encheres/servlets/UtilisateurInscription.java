@@ -30,9 +30,9 @@ public class UtilisateurInscription extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -41,35 +41,35 @@ public class UtilisateurInscription extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("code-postal");
 		String ville = request.getParameter("ville");
+		String ancien_motDePasse = request.getParameter("ancien-mot-de-passe");
 		String motDePasse = request.getParameter("mot-de-passe");
 		String confirmation = request.getParameter("confirmation");
-		
+
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = null;
 		Boolean errorSaver = true;
-		
+
 		try {
-			utilisateur = utilisateurManager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation);
+			utilisateur = utilisateurManager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue,
+					codePostal, ville,ancien_motDePasse, motDePasse, confirmation);
 		} catch (Exception ex) {
 			if (ex instanceof BusinessException) {
 				request.setAttribute("listeCodesErreur", ((BusinessException) ex).getListeCodesErreur());
-				ex.printStackTrace();				
-			}
-			else {
+				ex.printStackTrace();
+			} else {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_UTILISATEUR_ERREUR);
-				request.setAttribute("listeCodesErreur", listeCodesErreur);				
+				request.setAttribute("listeCodesErreur", listeCodesErreur);
 			}
 			errorSaver = false;
 		}
 		request.setAttribute("user", utilisateur);
 		if (errorSaver) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/compte.jsp");
-			rd.forward(request, response);			
-		}
-		else {
+			rd.forward(request, response);
+		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/inscription.jsp");
-			rd.forward(request, response);			
+			rd.forward(request, response);
 		}
 	}
 

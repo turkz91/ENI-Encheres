@@ -24,7 +24,7 @@ public interface UtilisateurDAO {
 	public Utilisateur selectUserByDetails(String pseudo, String email) throws BusinessException;
 
 
-	public Utilisateur updateUser(Utilisateur user) throws BusinessException;
+	public void updateUser(Utilisateur user) throws BusinessException;
 	public void deleteUser(int no_utilisateur) throws BusinessException;
 	public int checkUserDetailsExist(String pseudo, String email) throws BusinessException ;
 

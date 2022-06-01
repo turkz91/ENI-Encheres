@@ -12,8 +12,8 @@ public class UtilisateurManager {
 	private UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
 
 	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email,
-			String telephone, String rue, String codePostal, String ville, String motDePasse,
-			String confirmation) throws BusinessException {
+			String telephone, String rue, String codePostal, String ville, String ancien_motDePasse,
+			String motDePasse, String confirmation) throws BusinessException {
 
 		BusinessException businessException = new BusinessException();
 
@@ -68,9 +68,37 @@ public class UtilisateurManager {
 
 	public Utilisateur updateUtilisateur(String pseudo, String nom, String prenom, String email,
 			String telephone, String rue, String codePostal, String ville, String motDePasse,
-			String confirmation, String ancien_mdp) throws BusinessException {
+			String confirmation, String ancien_mdp, Utilisateur oldUser) throws BusinessException {
 
-		return null;
+		BusinessException businessException = new BusinessException();
+		Utilisateur utilisateur = null;
+		
+		checkPseudo(pseudo, businessException);
+		checkNom(nom, businessException);
+		checkPrenom(prenom, businessException);
+		checkEmail(email, businessException);
+		checkTelephone(telephone, businessException);
+		checkRue(rue, businessException);
+		checkCodePostal(codePostal, businessException);
+		checkVille(ville, businessException);
+		if (motDePasse == null || motDePasse.isEmpty()) {	
+			motDePasse = checkAncienMDP(ancien_mdp,oldUser ,businessException);
+			System.out.println(motDePasse);
+		}
+		else {
+			checkMotDePasse(motDePasse, confirmation, businessException);
+			checkAncienMDP(ancien_mdp,oldUser ,businessException);
+		}
+		if (!businessException.hasErreurs()) {
+			utilisateur = new Utilisateur(oldUser.getNo_utilisateur(),pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+					motDePasse, oldUser.getCredit(), oldUser.isAdministrateur());
+			this.utilisateurDAO.updateUser(utilisateur);
+		} else {
+			System.out.println("Erreur survenue" + businessException.getListeCodesErreur());
+			throw businessException;
+		}
+
+		return utilisateur;
 	}
 
 	public void checkPseudo(String pseudo, BusinessException businessException) throws BusinessException {
@@ -175,5 +203,15 @@ public class UtilisateurManager {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_EMAIL_UNIQUE);
 			break;
 		}
+	}
+	
+	public String checkAncienMDP(String ancienMDP,Utilisateur oldUser ,BusinessException businessException) throws BusinessException {
+		if (ancienMDP == null || ancienMDP.isEmpty() ) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_UPDATE_MDP);
+		}
+		if (!(oldUser.getMot_de_passe().equals(ancienMDP))) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_UPDATE_MDP);
+		}
+		return ancienMDP;
 	}
 }
