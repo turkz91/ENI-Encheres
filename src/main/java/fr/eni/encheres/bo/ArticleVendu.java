@@ -6,22 +6,6 @@ import java.time.LocalDate;
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
  *
  */
-/**
- * @author ephra
- *
- */
-/**
- * @author ephra
- *
- */
-/**
- * @author ephra
- *
- */
-/**
- * @author ephra
- *
- */
 public class ArticleVendu {
 	
 	private int no_article;

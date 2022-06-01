@@ -28,11 +28,7 @@
 		<main class="py-5">
 			
 			<h1 class="text-center h3 mb-4">
-				<% if(session.getAttribute("user") != null) {%>
-				Créer un compte
-				<% }else {%>
-				Compte Utilisateur
-				<% } %>
+				Inscription Utilisateur
 			</h1>
 			<%
 			@SuppressWarnings("unchecked")
@@ -48,57 +44,57 @@
 			}
 			}
 			%>
-			<form class="container eni-compteAction" action="<%=request.getContextPath()%>/Inscription" method="post">
+			<form class="container eni-compteAction" action="<%=request.getContextPath()%>/utilisateur/inscription" method="post">
 				
  				<div class="form-row justify-content-center mb-3"> 
 					<label for="pseudo" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Pseudo : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="pseudo" name="pseudo" class="form-control" value="${ !empty pseudo ? pseudo : '' }">
+						<input type="text" id="pseudo" name="pseudo" class="form-control" value="${ !empty user.pseudo ? user.pseudo : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="nom" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Nom : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="nom" name="nom" class="form-control" value="${ !empty nom ? nom : '' }">
+						<input type="text" id="nom" name="nom" class="form-control" value="${ !empty user.nom ? user.nom : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row justify-content-center mb-3">
 					<label for="prenom" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Prénom : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="prenom" name="prenom" class="form-control" value="${ !empty prenom ? prenom : '' }">
+						<input type="text" id="prenom" name="prenom" class="form-control" value="${ !empty user.prenom ? user.prenom : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="email" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Email : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="email" id="email" name="email" class="form-control" value="${ !empty email ? email : '' }">
+						<input type="email" id="email" name="email" class="form-control" value="${ !empty user.email ? user.email : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row justify-content-center mb-3">
 					<label for="telephone" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Téléphone : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="telephone" name="telephone" class="form-control" value="${ !empty telephone ? telephone : '' }">
+						<input type="text" id="telephone" name="telephone" class="form-control" value="${ !empty user.telephone ? user.telephone : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="rue" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Rue : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="rue" name="rue" class="form-control" value="${ !empty rue ? rue : '' }">
+						<input type="text" id="rue" name="rue" class="form-control" value="${ !empty user.rue ? user.rue : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row justify-content-center mb-3">
 					<label for="code-postal" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Code Postal : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="code-postal" name="code-postal" class="form-control" value="${ !empty codePostal ? codePostal : '' }">
+						<input type="text" id="code-postal" name="code-postal" class="form-control" value="${ !empty user.codePostal ? user.codePostal : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="ville" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Ville : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="ville" name="ville" class="form-control" value="${ !empty ville ? ville : '' }">
+						<input type="text" id="ville" name="ville" class="form-control" value="${ !empty user.ville ? user.ville : '' }">
 					</div>
 				</div>
 				

@@ -4,17 +4,13 @@
 	background-color: #aabecd;
 }
 
+body{
+	background-color:  #ced4dacc ;
+}
+
 nav.navbar .navbar-nav .nav-item .nav-link {
 	font-size : 1.25rem;
 }
 nav.navbar .navbar-brand {
 	font-size : 1.45rem;
-}
-.form-control {
-    border-radius: 2.25rem;
-}
-
-.form-check-inline {
-    display: inline-block;
-    margin-right: 2.75rem;
 }
