@@ -65,6 +65,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtArticle = cnx.prepareStatement(CREATE_ARTICLE,
 					PreparedStatement.RETURN_GENERATED_KEYS);
+			System.out.println(article);
 			pstmtArticle.setString(1, article.getNom_article());
 			pstmtArticle.setString(2, article.getDescription());
 			//pstmtArticle.setDate(3, Date.valueOf(article.getDate_debut_encheres()));

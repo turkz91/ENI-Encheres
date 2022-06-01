@@ -14,6 +14,11 @@
 	href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 </head>
+
+
+<%
+String pageTitle = "Categorie";
+%>
 <body>
 	<%@ page
 		import="fr.eni.encheres.bo.Categorie, java.util.List, fr.eni.encheres.messages.LecteurMessage"%>

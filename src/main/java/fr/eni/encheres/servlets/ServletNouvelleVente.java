@@ -52,7 +52,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		int prix_initial = Integer.valueOf(request.getParameter("prix_initial"));
 		// no_utilisateur dans infos utilisateur
 		int no_categorie = Integer.valueOf(request.getParameter("categorie"));
-
+		
+		
 		// infos utilisateur
 
 		// TO DO
@@ -60,6 +61,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		// int no_utilisateur = Integer.valueOf(request.getParameter("no_utilisateur"));
 		// POUR LE TEST :
 		int no_utilisateur = 2;
+		
+		System.out.println(nom_article +", " + description +", " + date_debut_encheres + ", " + date_fin_encheres + ", " + no_utilisateur + ", " + ", " + no_categorie );
 
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("code_postal");
@@ -69,6 +72,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		ArticleVendu article = null;
 
 		try {
+			
 			article = articleManager.ajouterArticle(nom_article, description, date_debut_encheres, date_fin_encheres,
 					prix_initial, no_utilisateur, no_categorie);
 		} catch (BusinessException ex) {
