@@ -30,7 +30,7 @@ public class ArticleEnchereManager {
 
 		if (!businessException.hasErreurs()) {
 			articleVendu = new ArticleVendu(nom_article, description, date_debut_encheres, date_fin_encheres,
-					prix_initial, no_categorie);
+					prix_initial, no_utilisateur, no_categorie);
 
 			this.articleEnchereDAO.createArticle(articleVendu);
 		} else {
