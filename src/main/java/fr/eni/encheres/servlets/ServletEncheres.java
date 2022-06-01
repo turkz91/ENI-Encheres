@@ -34,8 +34,9 @@ public class ServletEncheres extends HttpServlet {
 		String motCle = request.getParameter("recherche");
 		String categorie = request.getParameter("selectCategorie");
 		String[] checkboxAchat = request.getParameterValues("checkAchat");
-		List list= Arrays.asList(checkboxAchat);
-		
+		List listA= Arrays.asList(checkboxAchat);
+		String[] checkboxVentes = request.getParameterValues("checkAchat");
+		List listV= Arrays.asList(checkboxAchat);
 	}
 
 }
