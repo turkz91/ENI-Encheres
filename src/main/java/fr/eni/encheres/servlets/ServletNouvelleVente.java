@@ -19,7 +19,7 @@ import fr.eni.encheres.servlets.CodesResultatServlets;
 /**
  * Servlet implementation class InstallArticleVenduDAL
  */
-@WebServlet("/NouvelleVente")
+@WebServlet("/nouvelleVente")
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -54,17 +54,12 @@ public class ServletNouvelleVente extends HttpServlet {
 		int no_categorie = Integer.valueOf(request.getParameter("categorie"));
 
 		// infos utilisateur
-
-		// TO DO
-		// => Récupérer l'identifiant de l'utilisateur
-		// int no_utilisateur = Integer.valueOf(request.getParameter("no_utilisateur"));
-		// POUR LE TEST :
-		int no_utilisateur = 2;
+		int no_utilisateur = Integer.valueOf(request.getParameter("no_utilisateur"));
 
 
-		String rue = request.getParameter("rue");
-		String codePostal = request.getParameter("code_postal");
-		String ville = request.getParameter("ville");
+//		String rue = request.getParameter("rue");
+//		String codePostal = request.getParameter("code_postal");
+//		String ville = request.getParameter("ville");
 
 		ArticleEnchereManager articleManager = new ArticleEnchereManager();
 		ArticleVendu article = null;
@@ -82,8 +77,8 @@ public class ServletNouvelleVente extends HttpServlet {
 			listeCodesErreur.add(CodesResultatServlets.FORMAT_ARTICLE_ERREUR);
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/venteArticle.jsp");
+			
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/ListeEncheres.jsp");
 		rd.forward(request, response);
 	}
 

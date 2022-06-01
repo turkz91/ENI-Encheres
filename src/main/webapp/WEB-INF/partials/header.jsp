@@ -21,7 +21,7 @@
 				  			<li class="nav-item">
 				  				<a 
 				  				  class="nav-link  ${param.pageTitle == 'Vente' ? 'active' : '' }"
-				  				  href="<%=request.getContextPath()%>/article-vente">
+				  				  href="<%=request.getContextPath()%>/nouvelleVente">
 				  				    Vendre un Article
 				  				</a>
 				  			</li>
