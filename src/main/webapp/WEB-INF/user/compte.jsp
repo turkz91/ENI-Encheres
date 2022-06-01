@@ -82,8 +82,8 @@
 						<input type="text" id="code-postal" name="code-postal" class="form-control" value="${ !empty sessionScope.user.code_postal ? sessionScope.user.code_postal : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
-					<div class="d-none d-md-block col-lg-1"></div>
-					<label for="ville" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Ville : </label>
+				<div class="d-none d-md-block col-lg-1"></div>
+				<label for="ville" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Ville : </label>
 					<div class="col-6 col-md-4 col-lg-3">
 						<input type="text" id="ville" name="ville" class="form-control" value="${ !empty sessionScope.user.ville ? sessionScope.user.ville : '' }">
 					</div>

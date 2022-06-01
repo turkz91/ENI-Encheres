@@ -10,16 +10,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list> 
-    
-  <servlet>
-  	<servlet-name>ArticleVente</servlet-name>
-  	<jsp-file>/WEB-INF/article/venteArticle.jsp</jsp-file>  	
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>ArticleVente</servlet-name>
-  	<url-pattern>/article-vente</url-pattern>
-  </servlet-mapping>
   
   <session-config>
   	<session-timeout>5</session-timeout>
