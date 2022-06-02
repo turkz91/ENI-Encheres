@@ -346,7 +346,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtCategorie = cnx.prepareStatement(SELECT_ALL_CATEGORIES);
 			ResultSet rs = pstmtCategorie.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				Categorie categorie = new Categorie(rs.getString("libelle"));
 				listeCategories.add(categorie);
 			}
