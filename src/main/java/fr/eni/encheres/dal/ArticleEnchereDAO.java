@@ -30,8 +30,6 @@ public interface ArticleEnchereDAO {
 	public void updateEnchere(Enchere enchere) throws BusinessException;
 	// CATEGORIES
 	public Categorie createCategorie(Categorie categorie) throws BusinessException;
-
 	public List<Categorie> selectAllCategorie() throws BusinessException;
-	// TO DO SelectCategorie
 	
 }

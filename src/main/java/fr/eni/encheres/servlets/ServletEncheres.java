@@ -17,6 +17,7 @@ import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ArticleEnchereDAO;
 import fr.eni.encheres.dal.DAOFactory;
+import fr.eni.encheres.dal.UtilisateurDAO;
 
 /**
  * Servlet implementation class ServletEncheres
@@ -83,6 +84,7 @@ public class ServletEncheres extends HttpServlet {
 				
 				
 				// IN ORDER TO HAVE THE SELLER PSEUDO
+
 				
 				// TODO
 
