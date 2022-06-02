@@ -36,13 +36,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String SELECT_LIST_ARTICLES_BY_KEY_WORD = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES WHERE nom_article LIKE ?";
 
-	private final String SELECT_ARTICLE_INNER_UTILISATEUR = "SELECT " + "a.no_article," + "a.nom_article,"
-			+ "a.description," + "a.date_debut_encheres," + "a.date_fin_encheres," + "a.prix_initial," + "a.prix_vente,"
-			+ "a.no_utilisateur," + "a.no_categorie," + "u.pseudo," + "u.nom," + "u.prenom," + "u.email,"
-			+ "u.telephone," + "u.rue," + "u.code_postal," + "u.ville," + "u.credit," + "u.administrateur,"
-			+ " a.no_categorie"
-			+ "	FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u  ON a.no_utilisateur = u.no_utilisateur"
-			+ " WHERE a.no_utilisateur = ? AND no_utilisateur = ?";
+	
 	private final String UPDATE_ARTICLE = ""; // TO DO
 	private final String DELETE_ARTICLE = ""; // TO DO
 
