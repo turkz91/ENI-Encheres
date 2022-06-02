@@ -50,9 +50,54 @@
 					</div>
 				</div>
 			</form>
-			
-			<div class="">
-			
+			<div class="row">
+				<div class="card mb-3" style="max-width: 500px;">
+							<div class="row g-1">
+								<div class="col-md-4">
+									<img src="..." class="img-fluid rounded-start" alt="...">
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title">${listeAIU.nom_article}</h5>
+										<p class="card-text">${listeAIU.description}</p>
+										<p class="card-text">
+											<small class="text-muted">Fin de l'enchère :
+												${listeAIU.date_fin_encheres}
+											</small>
+										</p>		
+		<!--TODO RECUPERER PSEUDO VENDEUR  -->
+										<p>Vendeur : ${listeAIU.pseudo}</p>		
+									</div>
+								</div>
+							</div>
+						</div>
+				
+				<c:if test="${!empty listeArticles}">		
+					<c:forEach var="article" items="${listeArticles}">		
+						
+						<div class="card mb-3" style="max-width: 800px;">
+							<div class="row g-1">
+								<div class="col-md-4">
+									<img src="..." class="img-fluid rounded-start" alt="...">
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title">${article.key.nom_article}</h5>
+										<p class="card-text">${article.key.description}</p>
+										<p class="card-text">
+											<small class="text-muted">Fin de l'enchère :
+												${article.key.date_fin_encheres}
+											</small>
+										</p>		
+										<p>Vendeur : ${article.value[0]}</p>		
+									</div>
+								</div>
+							</div>
+						</div>
+								
+					</c:forEach>		
+				</c:if>
+				
 			</div>
 		</div>
 			
