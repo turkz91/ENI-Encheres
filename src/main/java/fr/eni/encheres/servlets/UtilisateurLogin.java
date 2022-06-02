@@ -68,14 +68,13 @@ public class UtilisateurLogin extends HttpServlet {
 				listeCodesErreur.add(CodesResultatServlets.LOGIN_UTILISATEUR_ERREUR);
 				request.setAttribute("listeCodesErreur", listeCodesErreur);				
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/login.jsp");
-			rd.forward(request, response);
+			doGet(request, response);
 			errorSaver = false;
 		}		
 		if (errorSaver) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", utilisateur);
-			response.sendRedirect(request.getContextPath() + "/compte");
+			response.sendRedirect(request.getContextPath());
 		}
 	}
 
