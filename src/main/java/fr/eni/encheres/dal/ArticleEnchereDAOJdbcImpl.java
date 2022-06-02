@@ -242,6 +242,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		return listeArticlesByCategorie;
 	}
 
+	
 	// METHODS FOR BIDS
 
 	@Override
@@ -428,5 +429,4 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return listeCategories;
 	}
-
 }
