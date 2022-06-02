@@ -114,14 +114,14 @@
 			</div>
 		</form>
 
-		<c:if test="${empty listeAIU.article}">
+		<c:if test="${empty listeArticles}">
 			<p class="text-center text-danger">ERREUR les articles n'ont pas
 				pu être récupérés</p>
 		</c:if>
-		<c:if test="${!empty listeAIU.article}">
+		<c:if test="${!empty listeArticles}">
 
 
-			<c:forEach var="article" items="${listeAIU.article.nom_article}">
+			<c:forEach var="article" items="${listeArticles}">
 
 
 				<div class="card mb-3" style="max-width: 500px;">
@@ -131,14 +131,14 @@
 						</div>
 						<div class="col-md-8">
 							<div class="card-body">
-								<h5 class="card-title">${listeAIU.nom_article}</h5>
-								<p class="card-text">${listeAIU.description}</p>
+								<h5 class="card-title">${article.nom_article}</h5>
+								<p class="card-text">${article.description}</p>
 								<p class="card-text">
 									<small class="text-muted">Fin de l'enchère :
-										${listeAIU.date_fin_encheres}</small>
+										${article.date_fin_encheres}</small>
 								</p>
-<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
-								<p>Vendeur : ${listeAIU.pseudo}</p>
+								<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
+								<p>Vendeur : ${article.no_utilisateur}</p>
 							</div>
 						</div>
 					</div>
@@ -147,49 +147,51 @@
 			</c:forEach>
 
 		</c:if>
+		
+<!-- 		POUR L'AFFICHAGE INITIAL .... A SUPPRIMER AVANT DEMO -->
 
-		<section id="encheres">
-			<div class="container">
-				<div class=row>
-					<div class="card mb-3" style="max-width: 500px;">
-						<div class="row g-1">
-							<div class="col-md-4">
-								<img src="..." class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-3" style="max-width: 500px;">
-						<div class="row g-2">
-							<div class="col-md-4">
-								<img src="..." class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title"></h5>
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+<!-- 		<section id="encheres"> -->
+<!-- 			<div class="container"> -->
+<!-- 				<div class=row> -->
+<!-- 					<div class="card mb-3" style="max-width: 500px;"> -->
+<!-- 						<div class="row g-1"> -->
+<!-- 							<div class="col-md-4"> -->
+<!-- 								<img src="..." class="img-fluid rounded-start" alt="..."> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-8"> -->
+<!-- 								<div class="card-body"> -->
+<!-- 									<h5 class="card-title">Card title</h5> -->
+<!-- 									<p class="card-text">This is a wider card with supporting -->
+<!-- 										text below as a natural lead-in to additional content. This -->
+<!-- 										content is a little bit longer.</p> -->
+<!-- 									<p class="card-text"> -->
+<!-- 										<small class="text-muted">Last updated 3 mins ago</small> -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="card mb-3" style="max-width: 500px;"> -->
+<!-- 						<div class="row g-2"> -->
+<!-- 							<div class="col-md-4"> -->
+<!-- 								<img src="..." class="img-fluid rounded-start" alt="..."> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-8"> -->
+<!-- 								<div class="card-body"> -->
+<!-- 									<h5 class="card-title"></h5> -->
+<!-- 									<p class="card-text">This is a wider card with supporting -->
+<!-- 										text below as a natural lead-in to additional content. This -->
+<!-- 										content is a little bit longer.</p> -->
+<!-- 									<p class="card-text"> -->
+<!-- 										<small class="text-muted">Last updated 3 mins ago</small> -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</section> -->
 
 
 
