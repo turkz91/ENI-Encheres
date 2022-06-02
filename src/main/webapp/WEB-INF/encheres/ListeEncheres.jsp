@@ -73,7 +73,7 @@
 					</select>
 				</div>
 			</div>
-			
+
 
 
 			<div class="row">
@@ -119,18 +119,31 @@
 				</div>
 			</div>
 		</form>
-			<!-- PARTIE TEST -->
-						<h2>Affichage d'une liste des articles</h2>
-						<p>il y a ${listeArticles.size()} articles.</p>
-<!-- FIN PARTIE TEST -->
 
 		<c:if test="${empty listeArticles}">
-			<option selected>ERREUR</option>
+			<p class="text-center text-danger">ERREUR les articles n'ont pas
+				pu être récupérés</p>
 		</c:if>
 		<c:if test="${!empty listeArticles}">
-			<option selected>Toutes</option>
-			<c:forEach var="categorie" items="${listeCategorie}">
-				<option>${categorie}</option>
+			<c:forEach var="article" items="${listeArticles}">
+
+				<div class="card mb-3" style="max-width: 500px;">
+					<div class="row g-1">
+						<div class="col-md-4">
+							<img src="..." class="img-fluid rounded-start" alt="...">
+						</div>
+						<div class="col-md-8">
+							<div class="card-body">
+								<h5 class="card-title">${article.nom_article}</h5>
+								<p class="card-text">${article.description}</p>
+								<p class="card-text">
+									<small class="text-muted">Last updated 3 mins ago</small>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</c:forEach>
 
 		</c:if>

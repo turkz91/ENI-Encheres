@@ -27,13 +27,13 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String CREATE_ARTICLE = "INSERT INTO ARTICLES_VENDUS "
 			// prix_initial can be null, but if the user inform a price, it wont be recorded
 			// ?
-			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
+			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) "
 			+ "VALUES (?,?,?,?,?,?, ?)";
-	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES_VENDUS WHERE no_article = ?";
-	private final String SELECT_ALL_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private final String SELECT_ALL_ARTICLES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES_VENDUS";
-	private final String SELECT_LIST_ARTICLES_BY_KEY_WORD = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private final String SELECT_LIST_ARTICLES_BY_KEY_WORD = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES WHERE nom_article LIKE ?";
 	private final String UPDATE_ARTICLE = ""; // TO DO
 	private final String DELETE_ARTICLE = ""; // TO DO
