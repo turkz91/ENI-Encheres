@@ -21,6 +21,9 @@ public class ArticleInnerUtilisateur {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	
+	@Override
+	public String toString() {
+		return "ArticleInnerUtilisateur [article=" + article + ", utilisateur=" + utilisateur + "]";
+	}
 	
 }

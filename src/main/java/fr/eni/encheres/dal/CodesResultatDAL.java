@@ -33,7 +33,7 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int SELECT_ALL_ARTICLES_SQL = 10004;
 	
-	
+	public static final int SELECT_ALL_ARTICLE_INNER_UTILISATEUR_SQL = 10005;
 	
 	
 	//------------------ ERRORS FOR CATEGORIES ------------------
@@ -172,6 +172,8 @@ public abstract class CodesResultatDAL {
 	 *   - InstallCategorieDAL.java
 	 */
 	public static final int INSTALL_CATEGORIES_INIT=50000;
+
+
 
 
 

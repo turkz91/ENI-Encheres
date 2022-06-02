@@ -195,4 +195,12 @@ public class Utilisateur implements Serializable  {
 		this.administrateur = administrateur;
 	}
 
+	@Override
+	public String toString() {
+		return "Utilisateur [no_utilisateur=" + no_utilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", code_postal="
+				+ code_postal + ", ville=" + ville + ", mot_de_passe=" + mot_de_passe + ", credit=" + credit
+				+ ", administrateur=" + administrateur + "]";
+	}
+
 }

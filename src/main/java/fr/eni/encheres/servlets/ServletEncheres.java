@@ -90,14 +90,11 @@ public class ServletEncheres extends HttpServlet {
 		// SELLER PSEUDO
 
 		ArticleInnerUtilisateurDAO daoArticleInnerUtilisateur = DAOFactory.getArticleInnerDAO();
-		List<ArticleInnerUtilisateur> listeArticlesInnerUtilisateurs = new ArrayList<ArticleInnerUtilisateur>();
-		
-		// TODO
-		// Récupération du no_utilisateur
-		
-		listeArticlesInnerUtilisateurs = daoArticleInnerUtilisateur.selectArticleInnerUtilisateur(no_utilisateur);
-		if (listeArticlesInnerUtilisateurs != null) {
-			request.setAttribute("listeArticlesInnerUtilisateurs", listeArticlesInnerUtilisateurs);
+		List<ArticleInnerUtilisateur> listeAIU = new ArrayList<ArticleInnerUtilisateur>();
+				
+		listeAIU = daoArticleInnerUtilisateur.selectAllArticleInnerUtilisateur();
+		if (listeAIU != null) {
+			request.setAttribute("listeAIU", listeAIU);
 		}
 
 		// TODO
