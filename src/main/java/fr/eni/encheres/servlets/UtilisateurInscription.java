@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.BusinessException;
 import fr.eni.encheres.bll.UtilisateurManager;
@@ -41,17 +42,17 @@ public class UtilisateurInscription extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal = request.getParameter("code-postal");
 		String ville = request.getParameter("ville");
-		String ancien_motDePasse = request.getParameter("ancien-mot-de-passe");
 		String motDePasse = request.getParameter("mot-de-passe");
 		String confirmation = request.getParameter("confirmation");
 
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		Utilisateur utilisateur = null;
+		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email,telephone, rue, codePostal, ville,
+				confirmation, 0, false);
 		Boolean errorSaver = true;
 
 		try {
 			utilisateur = utilisateurManager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue,
-					codePostal, ville,ancien_motDePasse, motDePasse, confirmation);
+					codePostal, ville, motDePasse, confirmation);
 		} catch (Exception ex) {
 			if (ex instanceof BusinessException) {
 				request.setAttribute("listeCodesErreur", ((BusinessException) ex).getListeCodesErreur());
@@ -63,11 +64,13 @@ public class UtilisateurInscription extends HttpServlet {
 			}
 			errorSaver = false;
 		}
-		request.setAttribute("user", utilisateur);
 		if (errorSaver) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", utilisateur);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/compte.jsp");
 			rd.forward(request, response);
 		} else {
+			request.setAttribute("user", utilisateur);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/inscription.jsp");
 			rd.forward(request, response);
 		}

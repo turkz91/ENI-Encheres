@@ -40,52 +40,52 @@
  				<div class="form-row justify-content-center mb-3"> 
 					<label for="pseudo" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Pseudo : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="pseudo" name="pseudo" class="form-control" value="${ !empty user.pseudo ? user.pseudo : '' }">
+						<input type="text" id="pseudo" name="pseudo" class="form-control" value="${ !empty requestScope.user.pseudo ? requestScope.user.pseudo : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="nom" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Nom : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="nom" name="nom" class="form-control" value="${ !empty user.nom ? user.nom : '' }">
+						<input type="text" id="nom" name="nom" class="form-control" value="${ !empty requestScope.user.nom ? requestScope.user.nom : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row justify-content-center mb-3">
 					<label for="prenom" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Prénom : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="prenom" name="prenom" class="form-control" value="${ !empty user.prenom ? user.prenom : '' }">
+						<input type="text" id="prenom" name="prenom" class="form-control" value="${ !empty requestScope.user.prenom ? requestScope.user.prenom : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="email" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Email : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="email" id="email" name="email" class="form-control" value="${ !empty user.email ? user.email : '' }">
+						<input type="email" id="email" name="email" class="form-control" value="${ !empty requestScope.user.email ? requestScope.user.email : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row justify-content-center mb-3">
 					<label for="telephone" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Téléphone : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="telephone" name="telephone" class="form-control" value="${ !empty user.telephone ? user.telephone : '' }">
+						<input type="text" id="telephone" name="telephone" class="form-control" value="${ !empty requestScope.user.telephone ? requestScope.user.telephone : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="rue" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Rue : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="rue" name="rue" class="form-control" value="${ !empty user.rue ? user.rue : '' }">
+						<input type="text" id="rue" name="rue" class="form-control" value="${ !empty requestScope.user.rue ? requestScope.user.rue : '' }">
 					</div>
 				</div>
 				
 				<div class="form-row justify-content-center mb-3">
 					<label for="code-postal" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Code Postal : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="code-postal" name="code-postal" class="form-control" value="${ !empty user.codePostal ? user.codePostal : '' }">
+						<input type="text" id="code-postal" name="code-postal" class="form-control" value="${ !empty requestScope.user.code_postal ? requestScope.user.code_postal : '' }">
 					</div>
 					<div class="w-100 d-block d-md-none"></div>
 					<div class="d-none d-md-block col-lg-1"></div>
 					<label for="ville" class="col-5 col-sm-4 col-lg-2 col-form-label col-form-label-lg">Ville : </label>
 					<div class="col-6 col-md-4 col-lg-3">
-						<input type="text" id="ville" name="ville" class="form-control" value="${ !empty user.ville ? user.ville : '' }">
+						<input type="text" id="ville" name="ville" class="form-control" value="${ !empty requestScope.user.ville ? requestScope.user.ville : '' }">
 					</div>
 				</div>
 				
