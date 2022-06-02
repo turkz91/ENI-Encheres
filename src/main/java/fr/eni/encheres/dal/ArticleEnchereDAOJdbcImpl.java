@@ -27,18 +27,21 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String CREATE_ARTICLE = "INSERT INTO ARTICLES_VENDUS "
 			// prix_initial can be null, but if the user inform a price, it wont be recorded
 			// ?
-			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
+			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) "
 			+ "VALUES (?,?,?,?,?,?, ?)";
-	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES_VENDUS WHERE no_article = ?";
-	private final String SELECT_ALL_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private final String SELECT_ALL_ARTICLES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES_VENDUS";
+	private final String SELECT_LIST_ARTICLES_BY_KEY_WORD = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
+			+ "FROM ARTICLES WHERE nom_article LIKE ?";
 	private final String UPDATE_ARTICLE = ""; // TO DO
 	private final String DELETE_ARTICLE = ""; // TO DO
 
 	// SQL REQUESTS FOR CATEGORIES
 	private final String CREATE_CATEGORIE = "INSERT INTO CATEGORIES (libelle) VALUES (?)";
 	private final String SELECT_CATEGORIE = "SELECT libelle FROM CATEGORIES WHERE no_categorie = ?";
+	private final String SELECT_ALL_CATEGORIES = "SELECT libelle FROM CATEGORIES";
 	private final String UPDATE_CATEGORIE = ""; // TO DO
 	private final String DELETE_CATEGORIE = ""; // TO DO
 
@@ -136,11 +139,40 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_MONTANTS_ENCHERES_SQL);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_ARTICLES_SQL);
 		}
 		return listeArticles;
 	}
 
+	@Override
+	public List<ArticleVendu> selectListArticlesByKeyWord(String motCle) throws BusinessException {
+
+		List<ArticleVendu> listeFiltreeArticles = new ArrayList<ArticleVendu>();
+		
+		ArticleVendu article = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_LIST_ARTICLES_BY_KEY_WORD);
+			pstmtArticle.setString(1, "%motCle%");
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),
+						(rs.getDate("date_debut_enchere")).toLocalDate(), (rs.getDate("date_fin_enchere")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				listeFiltreeArticles.add(article);
+			}
+			pstmtArticle.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_LIST_ARTICLES_BY_KEY_WORD_SQL);
+		}
+		return listeFiltreeArticles;
+		
+	}
+	
 	// METHODS FOR BIDS
 
 	@Override
@@ -278,6 +310,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	}
 
 	// METHODS FOR CATEGORIES
+	
 	@Override
 	public Categorie createCategorie(Categorie categorie) throws BusinessException {
 		if (categorie == null) {
@@ -304,5 +337,36 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return categorie;
 	}
+
+	
+	@Override
+	public List<Categorie> selectAllCategorie() throws BusinessException {
+		List<Categorie> listeCategories = new ArrayList<>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtCategorie = cnx.prepareStatement(SELECT_ALL_CATEGORIES);
+			ResultSet rs = pstmtCategorie.executeQuery();
+			while (rs.next()) {
+				Categorie categorie = new Categorie(rs.getString("libelle"));
+				listeCategories.add(categorie);
+			}
+			pstmtCategorie.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_CATEGORIES_SQL);
+		}
+		return listeCategories;
+	}
+
+
+
+
+
+
+	
+
 
 }

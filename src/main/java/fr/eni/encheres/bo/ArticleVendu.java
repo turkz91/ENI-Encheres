@@ -1,6 +1,7 @@
 package fr.eni.encheres.bo;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 /**
  * @author BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain
@@ -99,7 +100,6 @@ public class ArticleVendu {
 		setNo_categorie(no_categorie);
 	}
 
-
 	public int getNo_article() {
 		return no_article;
 	}
@@ -178,6 +178,11 @@ public class ArticleVendu {
 				+ description + ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres="
 				+ date_fin_encheres + ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente
 				+ ", no_utilisateur=" + no_utilisateur + ", no_categorie=" + no_categorie + "]";
+	}
+	
+	public String formatDate(LocalDate date_fin_enchere) {
+		String date = new SimpleDateFormat("dd/MM/yyyy").format(date_fin_enchere);
+		return date;
 	}
 
 
