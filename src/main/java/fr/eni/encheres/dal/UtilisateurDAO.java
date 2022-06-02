@@ -19,8 +19,6 @@ public interface UtilisateurDAO {
 
 
 	public Utilisateur selectUserById(int no_utilisateur) throws BusinessException;
-	public String selectUserByPseudo(String pseudo) throws BusinessException;
-	public String selectUserByEmail(String email) throws BusinessException;
 	public Utilisateur selectUserByDetails(String pseudo, String email) throws BusinessException;
 
 

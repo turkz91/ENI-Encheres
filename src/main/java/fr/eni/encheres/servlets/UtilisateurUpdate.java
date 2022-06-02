@@ -19,7 +19,7 @@ import fr.eni.encheres.bo.Utilisateur;
 /**
  * Servlet implementation class UtilisateurUpdate
  */
-@WebServlet("/compte")
+@WebServlet("/compte/update")
 public class UtilisateurUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,7 @@ public class UtilisateurUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/compte.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/compteDetail.jsp");
 		rd.forward(request, response);
 	}
 

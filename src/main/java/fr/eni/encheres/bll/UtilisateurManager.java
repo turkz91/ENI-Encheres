@@ -12,7 +12,7 @@ public class UtilisateurManager {
 	private UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
 
 	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email,
-			String telephone, String rue, String codePostal, String ville, String ancien_motDePasse,
+			String telephone, String rue, String codePostal, String ville,
 			String motDePasse, String confirmation) throws BusinessException {
 
 		BusinessException businessException = new BusinessException();
@@ -41,12 +41,12 @@ public class UtilisateurManager {
 					motDePasse, credit, administrateur);
 			this.utilisateurDAO.createUser(utilisateur);
 		} else {
-			System.out.println("Erreur survenue" + businessException.getListeCodesErreur());
 			throw businessException;
 		}
 
 		return utilisateur;
 	}
+	
 	public Utilisateur loginUtilisateur(String userDetails, String motDePasse) throws BusinessException {
 
 		BusinessException businessException = new BusinessException();
@@ -82,7 +82,6 @@ public class UtilisateurManager {
 		checkVille(ville, businessException);
 		if (motDePasse == null || motDePasse.isEmpty()) {	
 			motDePasse = checkAncienMDP(ancien_mdp,oldUser ,businessException);
-			System.out.println(motDePasse);
 		}
 		else {
 			checkMotDePasse(motDePasse, confirmation, businessException);
@@ -93,7 +92,6 @@ public class UtilisateurManager {
 					motDePasse, oldUser.getCredit(), oldUser.isAdministrateur());
 			this.utilisateurDAO.updateUser(utilisateur);
 		} else {
-			System.out.println("Erreur survenue" + businessException.getListeCodesErreur());
 			throw businessException;
 		}
 
@@ -101,6 +99,13 @@ public class UtilisateurManager {
 		return utilisateur;
 	}
 
+	public void deleteUtilisateur(int no_utilisateur) throws BusinessException {
+		
+		this.utilisateurDAO.deleteUser(no_utilisateur);
+		
+	}
+	
+	
 	public void checkPseudo(String pseudo, BusinessException businessException) throws BusinessException {
 		// Only alphanumeric characters accepted for pseudo
 		String regex = "^[A-Za-z0-9]{1,30}$";
@@ -110,7 +115,6 @@ public class UtilisateurManager {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_ERREUR);
 		}
 	}
-
 
 	public void checkNom(String nom, BusinessException businessException) {
 		// Only letters accepted for lastname
