@@ -85,12 +85,9 @@ public class ServletEncheres extends HttpServlet {
 				// IN ORDER TO HAVE THE SELLER PSEUDO
 				
 				// TODO
-				
-				
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encheres/ListeEncheres.jsp");
 		rd.forward(request, response);
-
 	}
 
 	/**

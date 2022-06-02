@@ -32,7 +32,7 @@
 				  				</a>
 				  			</li>
 				  			<li class="nav-item">
-				  				<a class="nav-link" href="#">Déconnexion</a>
+				  				<a class="nav-link" href="<%=request.getContextPath()%>/logoff">Déconnexion</a>
 				  			</li>			  		
 			  			</c:when>
 			  			<c:otherwise>
