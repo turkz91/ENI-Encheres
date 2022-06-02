@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.eni.encheres.bll.ArticleEnchereManager;
 import fr.eni.encheres.bll.BusinessException;
+import fr.eni.encheres.bo.Categorie;
 
 /**
  * Servlet implementation class InstallArticleVenduDAL
@@ -26,6 +27,19 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		List<Categorie> listeCategories = new ArrayList<>();
+		ArticleEnchereManager articleManager = new ArticleEnchereManager();
+		
+		try {
+			listeCategories = articleManager.selectAllCategorie();
+			if (listeCategories != null) {
+				request.setAttribute("listeCategories", listeCategories);
+			}
+		}  catch (BusinessException e) {
+		}
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/venteArticle.jsp");
 		rd.forward(request, response);
 

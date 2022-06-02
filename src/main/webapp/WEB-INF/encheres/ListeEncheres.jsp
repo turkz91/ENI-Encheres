@@ -104,16 +104,23 @@
 						for="ventes" class="option form-check-label">Mes ventes</label><br>
 					<div class="form-check">
 						<input disabled="disabled" type="checkbox" value="enCours"
-							name="checkVentes" id="venteEnCours"> <label
+							name="checkVentes" id="venteEnCours"> 
+						<label
 							for="venteEnCours" class="subOptionV form-check-label">
-							mes ventes en cours</label> <br> <input disabled="disabled"
+							mes ventes en cours
+						</label>
+						<input disabled="disabled"
 							type="checkbox" value="noDebutées" name="checkVentes"
-							id="ventenoDebutées"> <label for="ventenoDebutées"
-							class="subOptionV form-check-label"> ventes non débutées</label>
-						<br> <input disabled="disabled" type="checkbox"
+							id="ventenoDebutées"> 
+						<label for="ventenoDebutées"
+							class="subOptionV form-check-label"> 
+							ventes non débutées
+						</label>
+						<input disabled="disabled" type="checkbox"
 							value="terminées" name="checkVentes" id="venteTerminées">
 						<label for="venteTerminées" class="subOptionV form-check-label">
-							ventes terminées</label> <br>
+							ventes terminées
+						</label>
 					</div>
 				</div>
 

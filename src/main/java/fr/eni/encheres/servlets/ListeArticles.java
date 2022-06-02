@@ -12,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fr.eni.encheres.bll.ArticleEnchereManager;
 import fr.eni.encheres.bll.BusinessException;
-import fr.eni.encheres.bo.ArticleInnerUtilisateur;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
-import fr.eni.encheres.dal.ArticleEnchereDAO;
-import fr.eni.encheres.dal.ArticleInnerUtilisateurDAO;
-import fr.eni.encheres.dal.DAOFactory;
+import fr.eni.encheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ArticlesListe
@@ -33,34 +32,24 @@ public class ListeArticles extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-
-		ArticleEnchereDAO daoArticle = DAOFactory.getArticleEnchereDAO();
-
-		// IN ORDER TO HAVE THE LIST OF CATEGORIES
-
+		request.setCharacterEncoding("UTF-8");		
+		ArticleEnchereManager articleManager = new ArticleEnchereManager();		
 		List<Categorie> listeCategories = new ArrayList<>();
 		Map<ArticleVendu,String[]> listeArticles = new HashMap<>();
 		
 		try {
-			listeCategories = daoArticle.selectAllCategorie();
+			listeCategories = articleManager.selectAllCategorie();
 			if (listeCategories != null) {
 				request.setAttribute("listeCategories", listeCategories);
 			}
-			listeArticles = daoArticle.selectAllArticlesUser();
+			listeArticles = articleManager.getListeArticle();			
 			if (listeArticles != null) {
 				request.setAttribute("listeArticles", listeArticles);
 			}
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-				
-		
-//		if ( != null) {
-//			request.setAttribute("", );
-//		}
-		
+		}		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/listeArticles.jsp");
 		rd.forward(request, response);
 	}
@@ -69,8 +58,36 @@ public class ListeArticles extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		request.setCharacterEncoding("UTF-8");		
+		ArticleEnchereManager articleManager = new ArticleEnchereManager();		
+		List<Categorie> listeCategories = new ArrayList<>();
+		Map<ArticleVendu,String[]> listeArticles = new HashMap<>();
+		String categorieCheck = request.getParameter("categorie");
+		
+		try {
+			listeCategories = articleManager.selectAllCategorie();
+			if (listeCategories != null) {
+				request.setAttribute("listeCategories", listeCategories);
+			}
+			if (!categorieCheck.equalsIgnoreCase("toutes")) {
+//				listeArticles = articleManager.getFilteredListeArticle(2);
+				int categorie_id = Integer.valueOf(categorieCheck);
+				listeArticles = articleManager.getFilteredListeArticle(categorie_id);
+				request.setAttribute("selectedCategorie", categorie_id);
+			}
+			else {
+				listeArticles = articleManager.getListeArticle();
+			}
+			if (listeArticles != null) {
+				request.setAttribute("listeArticles", listeArticles);
+			}
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/listeArticles.jsp");
+		rd.forward(request, response);
 	}
 
 }

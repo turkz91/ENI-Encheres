@@ -34,10 +34,12 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES_VENDUS WHERE no_article = ?";
 	
+	private final String SELECT_ALL_ARTICLES_INNER_UTILISATEUR = "SELECT a.no_article as no_article , a.nom_article as nom_article, a.description as description, a.date_debut_encheres as date_debut_encheres, a.date_fin_encheres as date_fin_encheres, a.prix_initial as prix_initial, a.prix_vente as prix_vente, a.no_utilisateur as no_utilisateur,a.no_categorie as no_categorie,u.pseudo as pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u  ON a.no_utilisateur = u.no_utilisateur;";
+	
 	private final String SELECT_ALL_ARTICLES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES_VENDUS";
 	
-	private final String SELECT_ALL_ARTICLES_INNER_UTILISATEUR = "SELECT a.no_article as no_article , a.nom_article as nom_article, a.description as description, a.date_debut_encheres as date_debut_encheres, a.date_fin_encheres as date_fin_encheres, a.prix_initial as prix_initial, a.prix_vente as prix_vente, a.no_utilisateur as no_utilisateur,a.no_categorie as no_categorie,u.pseudo as pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u  ON a.no_utilisateur = u.no_utilisateur;";
+	private final String SELECT_ALL_ARTICLES_INNER_UTILISATEUR_CATEGORIE = "SELECT a.no_article as no_article , a.nom_article as nom_article, a.description as description, a.date_debut_encheres as date_debut_encheres, a.date_fin_encheres as date_fin_encheres, a.prix_initial as prix_initial, a.prix_vente as prix_vente, a.no_utilisateur as no_utilisateur,a.no_categorie as no_categorie,u.pseudo as pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u  ON a.no_utilisateur = u.no_utilisateur WHERE no_categorie = ?;";
 
 	// TODO
 	private final String SELECT_LIST_ARTICLES_BY_KEY_WORD = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
@@ -128,7 +130,8 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return article;
 	}
-
+	
+	@Override
 	public Map<ArticleVendu,String[]> selectAllArticlesUser() throws BusinessException {
 		
 		Map<ArticleVendu,String[]> listeArticles = new HashMap<>();
@@ -154,6 +157,35 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		
 		return listeArticles;
 	}
+	
+	@Override
+	public Map<ArticleVendu,String[]> selectAllArticlesCategorie(int no_categorie) throws BusinessException {
+		
+		Map<ArticleVendu,String[]> listeArticles = new HashMap<>();
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_ALL_ARTICLES_INNER_UTILISATEUR_CATEGORIE);
+			pstmtArticle.setInt(1, no_categorie);
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				ArticleVendu article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(),
+						(rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				String[] infoUser = {rs.getString("pseudo"), String.valueOf(rs.getInt("no_utilisateur"))};
+				listeArticles.put(article, infoUser);
+			}
+			pstmtArticle.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_ARTICLES_SQL);
+			throw businessException;
+		}
+		
+		return listeArticles;
+	}
+	
 	
 	@Override
 	public List<ArticleVendu> selectAllArticles() throws BusinessException {
@@ -429,4 +461,5 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return listeCategories;
 	}
+	
 }
