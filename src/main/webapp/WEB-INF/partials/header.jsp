@@ -10,14 +10,14 @@
 				<span class="navbar-toggler-icon"></span>
 		  	</button>
 		  	<div class="collapse navbar-collapse" id="navigateur">
-		  		<ul class="navbar-nav ml-auto">		  			
-		  			<li class="nav-item">
-		  				<a 
-		  				  class="nav-link ${param.pageTitle == 'Encheres' ? 'active' : '' }"
-		  				  href="<%=request.getContextPath()%>">Enchères</a>
-		  			</li>
+		  		<ul class="navbar-nav ml-auto">	
 		  			<c:choose>
-			  			<c:when test="${!empty sessionScope.user}">
+			  			<c:when test="${!empty sessionScope.user}">	  			
+				  			<li class="nav-item">
+				  				<a 
+				  				  class="nav-link ${param.pageTitle == 'Encheres' ? 'active' : '' }"
+				  				  href="<%=request.getContextPath()%>">Enchères</a>
+				  			</li>
 				  			<li class="nav-item">
 				  				<a 
 				  				  class="nav-link  ${param.pageTitle == 'Vente' ? 'active' : '' }"
@@ -32,20 +32,20 @@
 				  				</a>
 				  			</li>
 				  			<li class="nav-item">
-				  				<a class="nav-link" href="#">Déconnexion</a>
+				  				<a class="nav-link" href="<%=request.getContextPath()%>/logoff">Déconnexion</a>
 				  			</li>			  		
 			  			</c:when>
 			  			<c:otherwise>
 				  			<li class="nav-item">
 				  				<a 
-				  				  class="nav-link  ${param.pageTitle == 'Login' ? 'active' : '' }"
-				  				  href="<%=request.getContextPath()%>/login">Login
-				  				</a>
-				  			</li>		
-				  			<li class="nav-item">
-				  				<a 
 				  				  class="nav-link  ${param.pageTitle == 'Inscription' ? 'active' : '' }"
 				  				  href="<%=request.getContextPath()%>/nouveau-compte">S'Inscrire
+				  				</a>
+				  			</li>	
+				  			<li class="nav-item">
+				  				<a 
+				  				  class="nav-link  ${param.pageTitle == 'Login' ? 'active' : '' }"
+				  				  href="<%=request.getContextPath()%>/login">Se connecter
 				  				</a>
 				  			</li>			  			
 					    </c:otherwise>

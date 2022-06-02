@@ -1,16 +1,18 @@
 /**
- * 
- */
+* 
+*/
 package fr.eni.encheres.dal;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fr.eni.encheres.bll.BusinessException;
 import fr.eni.encheres.bo.ArticleVendu;
@@ -27,18 +29,32 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	private final String CREATE_ARTICLE = "INSERT INTO ARTICLES_VENDUS "
 			// prix_initial can be null, but if the user inform a price, it wont be recorded
 			// ?
-			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
+			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) "
 			+ "VALUES (?,?,?,?,?,?, ?)";
-	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES_VENDUS WHERE no_article = ?";
-	private final String SELECT_ALL_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	
+	private final String SELECT_ALL_ARTICLES_INNER_UTILISATEUR = "SELECT a.no_article as no_article , a.nom_article as nom_article, a.description as description, a.date_debut_encheres as date_debut_encheres, a.date_fin_encheres as date_fin_encheres, a.prix_initial as prix_initial, a.prix_vente as prix_vente, a.no_utilisateur as no_utilisateur,a.no_categorie as no_categorie,u.pseudo as pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u  ON a.no_utilisateur = u.no_utilisateur;";
+	
+	private final String SELECT_ALL_ARTICLES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES_VENDUS";
+	
+	private final String SELECT_ALL_ARTICLES_INNER_UTILISATEUR_CATEGORIE = "SELECT a.no_article as no_article , a.nom_article as nom_article, a.description as description, a.date_debut_encheres as date_debut_encheres, a.date_fin_encheres as date_fin_encheres, a.prix_initial as prix_initial, a.prix_vente as prix_vente, a.no_utilisateur as no_utilisateur,a.no_categorie as no_categorie,u.pseudo as pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u  ON a.no_utilisateur = u.no_utilisateur WHERE no_categorie = ?;";
+
+	// TODO
+	private final String SELECT_LIST_ARTICLES_BY_KEY_WORD = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
+			+ "FROM ARTICLES WHERE nom_article LIKE ?";
+
+	private final String SELECT_LIST_ARTICLES_BY_CATEGORIE = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
+			+ "FROM ARTICLES WHERE no_categorie = ?";
+
 	private final String UPDATE_ARTICLE = ""; // TO DO
 	private final String DELETE_ARTICLE = ""; // TO DO
 
 	// SQL REQUESTS FOR CATEGORIES
 	private final String CREATE_CATEGORIE = "INSERT INTO CATEGORIES (libelle) VALUES (?)";
 	private final String SELECT_CATEGORIE = "SELECT libelle FROM CATEGORIES WHERE no_categorie = ?";
+	private final String SELECT_ALL_CATEGORIES = "SELECT libelle, no_categorie FROM CATEGORIES";
 	private final String UPDATE_CATEGORIE = ""; // TO DO
 	private final String DELETE_CATEGORIE = ""; // TO DO
 
@@ -99,8 +115,9 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			ResultSet rs = pstmtArticle.executeQuery();
 			if (rs.next()) {
 				article = new ArticleVendu(rs.getString("nom_article"), rs.getString("description"),
-						rs.getDate("date_debut_enchere"), rs.getDate("date_fin_enchere"), rs.getInt("prix_initial"),
-						rs.getInt("prix_initial"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+						rs.getDate("date_debut_enchere"), rs.getDate("date_fin_enchere"),
+						rs.getInt("prix_initial"), rs.getInt("prix_initial"), rs.getInt("no_utilisateur"),
+						rs.getInt("no_categorie"));
 			}
 			pstmtArticle.close();
 			cnx.close();
@@ -109,10 +126,67 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_SQL);
+			throw businessException;
 		}
 		return article;
 	}
-
+	
+	@Override
+	public Map<ArticleVendu,String[]> selectAllArticlesUser() throws BusinessException {
+		
+		Map<ArticleVendu,String[]> listeArticles = new HashMap<>();
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_ALL_ARTICLES_INNER_UTILISATEUR);
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				ArticleVendu article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(),
+						(rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				String[] infoUser = {rs.getString("pseudo"), String.valueOf(rs.getInt("no_utilisateur"))};
+				listeArticles.put(article, infoUser);
+			}
+			pstmtArticle.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_ARTICLES_SQL);
+			throw businessException;
+		}
+		
+		return listeArticles;
+	}
+	
+	@Override
+	public Map<ArticleVendu,String[]> selectAllArticlesCategorie(int no_categorie) throws BusinessException {
+		
+		Map<ArticleVendu,String[]> listeArticles = new HashMap<>();
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_ALL_ARTICLES_INNER_UTILISATEUR_CATEGORIE);
+			pstmtArticle.setInt(1, no_categorie);
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				ArticleVendu article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_encheres")).toLocalDate(),
+						(rs.getDate("date_fin_encheres")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				String[] infoUser = {rs.getString("pseudo"), String.valueOf(rs.getInt("no_utilisateur"))};
+				listeArticles.put(article, infoUser);
+			}
+			pstmtArticle.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_ARTICLES_SQL);
+			throw businessException;
+		}
+		
+		return listeArticles;
+	}
+	
+	
 	@Override
 	public List<ArticleVendu> selectAllArticles() throws BusinessException {
 
@@ -132,15 +206,75 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			}
 			pstmtArticle.close();
 			cnx.close();
-			
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_MONTANTS_ENCHERES_SQL);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_ARTICLES_SQL);
 		}
 		return listeArticles;
 	}
 
+	@Override
+	public List<ArticleVendu> selectListArticlesByKeyWord(String motCle) throws BusinessException {
+
+		List<ArticleVendu> listeFiltreeArticles = new ArrayList<ArticleVendu>();
+
+		ArticleVendu article = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_LIST_ARTICLES_BY_KEY_WORD);
+			pstmtArticle.setString(1, "%motCle%");
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_enchere")).toLocalDate(),
+						(rs.getDate("date_fin_enchere")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				listeFiltreeArticles.add(article);
+			}
+			pstmtArticle.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_LIST_ARTICLES_BY_KEY_WORD_SQL);
+		}
+		return listeFiltreeArticles;
+
+	}
+
+	@Override
+	public List<ArticleVendu> selectListArticlesByCategorie(int no_categorie) throws BusinessException {
+
+		List<ArticleVendu> listeArticlesByCategorie = new ArrayList<ArticleVendu>();
+
+		ArticleVendu article = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_LIST_ARTICLES_BY_KEY_WORD);
+			pstmtArticle.setString(1, "no_categorie");
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_enchere")).toLocalDate(),
+						(rs.getDate("date_fin_enchere")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				listeArticlesByCategorie.add(article);
+			}
+			pstmtArticle.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_LIST_ARTICLES_BY_CATEGORIE_SQL);
+		}
+		return listeArticlesByCategorie;
+	}
+
+	
 	// METHODS FOR BIDS
 
 	@Override
@@ -278,6 +412,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	}
 
 	// METHODS FOR CATEGORIES
+
 	@Override
 	public Categorie createCategorie(Categorie categorie) throws BusinessException {
 		if (categorie == null) {
@@ -305,4 +440,26 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		return categorie;
 	}
 
+	@Override
+	public List<Categorie> selectAllCategorie() throws BusinessException {
+		List<Categorie> listeCategories = new ArrayList<>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtCategorie = cnx.prepareStatement(SELECT_ALL_CATEGORIES);
+			ResultSet rs = pstmtCategorie.executeQuery();
+			while (rs.next()) {
+				Categorie categorie = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+				listeCategories.add(categorie);
+			}
+			pstmtCategorie.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_CATEGORIES_SQL);
+		}
+		return listeCategories;
+	}
+	
 }

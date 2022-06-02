@@ -24,8 +24,6 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String SELECT_USER_BY_DETAILS = "SELECT "
 			+ "no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit,administrateur "
 			+ "FROM UTILISATEURS WHERE pseudo=? OR email=?";
-	private final String SELECT_USER_BY_PSEUDO = "SELECT pseudo FROM UTILISATEURS WHERE (pseudo = ?)";
-	private final String SELECT_USER_BY_EMAIL = "SELECT email FROM UTILISATEURS WHERE (email = ?)";
 	private final String UPDATE_USER = "UPDATE UTILISATEURS SET "
 			+ "pseudo=?, nom=?, prenom=?,email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? "
 			+ "WHERE no_utilisateur=?";
@@ -99,56 +97,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return utilisateur;
 
-	}
-	@Override
-	public String selectUserByPseudo(String pseudo) throws BusinessException {
-
-		String pseudoInDb = null;
-
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_PSEUDO);
-			pstmtUser.setString(1, pseudo);
-			// pstmtUser.executeQuery();
-			// ResultSet rsUser = pstmtUser.getGeneratedKeys();
-			ResultSet rsUser = pstmtUser.executeQuery();
-
-			if (rsUser.next()) {
-				pseudoInDb = rsUser.getString("pseudo");
-			}
-			rsUser.close();
-			pstmtUser.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_BY_PSEUDO_SQL);
-			throw businessException;
-		}
-		return pseudoInDb;
-
-	}
-
-	@Override
-	public String selectUserByEmail(String email) throws BusinessException {
-
-		String emailInDb = null;
-
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_EMAIL);
-			pstmtUser.setString(1, email);
-			ResultSet rsUser = pstmtUser.executeQuery();
-			if (rsUser.next()) {
-				emailInDb = rsUser.getString("email");
-			}
-			rsUser.close();
-			pstmtUser.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_USER_BY_EMAIL_SQL);
-			throw businessException;
-		}
-		return emailInDb;
-	}
+	}	
 
 	@Override
 	public void updateUser(Utilisateur user) throws BusinessException {
@@ -214,7 +163,8 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 
 	}
-	@Override
+	
+	@Override	
 	public int checkUserDetailsExist(String pseudo, String email) throws BusinessException {
 		int check = 0;
 
@@ -247,7 +197,6 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return check;
 	}
-
 	
 	@Override
 	public Utilisateur selectUserByDetails(String pseudo, String email) throws BusinessException {
