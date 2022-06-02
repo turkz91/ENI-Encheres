@@ -4,24 +4,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Page liste des enchères">
-		<meta name="author" content="co-authored by BARBATO Marco, EPHRAIM Sean, KUBOTA Teruaki, VAN DE PUTTE Romain">
-		<title>Liste des Enchères</title>
-		<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/faviconEni.ico">
-		<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/faviconEni.png">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<link href="<%=request.getContextPath()%>/css/eniStyle.css" rel="stylesheet">
-		<link href="<%=request.getContextPath()%>/css/inscription.css" rel="stylesheet">
-		
+		<% 
+	String pageTitle = "Vente";
+	%>
+	<%@ include file="../partials/head.jspf"%>
+	
 		<link href="<%=request.getContextPath()%>/css/listEncheresStyle.css" rel="stylesheet">
 	
 	</head>
-	<body>	
-		
+		<body>	
+		<%@ include file="../partials/header.jspf"%>
 		
 		
 				<main class="py-5">
@@ -82,7 +74,7 @@
 								 		<br>
 								 	</div>
 							</div>
-						<div align="center" class="col-sm-10 col-md-10 col-lg-4">
+						<div align="center" class="col-sm-10 col-md-10 col-lg-3">
 						<button type="submit" class="btn btn-primary btn-lg" >Rechercher</button>
 						</div>
 						</div>
@@ -97,33 +89,35 @@
 				    				<div class="col-md-4">
 				     					 <img src="<%=request.getContextPath()%>/images/articles/articleTest.png" class="img-fluid rounded-start img-thumbnail mt-4" alt="...">
 				   					 </div>
-				    				<div class="col-md-8">
+				    				 <div class="col-md-8">
 				      					<div class="card-body">
 				        					<p class="souligne mb-1"><u>Nom article</u></p>
 									        <p class="card-text mb-2">Prix :</p>
-									          <p class="card-text">Fin de l'enchere :</p>
+									        <p class="card-text">Fin de l'enchere :</p>
 									        <p class="card-text">Vendeur :</p>
 									     </div>
 									  </div>
 				 				 </div>
 				 			 </div>
 							<div class="card mb-3 me-4 mt-4 ml-5  col-sm-10 col-md-5 col-lg-5" style="width: 28rem; id="cardVent"">
-							 <div class="row g-1 ml-2">
+							 	<div class="row g-1 ml-2">
 				    				<div class="col-md-4">
 				     					 <img src="<%=request.getContextPath()%>/images/articles/articleTest.png" class="img-fluid rounded-start img-thumbnail mt-4" alt="...">
 				   					 </div>
-				    				<div class="col-md-8">
+				    				 <div class="col-md-8">
 				      					<div class="card-body">
 				        					<p class="souligne" mb-2><u>Nom article</u></p>
 									        <p class="card-text mb-2">Prix :</p>
-									          <p class="card-text mb-1">Retrait : 10 alle des Alouettes 44800 Saint Herbain</p>
+									        <p class="card-text mb-1">Retrait : 10 alle des Alouettes 44800 Saint Herbain</p>
 									        <p class="card-text">Vendeur :</p>
 									        <p class="card-text">
 									     </div>
 									  </div>
 				 				 	</div>
 								</div>
-								</section>				
+							</div>
+						</div>
+						</section>				
 								
 				
 				
