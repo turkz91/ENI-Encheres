@@ -12,13 +12,31 @@
     margin-left : 0.1rem;
 } 
 
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 3px solid #495057;
+    border-radius: 0.25rem;
+}
 
 .btn-group-lg>.btn,.btn-lg {
     padding: 0.5rem 1rem;
     font-size: 1.25rem;
-    line-height: 2.5;
+    line-height: 3.5;
+    width: 60%;
     border-radius: 0.3rem;
 }
+
 
 .btn-primary {
 	box-shadow: 5px 5px 5px #007bff ;
@@ -26,6 +44,7 @@
     background-color: #aabecd;
     border-color: #007bff;
 }
+
 
 
 .form-check-inline {
