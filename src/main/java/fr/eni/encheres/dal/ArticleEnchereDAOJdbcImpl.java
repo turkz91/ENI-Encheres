@@ -41,7 +41,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	// SQL REQUESTS FOR CATEGORIES
 	private final String CREATE_CATEGORIE = "INSERT INTO CATEGORIES (libelle) VALUES (?)";
 	private final String SELECT_CATEGORIE = "SELECT libelle FROM CATEGORIES WHERE no_categorie = ?";
-	private final String SELECT_ALL_CATEGORIES = "SELECT libelle FROM CATEGORIES";
+	private final String SELECT_ALL_CATEGORIES = "SELECT libelle, no_categorie FROM CATEGORIES";
 	private final String UPDATE_CATEGORIE = ""; // TO DO
 	private final String DELETE_CATEGORIE = ""; // TO DO
 
@@ -347,7 +347,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			PreparedStatement pstmtCategorie = cnx.prepareStatement(SELECT_ALL_CATEGORIES);
 			ResultSet rs = pstmtCategorie.executeQuery();
 			while (rs.next()) {
-				Categorie categorie = new Categorie(rs.getString("libelle"));
+				Categorie categorie = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
 				listeCategories.add(categorie);
 			}
 			pstmtCategorie.close();

@@ -102,7 +102,6 @@
 
 				<div class="col-sm-6 col-md-4 ">
 					<input type="radio" value="ventes" name="rechercheEnchere"
-
 						id="radioVentes" onchange="radioDisable() "> <label
 						for="ventes" class="option form-check-label">Mes ventes</label><br>
 					<div class="form-check">
@@ -114,7 +113,6 @@
 							id="ventenoDebutées"> <label for="ventenoDebutées"
 							class="subOptionV form-check-label"> ventes non débutées</label>
 						<br> <input disabled="disabled" type="checkbox"
-
 							value="terminées" name="checkVentes" id="venteTerminées">
 						<label for="venteTerminées" class="subOptionV form-check-label">
 							ventes terminées</label> <br>
@@ -152,7 +150,7 @@
 									<small class="text-muted">Fin de l'enchère :
 										${article.date_fin_encheres}</small>
 								</p>
-<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
+								<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
 								<p>Vendeur : ${article.no_utilisateur}</p>
 							</div>
 						</div>
@@ -218,17 +216,17 @@
 	<script
 		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-<script>>
-	function enable(){
+<script>
+	function enable() {
 		var radio = document.getElementById("radioAchat");
 		var checkV = document.getELementByName("checkVentes");
 		var chackA = document.getELementByName("checkAchat");
-		if(radio.checked){
+		if (radio.checked) {
 			checkV.removeAttribute("disabled");
-		}else{
+		} else {
 			checkA.removeAttribute("disabled");
 		}
 	}
-	</script>
+</script>
 
 </html>

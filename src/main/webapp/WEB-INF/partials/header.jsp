@@ -38,14 +38,14 @@
 			  			<c:otherwise>
 				  			<li class="nav-item">
 				  				<a 
-				  				  class="nav-link  ${param.pageTitle == 'Login' ? 'active' : '' }"
-				  				  href="<%=request.getContextPath()%>/login">Login
-				  				</a>
-				  			</li>		
-				  			<li class="nav-item">
-				  				<a 
 				  				  class="nav-link  ${param.pageTitle == 'Inscription' ? 'active' : '' }"
 				  				  href="<%=request.getContextPath()%>/nouveau-compte">S'Inscrire
+				  				</a>
+				  			</li>	
+				  			<li class="nav-item">
+				  				<a 
+				  				  class="nav-link  ${param.pageTitle == 'Login' ? 'active' : '' }"
+				  				  href="<%=request.getContextPath()%>/login">Se connecter
 				  				</a>
 				  			</li>			  			
 					    </c:otherwise>
