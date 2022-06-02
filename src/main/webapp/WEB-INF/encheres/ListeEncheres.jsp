@@ -53,11 +53,6 @@
 				<div class="col-lg-3 col-md-6  col-form-label ">
 					<select class="custom-select custom-select-md mb-3"
 						name="selectCategorie">
-						<!-- 							   <option selected> Toutes</option> -->
-						<!-- 							   <option value="Informatique">Informatique</option> -->
-						<!-- 							   <option value="Ameublement">Ameublement</option> -->
-						<!-- 							   <option value="Vetêment">Vetêment</option> -->
-						<!-- 							   <option value="Sport">Sport&Loisirs</option> -->
 
 						<c:if test="${empty listeCategories}">
 							<option selected>ERREUR</option>

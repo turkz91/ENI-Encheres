@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="fr">
 	<jsp:include page='../partials/head.jsp'>
@@ -28,11 +29,17 @@
 						<div class = "col-lg-3 col-md-4 col-form-label" style="font-size: large"> Categorie </div>
 						<div class= "col-lg-3 col-md-6  col-form-label "> 
 							<select class="custom-select custom-select-md mb-3">
-							   <option selected> Toutes</option>
-							   <option value="Informatique">Informatique</option>
-							   <option value="Ameublement">Ameublement</option>
-							   <option value="Vetêment">Vetêment</option>
-							   <option value="Sport">Sport&Loisirs</option>
+								<c:if test="${empty listeCategories}">
+									<option selected>ERREUR</option>
+								</c:if>
+		
+		
+								<c:if test="${!empty listeCategories}">
+									<option selected>Toutes</option>
+									<c:forEach var="categorie" items="${listeCategories}">
+										<option>${categorie.libelle.toString()}</option>
+									</c:forEach>
+								</c:if>
 							</select>
 						</div>
 						</div>	

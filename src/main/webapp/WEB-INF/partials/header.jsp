@@ -10,14 +10,14 @@
 				<span class="navbar-toggler-icon"></span>
 		  	</button>
 		  	<div class="collapse navbar-collapse" id="navigateur">
-		  		<ul class="navbar-nav ml-auto">		  			
-		  			<li class="nav-item">
-		  				<a 
-		  				  class="nav-link ${param.pageTitle == 'Encheres' ? 'active' : '' }"
-		  				  href="<%=request.getContextPath()%>">Enchères</a>
-		  			</li>
+		  		<ul class="navbar-nav ml-auto">	
 		  			<c:choose>
-			  			<c:when test="${!empty sessionScope.user}">
+			  			<c:when test="${!empty sessionScope.user}">	  			
+				  			<li class="nav-item">
+				  				<a 
+				  				  class="nav-link ${param.pageTitle == 'Encheres' ? 'active' : '' }"
+				  				  href="<%=request.getContextPath()%>">Enchères</a>
+				  			</li>
 				  			<li class="nav-item">
 				  				<a 
 				  				  class="nav-link  ${param.pageTitle == 'Vente' ? 'active' : '' }"
