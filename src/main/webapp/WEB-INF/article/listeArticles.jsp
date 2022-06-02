@@ -4,12 +4,12 @@
 <html lang="fr">
 	<jsp:include page='../partials/head.jsp'>
 	    <jsp:param name="extraCSS" value='<%=request.getContextPath()+"/css/listEncheresStyle.css"%>' />
-	    <jsp:param name="pageTitle" value='Encheres' />
+	    <jsp:param name="pageTitle" value='Accueil' />
 	    <jsp:param name="pageDescription" value='Eni-Enchères' />
 	</jsp:include>
 	<body>	
 		<jsp:include page='../partials/header.jsp'>
-		    <jsp:param name="pageTitle" value='Enchères' />
+		    <jsp:param name="pageTitle" value='Encheres' />
 		</jsp:include>
 		
 				<main class="py-5">

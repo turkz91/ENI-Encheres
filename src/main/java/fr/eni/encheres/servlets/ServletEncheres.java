@@ -23,8 +23,9 @@ public class ServletEncheres extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encheres/ListeEncheres.jsp");
-		rd.forward(request, response);	}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/accueil.jsp");
+		rd.forward(request, response);	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response) 

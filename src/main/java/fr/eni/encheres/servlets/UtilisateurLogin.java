@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +46,7 @@ public class UtilisateurLogin extends HttpServlet {
 		String pseudo = request.getParameter("username");
 		String motDePasse = request.getParameter("motDePasse");
 		//TODO Gérer le parametre souvenir
-		System.out.println(request.getParameter("souvenir"));
+		String remember = request.getParameter("souvenir");
 
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = null;
@@ -53,6 +54,11 @@ public class UtilisateurLogin extends HttpServlet {
 
 		try {
 			utilisateur = utilisateurManager.loginUtilisateur(pseudo, motDePasse);
+			if (remember != null) {
+				Cookie c = new Cookie("userID", String.valueOf(utilisateur.getNo_utilisateur()));
+				c.setMaxAge(3600*24*60);
+				response.addCookie(c);
+			}
 		} catch (Exception ex) {
 			if (ex instanceof BusinessException) {
 				request.setAttribute("listeCodesErreur", ((BusinessException) ex).getListeCodesErreur());
