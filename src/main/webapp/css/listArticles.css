@@ -29,20 +29,12 @@
     border-radius: 0.25rem;
 }
 
-.btn-group-lg>.btn,.btn-lg {
-    padding: 0.5rem 1rem;
-    font-size: 1.25rem;
-    line-height: 3.5;
-    width: 60%;
-    border-radius: 0.3rem;
-}
-
-
-.btn-primary {
+.eni-btn-rechercher {
 	box-shadow: 5px 5px 5px #007bff ;
     color: #fff;
     background-color: #aabecd;
     border-color: #007bff;
+    height : 4rem;
 }
 
 
@@ -62,9 +54,4 @@
     display: inline-block;
     margin-bottom: 0.5rem;
     margin-left: 1 rem;
-}
-
-
-body{
-	background-color:  #ecf5ff ;
 }
