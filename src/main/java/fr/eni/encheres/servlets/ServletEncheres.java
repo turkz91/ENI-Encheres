@@ -32,8 +32,6 @@ public class ServletEncheres extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// TODO Implémentation de la liste des catégories dans la jsp + TESTS
-				// FONCTIONNELS
 				request.setCharacterEncoding("UTF-8");
 
 				ArticleEnchereDAO daoArticle = DAOFactory.getArticleEnchereDAO();
@@ -80,6 +78,15 @@ public class ServletEncheres extends HttpServlet {
 					List<Integer> listeCodesErreur = new ArrayList<>();
 					request.setAttribute("listeCodesErreur", listeCodesErreur);
 				}
+				
+				// IN ORDER TO HAVE THE DURATION BETWEEN CREATION OF ARTICLE_VENDU
+				
+				
+				// IN ORDER TO HAVE THE SELLER PSEUDO
+				
+				// TODO
+				
+				
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encheres/ListeEncheres.jsp");
 		rd.forward(request, response);

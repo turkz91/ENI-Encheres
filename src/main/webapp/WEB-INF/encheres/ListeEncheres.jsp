@@ -125,7 +125,10 @@
 				pu être récupérés</p>
 		</c:if>
 		<c:if test="${!empty listeArticles}">
+
+
 			<c:forEach var="article" items="${listeArticles}">
+
 
 				<div class="card mb-3" style="max-width: 500px;">
 					<div class="row g-1">
@@ -137,8 +140,11 @@
 								<h5 class="card-title">${article.nom_article}</h5>
 								<p class="card-text">${article.description}</p>
 								<p class="card-text">
-									<small class="text-muted">Last updated 3 mins ago</small>
+									<small class="text-muted">Fin de l'enchère :
+										${article.date_fin_encheres}</small>
 								</p>
+<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
+								<p>Vendeur : ${article.no_utilisateur}</p>
 							</div>
 						</div>
 					</div>
