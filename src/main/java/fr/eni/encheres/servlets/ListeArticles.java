@@ -2,7 +2,9 @@ package fr.eni.encheres.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,9 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.BusinessException;
+import fr.eni.encheres.bo.ArticleInnerUtilisateur;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ArticleEnchereDAO;
+import fr.eni.encheres.dal.ArticleInnerUtilisateurDAO;
 import fr.eni.encheres.dal.DAOFactory;
 
 /**
@@ -35,18 +39,27 @@ public class ListeArticles extends HttpServlet {
 
 		// IN ORDER TO HAVE THE LIST OF CATEGORIES
 
-		List<Categorie> listeCategories = new ArrayList();
-		
+		List<Categorie> listeCategories = new ArrayList<>();
+		Map<ArticleVendu,String[]> listeArticles = new HashMap<>();
 		
 		try {
 			listeCategories = daoArticle.selectAllCategorie();
 			if (listeCategories != null) {
 				request.setAttribute("listeCategories", listeCategories);
 			}
+			listeArticles = daoArticle.selectAllArticlesUser();
+			if (listeArticles != null) {
+				request.setAttribute("listeArticles", listeArticles);
+			}
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+				
+		
+//		if ( != null) {
+//			request.setAttribute("", );
+//		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/listeArticles.jsp");
 		rd.forward(request, response);
