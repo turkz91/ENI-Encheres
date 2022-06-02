@@ -2,20 +2,51 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="fr">
+<%
+String pageTitle = "Vente";
+%>
 <jsp:include page='../partials/head.jsp'>
-	<jsp:param name="extraCSS"
-		value='<%=request.getContextPath() + "/css/listEncheresStyle.css"%>' />
-	<jsp:param name="pageTitle" value='Vente' />
-	<jsp:param name="pageDescription"
-		value='Vente Article pour Eni-Enchères' />
 </jsp:include>
 <body>
 	<%@ page
 		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleVendu"%>
+
 	<jsp:include page='../partials/header.jsp'>
-		<jsp:param name="pageTitle" value='Vente' />
 	</jsp:include>
 
+
+	<%
+	if (session.getAttribute("user") != null) {
+	%>
+	<section>
+		<h2>TEST de récupération des paramètres</h2>
+		<p>Le pseudo saisi : ${ !empty pseudo ? pseudo : "" } Le prénom
+			saisi : ${ !empty prenom ? prenom : "" } Le nom saisi : ${ !empty nom ? nom : "" }
+			L'email saisi : ${ !empty email ? email : "" } Le telephone saisi :
+			${ !empty telephone ? telephone : "" } La rue saisi : ${ !empty rue ? rue : "" }
+			La ville saisi : ${ !empty ville ? ville : "" } Le code postal saisi
+			: ${ !empty codePostal ? codePostal : "" } Le mot de passe saisi : ${ !empty motDePasse ? motDePasse : "" }
+			La confirmation saisi : ${ !empty confirmation ? confirmation : "" }</p>
+	</section>
+
+	<%
+	}
+	%>
+
+	<section>
+		<h2 class="text-center h2 mb-4">TEST DE RECUPERATION DES
+			PARAMETRES</h2>
+		<p>Nom article : ${ !empty nom ? nom : "" }</p>
+		<p>Description : ${ !empty description ? description : "" }</p>
+		<p>Date début enchère : ${ !empty debut_enchere ? debut_enchere : "" }</p>
+		<p>Date fin enchère : ${ !empty fin_enchere ? fin_enchere : "" }</p>
+		<p>Prix initial : ${ !empty prix ? prix : "" }</p>
+		<p>Num utilisateur : ${ !empty utilisateur ? utilisateur : "" }</p>
+		<p>Num categorie : ${ !empty categorie ? categorie : "" }</p>
+		<p>Rue : ${ !empty rue ? rue : "" }</p>
+		<p>Code postal : ${ !empty cp ? cp : "" }</p>
+		<p>Ville : ${ !empty ville ? ville : "" }</p>
+	</section>
 	<main class="py-5">
 
 		<h1 class="text-center h2 mb-4">Nouvelle Vente</h1>
@@ -37,7 +68,7 @@
 		%>
 
 		<form class="container eni-venteAction"
-			action="<%=request.getContextPath()%>/nouvelleVente" method="post">
+			action="<%=request.getContextPath()%>/Article" method="post">
 
 			<div class="row">
 				<div class="col-lg-4">
@@ -126,8 +157,7 @@
 								class="col-5 col-sm-4 col-lg-4 col-form-label col-form-label-lg">Rue
 								: </label>
 							<div class="col-6 col-md-4 col-lg-6">
-								<input type="text" id="rue" name="rue" class="form-control"
-									value="${ !empty sessionScope.user.rue ? sessionScope.user.rue : '' }">
+								<input type="text" id="rue" name="rue" class="form-control">
 							</div>
 						</div>
 
@@ -137,8 +167,7 @@
 								postal : </label>
 							<div class="col-6 col-md-4 col-lg-6">
 								<input type="text" id="code_postal" name="code_postal"
-									class="form-control"
-									value="${ !empty sessionScope.user.code_postal ? sessionScope.user.code_postal : '' }">
+									class="form-control">
 							</div>
 						</div>
 
@@ -147,16 +176,13 @@
 								class="col-5 col-sm-4 col-lg-4 col-form-label col-form-label-lg">Ville
 								: </label>
 							<div class="col-6 col-md-4 col-lg-6">
-								<input type="text" id="ville" name="ville" class="form-control"
-									value="${ !empty sessionScope.user.ville ? sessionScope.user.ville : '' }">
+								<input type="text" id="ville" name="ville" class="form-control">
 							</div>
 						</div>
 					</div>
 
 					<div class="form-row eni-form-footer pb-5 pt-4">
 						<div class="col-4 col-md-3 text-center pb-4">
-							<input type="hidden" name="no_utilisateur"
-								value="${ !empty sessionScope.user.no_utilisateur ? sessionScope.user.no_utilisateur : '' }">
 							<input class="btn btn-success btn-lg btn-block" type="submit"
 								value="Créer">
 						</div>

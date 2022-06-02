@@ -90,6 +90,12 @@ public abstract class CodesResultatDAL {
 	 * Une erreur est survenue lors de la tentative de suppression USER dans la DB
 	 */
 	public static final int DELETE_USER_SQL=10030;
+
+	
+	/**CHECK
+	 * Une erreur est survenue lors de la tentative de vérification d'un USER dans la DB
+	 */
+	public static final int CHECK_USER_SQL = 10031;
 	
 	
 	//------------------ ERRORS FOR BIDS ------------------
