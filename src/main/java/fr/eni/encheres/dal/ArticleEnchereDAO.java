@@ -21,6 +21,7 @@ public interface ArticleEnchereDAO {
 	public ArticleVendu selectArticle(int no_article) throws BusinessException;	
 	public List<ArticleVendu> selectAllArticles () throws BusinessException;
 	public List<ArticleVendu> selectListArticlesByKeyWord (String motCle) throws BusinessException;
+	public List<ArticleVendu> selectListArticlesByCategorie (int no_categorie) throws BusinessException;
 	
 	// ENCHERES
 	public void createEnchere(Enchere enchere) throws BusinessException;
@@ -30,8 +31,6 @@ public interface ArticleEnchereDAO {
 	public void updateEnchere(Enchere enchere) throws BusinessException;
 	// CATEGORIES
 	public Categorie createCategorie(Categorie categorie) throws BusinessException;
-
 	public List<Categorie> selectAllCategorie() throws BusinessException;
-	// TO DO SelectCategorie
 	
 }

@@ -35,6 +35,11 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			+ "FROM ARTICLES_VENDUS";
 	private final String SELECT_LIST_ARTICLES_BY_KEY_WORD = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
 			+ "FROM ARTICLES WHERE nom_article LIKE ?";
+	
+	private final String SELECT_LIST_ARTICLES_BY_CATEGORIE = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
+			+ "FROM ARTICLES WHERE no_categorie = ?";
+
+	
 	private final String UPDATE_ARTICLE = ""; // TO DO
 	private final String DELETE_ARTICLE = ""; // TO DO
 
@@ -135,7 +140,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			}
 			pstmtArticle.close();
 			cnx.close();
-			
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -148,16 +153,17 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	public List<ArticleVendu> selectListArticlesByKeyWord(String motCle) throws BusinessException {
 
 		List<ArticleVendu> listeFiltreeArticles = new ArrayList<ArticleVendu>();
-		
+
 		ArticleVendu article = null;
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_LIST_ARTICLES_BY_KEY_WORD);
 			pstmtArticle.setString(1, "%motCle%");
 			ResultSet rs = pstmtArticle.executeQuery();
 			while (rs.next()) {
-				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),
-						(rs.getDate("date_debut_enchere")).toLocalDate(), (rs.getDate("date_fin_enchere")).toLocalDate(), rs.getInt("prix_initial"),
+				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_enchere")).toLocalDate(),
+						(rs.getDate("date_fin_enchere")).toLocalDate(), rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
 				listeFiltreeArticles.add(article);
 			}
@@ -170,9 +176,39 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_LIST_ARTICLES_BY_KEY_WORD_SQL);
 		}
 		return listeFiltreeArticles;
-		
+
 	}
 	
+
+	@Override
+	public List<ArticleVendu> selectListArticlesByCategorie(int no_categorie) throws BusinessException {
+		
+		List<ArticleVendu> listeArticlesByCategorie = new ArrayList<ArticleVendu>();
+
+		ArticleVendu article = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmtArticle = cnx.prepareStatement(SELECT_LIST_ARTICLES_BY_KEY_WORD);
+			pstmtArticle.setString(1, "no_categorie");
+			ResultSet rs = pstmtArticle.executeQuery();
+			while (rs.next()) {
+				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), (rs.getDate("date_debut_enchere")).toLocalDate(),
+						(rs.getDate("date_fin_enchere")).toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				listeArticlesByCategorie.add(article);
+			}
+			pstmtArticle.close();
+			cnx.close();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_LIST_ARTICLES_BY_CATEGORIE_SQL);
+		}
+		return listeArticlesByCategorie;
+	}
+
 	// METHODS FOR BIDS
 
 	@Override
@@ -310,7 +346,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 	}
 
 	// METHODS FOR CATEGORIES
-	
+
 	@Override
 	public Categorie createCategorie(Categorie categorie) throws BusinessException {
 		if (categorie == null) {
@@ -338,7 +374,6 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		return categorie;
 	}
 
-	
 	@Override
 	public List<Categorie> selectAllCategorie() throws BusinessException {
 		List<Categorie> listeCategories = new ArrayList<>();
@@ -360,13 +395,6 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 		}
 		return listeCategories;
 	}
-
-
-
-
-
-
-	
 
 
 }

@@ -14,7 +14,7 @@
 </jsp:include>
 <body>
 	<%@ page
-		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleVendu, fr.eni.encheres.bo.Categorie"%>
+		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleInnerUtilisateur, fr.eni.encheres.bo.ArticleVendu, fr.eni.encheres.bo.Categorie"%>
 	<jsp:include page='../partials/header.jsp'>
 		<jsp:param name="pageTitle" value='Liste des enchères' />
 
@@ -60,8 +60,6 @@
 				<div class="col-lg-3 col-md-6  col-form-label ">
 					<select class="custom-select custom-select-md mb-3"
 						name="selectCategorie">
-
-
 						<c:if test="${empty listeCategories}">
 							<option selected>ERREUR</option>
 						</c:if>
@@ -127,14 +125,15 @@
 		</form>
 
 
-		<c:if test="${empty listeArticles}">
+		<c:if test="${empty listeAIU.article}">
+
 			<p class="text-center text-danger">ERREUR les articles n'ont pas
 				pu être récupérés</p>
 		</c:if>
-		<c:if test="${!empty listeArticles}">
+		<c:if test="${!empty listeAIU.article}">
 
 
-			<c:forEach var="article" items="${listeArticles}">
+			<c:forEach var="article" items="${listeAIU.article.nom_article}">
 
 
 				<div class="card mb-3" style="max-width: 500px;">
@@ -144,14 +143,16 @@
 						</div>
 						<div class="col-md-8">
 							<div class="card-body">
-								<h5 class="card-title">${article.nom_article}</h5>
-								<p class="card-text">${article.description}</p>
+								<h5 class="card-title">${listeAIU.nom_article}</h5>
+								<p class="card-text">${listeAIU.description}</p>
 								<p class="card-text">
 									<small class="text-muted">Fin de l'enchère :
-										${article.date_fin_encheres}</small>
+										${listeAIU.date_fin_encheres}</small>
 								</p>
-								<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
-								<p>Vendeur : ${article.no_utilisateur}</p>
+
+<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
+								<p>Vendeur : ${listeAIU.pseudo}</p>
+
 							</div>
 						</div>
 					</div>
