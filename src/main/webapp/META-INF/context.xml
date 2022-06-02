@@ -7,8 +7,8 @@
 		type="javax.sql.DataSource"
 		
 		url="jdbc:sqlserver://localhost;databaseName=ENI_ENCHERES"
-		username="user_encheres"
-		password="0000"
+		username="eni_connect"
+		password="Pa$$w0rd"
 				
 		maxTotal="100"
 		maxIdle="30"

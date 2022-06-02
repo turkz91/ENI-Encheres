@@ -2,11 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="fr">
 <jsp:include page='../partials/head.jsp'>
 	<jsp:param name="extraCSS"
 		value='<%=request.getContextPath() + "/css/listEncheresStyle.css"%>' />
+
 	<jsp:param name="pageTitle" value='Encheres' />
 	<jsp:param name="pageDescription" value='Eni-Enchères' />
 </jsp:include>
@@ -15,12 +17,14 @@
 		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleInnerUtilisateur, fr.eni.encheres.bo.ArticleVendu, fr.eni.encheres.bo.Categorie"%>
 	<jsp:include page='../partials/header.jsp'>
 		<jsp:param name="pageTitle" value='Liste des enchères' />
+
 	</jsp:include>
 
 
 	<main class="py-5">
 
 		<h1 class="text-center h3 mb-4">Liste des enchères</h1>
+
 
 		<%
 		@SuppressWarnings("unchecked")
@@ -40,11 +44,14 @@
 		<form class="container eni-filtresEncheres"
 			action="<%=request.getContextPath()%>/Encheres" method="post">
 
+
 			<div>Filtres :</div>
 
 			<div class="col-md-10 col-lg-6 col-form-label col-form-label-lg">
 				<input type="search" id="recherche" name="recherche"
 					class="form-control " placeholder="Le nom de l'article contient">
+
+
 			</div>
 
 			<div class="row">
@@ -64,10 +71,10 @@
 								<option>${categorie.libelle.toString()}</option>
 							</c:forEach>
 						</c:if>
+
 					</select>
 				</div>
 			</div>
-
 
 
 			<div class="row">
@@ -87,6 +94,7 @@
 							id="achatsRemportes"> <label for="encheresRemportees"
 							class="subOptionA form-check-label"> mes enchères
 							remportées</label> <br>
+
 					</div>
 				</div>
 
@@ -108,13 +116,17 @@
 							ventes terminées</label> <br>
 					</div>
 				</div>
+
 				<div align="center" class="col-sm-8 col-md-8 col-lg-4">
+
 					<button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
 				</div>
 			</div>
 		</form>
 
+
 		<c:if test="${empty listeAIU.article}">
+
 			<p class="text-center text-danger">ERREUR les articles n'ont pas
 				pu être récupérés</p>
 		</c:if>
@@ -137,8 +149,10 @@
 									<small class="text-muted">Fin de l'enchère :
 										${listeAIU.date_fin_encheres}</small>
 								</p>
+
 <!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
 								<p>Vendeur : ${listeAIU.pseudo}</p>
+
 							</div>
 						</div>
 					</div>
@@ -165,10 +179,12 @@
 									<p class="card-text">
 										<small class="text-muted">Last updated 3 mins ago</small>
 									</p>
+
 								</div>
 							</div>
 						</div>
 					</div>
+
 					<div class="card mb-3" style="max-width: 500px;">
 						<div class="row g-2">
 							<div class="col-md-4">
@@ -183,6 +199,7 @@
 									<p class="card-text">
 										<small class="text-muted">Last updated 3 mins ago</small>
 									</p>
+
 								</div>
 							</div>
 						</div>
@@ -200,16 +217,17 @@
 	<script
 		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-<script>>
-	function enable(){
+<script>
+	function enable() {
 		var radio = document.getElementById("radioAchat");
 		var checkV = document.getELementByName("checkVentes");
 		var chackA = document.getELementByName("checkAchat");
-		if(radio.checked){
+		if (radio.checked) {
 			checkV.removeAttribute("disabled");
-		}else{
+		} else {
 			checkA.removeAttribute("disabled");
 		}
 	}
-	</script>
+</script>
+
 </html>
