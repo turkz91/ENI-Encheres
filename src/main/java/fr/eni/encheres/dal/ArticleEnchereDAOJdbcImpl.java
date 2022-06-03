@@ -115,7 +115,7 @@ class ArticleEnchereDAOJdbcImpl implements ArticleEnchereDAO {
 			ResultSet rs = pstmtArticle.executeQuery();
 			if (rs.next()) {
 				article = new ArticleVendu(rs.getString("nom_article"), rs.getString("description"),
-						rs.getDate("date_debut_enchere"), rs.getDate("date_fin_enchere"),
+						rs.getDate("date_debut_encheres"), rs.getDate("date_fin_encheres"),
 						rs.getInt("prix_initial"), rs.getInt("prix_initial"), rs.getInt("no_utilisateur"),
 						rs.getInt("no_categorie"));
 			}
