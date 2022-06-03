@@ -1,20 +1,26 @@
 @charset "UTF-8";
 
-.eni-bg-light {
-	background-color: #aabecd;
+body{
+	background-color:  #ecf5ff;
 }
 
-body{
-	background-color:  #ced4dacc ;
+.eni-bg-light {
+	background-color: #aabecd;
 }
 
 nav.navbar .navbar-nav .nav-item .nav-link {
 	font-size : 1.25rem;
 }
+
 nav.navbar .navbar-brand {
 	font-size : 1.45rem;
 }
+
 .btn-success.btn-lg.btn-block.text-center.eni-btn-update {
 	height: 5rem;
 	line-height: 3.7rem;
+}
+
+.eni-btn-nvCompte:hover, .btn-block.eni-btn-connexion:hover, button.btn.eni-hover-pointer:hover  {
+	cursor: pointer;
 }

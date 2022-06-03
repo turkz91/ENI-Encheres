@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="fr">
 <jsp:include page='../partials/head.jsp'>
@@ -72,10 +73,12 @@
 							: </label>
 						<div class="col-6 col-md-4 col-lg-4">
 							<select id="categorie" name="categorie" class="form-control">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+								<c:forEach var="categorie" items="${listeCategories}">
+									<option value="${categorie.no_categorie}"
+										  ${selectedCategorie == categorie.no_categorie ? 'selected' : '' }>
+										  ${categorie.libelle}
+									</option>
+								</c:forEach>
 							</select>
 						</div>
 					</div>
@@ -95,7 +98,7 @@
 							à prix : </label>
 						<div class="col-6 col-md-4 col-lg-2">
 							<input type="number" id="prix_initial" name="prix_initial"
-								min="0" class="form-control">
+								min="0" class="form-control" value="0">
 						</div>
 					</div>
 
@@ -180,5 +183,7 @@
 	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		
+	<script src="<%=request.getContextPath()%>/js/eniScripts.js"></script>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package fr.eni.encheres.servlets;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.eni.encheres.bll.ArticleEnchereManager;
 import fr.eni.encheres.bll.BusinessException;
-import fr.eni.encheres.bo.ArticleVendu;
-import fr.eni.encheres.servlets.CodesResultatServlets;
+import fr.eni.encheres.bo.Categorie;
 
 /**
  * Servlet implementation class InstallArticleVenduDAL
@@ -29,6 +27,19 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		List<Categorie> listeCategories = new ArrayList<>();
+		ArticleEnchereManager articleManager = new ArticleEnchereManager();
+		
+		try {
+			listeCategories = articleManager.selectAllCategorie();
+			if (listeCategories != null) {
+				request.setAttribute("listeCategories", listeCategories);
+			}
+		}  catch (BusinessException e) {
+		}
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/venteArticle.jsp");
 		rd.forward(request, response);
 
@@ -62,11 +73,9 @@ public class ServletNouvelleVente extends HttpServlet {
 //		String ville = request.getParameter("ville");
 
 		ArticleEnchereManager articleManager = new ArticleEnchereManager();
-		ArticleVendu article = null;
 
 		try {
-
-			article = articleManager.ajouterArticle(nom_article, description, date_debut_encheres, date_fin_encheres,
+			articleManager.ajouterArticle(nom_article, description, date_debut_encheres, date_fin_encheres,
 					prix_initial, no_utilisateur, no_categorie);
 
 		} catch (BusinessException ex) {
@@ -78,7 +87,7 @@ public class ServletNouvelleVente extends HttpServlet {
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
 		}
 			
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/ListeEncheres.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("");
 		rd.forward(request, response);
 	}
 

@@ -11,10 +11,6 @@
 	line-height: 7rem;
 }
 
-.eni-btn-nvCompte:hover, .btn-block.eni-btn-connexion:hover  {
-	cursor: pointer;
-}
-
 .eni-col-nvCompte:hover a {
 	text-decoration: none;
 }

@@ -14,7 +14,7 @@
 </jsp:include>
 <body>
 	<%@ page
-		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleVendu, fr.eni.encheres.bo.Categorie"%>
+		import="java.util.List, fr.eni.encheres.messages.LecteurMessage, fr.eni.encheres.bo.ArticleInnerUtilisateur, fr.eni.encheres.bo.ArticleVendu, fr.eni.encheres.bo.Categorie"%>
 	<jsp:include page='../partials/header.jsp'>
 		<jsp:param name="pageTitle" value='Liste des enchères' />
 
@@ -60,8 +60,6 @@
 				<div class="col-lg-3 col-md-6  col-form-label ">
 					<select class="custom-select custom-select-md mb-3"
 						name="selectCategorie">
-
-
 						<c:if test="${empty listeCategories}">
 							<option selected>ERREUR</option>
 						</c:if>
@@ -102,22 +100,19 @@
 
 				<div class="col-sm-6 col-md-4 ">
 					<input type="radio" value="ventes" name="rechercheEnchere"
-
 						id="radioVentes" onchange="radioDisable() "> <label
 						for="ventes" class="option form-check-label">Mes ventes</label><br>
 					<div class="form-check">
 						<input disabled="disabled" type="checkbox" value="enCours"
 							name="checkVentes" id="venteEnCours"> <label
 							for="venteEnCours" class="subOptionV form-check-label">
-							mes ventes en cours</label> <br> <input disabled="disabled"
-							type="checkbox" value="noDebutées" name="checkVentes"
-							id="ventenoDebutées"> <label for="ventenoDebutées"
-							class="subOptionV form-check-label"> ventes non débutées</label>
-						<br> <input disabled="disabled" type="checkbox"
-
+							mes ventes en cours </label> <input disabled="disabled" type="checkbox"
+							value="noDebutées" name="checkVentes" id="ventenoDebutées">
+						<label for="ventenoDebutées" class="subOptionV form-check-label">
+							ventes non débutées </label> <input disabled="disabled" type="checkbox"
 							value="terminées" name="checkVentes" id="venteTerminées">
 						<label for="venteTerminées" class="subOptionV form-check-label">
-							ventes terminées</label> <br>
+							ventes terminées </label>
 					</div>
 				</div>
 
@@ -129,85 +124,143 @@
 		</form>
 
 
-		<c:if test="${empty listeArticles}">
+
+		<c:if test="${empty listeAIU.article}">
+
+
 			<p class="text-center text-danger">ERREUR les articles n'ont pas
 				pu être récupérés</p>
 		</c:if>
-		<c:if test="${!empty listeArticles}">
+		<div class="container">
+			<div class=row>
+				<c:if test="${!empty listeArticles}">
 
 
-			<c:forEach var="article" items="${listeArticles}">
+					<c:forEach var="article" items="${listeArticles}">
 
 
-				<div class="card mb-3" style="max-width: 500px;">
-					<div class="row g-1">
-						<div class="col-md-4">
-							<img src="..." class="img-fluid rounded-start" alt="...">
-						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title">${article.nom_article}</h5>
-								<p class="card-text">${article.description}</p>
-								<p class="card-text">
-									<small class="text-muted">Fin de l'enchère :
-										${article.date_fin_encheres}</small>
-								</p>
-<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
-								<p>Vendeur : ${article.no_utilisateur}</p>
-							</div>
-						</div>
-					</div>
-				</div>
 
-			</c:forEach>
+						<div class="card mb-3" style="max-width: 500px;">
+							<div class="row g-1">
+								<div class="col-md-4">
+									<img src="./images/articles/articleTest.png"
+										class="img-fluid rounded-start" alt="...">
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title">${article.nom_article}</h5>
+										<p class="card-text">${article.description}</p>
+										<p class="card-text">
+											<small class="text-muted">Fin de l'enchère :
+												${article.date_fin_encheres}</small>
+										</p>
 
-		</c:if>
+										<!-- 								TODO RECUPERER PSEUDO VENDEUR  -->
+										<p>Vendeur : ${article.no_utilisateur}</p>
 
-		<section id="encheres">
-			<div class="container">
-				<div class=row>
-					<div class="card mb-3" style="max-width: 500px;">
-						<div class="row g-1">
-							<div class="col-md-4">
-								<img src="..." class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
-					<div class="card mb-3" style="max-width: 500px;">
-						<div class="row g-2">
-							<div class="col-md-4">
-								<img src="..." class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title"></h5>
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+					</c:forEach>
+
+				</c:if>
 			</div>
-		</section>
+		</div>
+		<!-- 		POUR L'AFFICHAGE INITIAL .... A SUPPRIMER AVANT DEMO -->
+
+
+		<!-- 		<section id="encheres"> -->
+		<!-- 			<div class="container"> -->
+		<!-- 				<div class=row> -->
+		<!-- 					<div class="card mb-3" style="max-width: 500px;"> -->
+		<!-- 						<div class="row g-1"> -->
+		<!-- 							<div class="col-md-4"> -->
+		<!-- 								<img src="..." class="img-fluid rounded-start" alt="..."> -->
+		<!-- 							</div> -->
+		<!-- 							<div class="col-md-8"> -->
+		<!-- 								<div class="card-body"> -->
+		<!-- 									<h5 class="card-title">Card title</h5> -->
+		<!-- 									<p class="card-text">This is a wider card with supporting -->
+		<!-- 										text below as a natural lead-in to additional content. This -->
+		<!-- 										content is a little bit longer.</p> -->
+		<!-- 									<p class="card-text"> -->
+		<!-- 										<small class="text-muted">Last updated 3 mins ago</small> -->
+		<!-- 									</p> -->
+		<!-- 								</div> -->
+		<!-- 							</div> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+		<!-- 					<div class="card mb-3" style="max-width: 500px;"> -->
+		<!-- 						<div class="row g-2"> -->
+		<!-- 							<div class="col-md-4"> -->
+		<!-- 								<img src="..." class="img-fluid rounded-start" alt="..."> -->
+		<!-- 							</div> -->
+		<!-- 							<div class="col-md-8"> -->
+		<!-- 								<div class="card-body"> -->
+		<!-- 									<h5 class="card-title"></h5> -->
+		<!-- 									<p class="card-text">This is a wider card with supporting -->
+		<!-- 										text below as a natural lead-in to additional content. This -->
+		<!-- 										content is a little bit longer.</p> -->
+		<!-- 									<p class="card-text"> -->
+		<!-- 										<small class="text-muted">Last updated 3 mins ago</small> -->
+		<!-- 									</p> -->
+		<!-- 								</div> -->
+		<!-- 							</div> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</section> -->
+
+		<!-- 		<section id="encheres"> -->
+		<!-- 			<div class="container"> -->
+		<!-- 				<div class=row> -->
+		<!-- 					<div class="card mb-3" style="max-width: 500px;"> -->
+		<!-- 						<div class="row g-1"> -->
+		<!-- 							<div class="col-md-4"> -->
+		<!-- 								<img src="..." class="img-fluid rounded-start" alt="..."> -->
+		<!-- 							</div> -->
+		<!-- 							<div class="col-md-8"> -->
+		<!-- 								<div class="card-body"> -->
+		<!-- 									<h5 class="card-title">Card title</h5> -->
+		<!-- 									<p class="card-text">This is a wider card with supporting -->
+		<!-- 										text below as a natural lead-in to additional content. This -->
+		<!-- 										content is a little bit longer.</p> -->
+		<!-- 									<p class="card-text"> -->
+		<!-- 										<small class="text-muted">Last updated 3 mins ago</small> -->
+		<!-- 									</p> -->
+
+		<!-- 								</div> -->
+		<!-- 							</div> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+
+		<!-- 					<div class="card mb-3" style="max-width: 500px;"> -->
+		<!-- 						<div class="row g-2"> -->
+		<!-- 							<div class="col-md-4"> -->
+		<!-- 								<img src="..." class="img-fluid rounded-start" alt="..."> -->
+		<!-- 							</div> -->
+		<!-- 							<div class="col-md-8"> -->
+		<!-- 								<div class="card-body"> -->
+		<!-- 									<h5 class="card-title"></h5> -->
+		<!-- 									<p class="card-text">This is a wider card with supporting -->
+		<!-- 										text below as a natural lead-in to additional content. This -->
+		<!-- 										content is a little bit longer.</p> -->
+		<!-- 									<p class="card-text"> -->
+		<!-- 										<small class="text-muted">Last updated 3 mins ago</small> -->
+		<!-- 									</p> -->
+
+		<!-- 								</div> -->
+		<!-- 							</div> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</section> -->
+
 
 
 
@@ -218,17 +271,17 @@
 	<script
 		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-<script>>
-	function enable(){
+<script>
+	function enable() {
 		var radio = document.getElementById("radioAchat");
 		var checkV = document.getELementByName("checkVentes");
 		var chackA = document.getELementByName("checkAchat");
-		if(radio.checked){
+		if (radio.checked) {
 			checkV.removeAttribute("disabled");
-		}else{
+		} else {
 			checkA.removeAttribute("disabled");
 		}
 	}
-	</script>
+</script>
 
 </html>
