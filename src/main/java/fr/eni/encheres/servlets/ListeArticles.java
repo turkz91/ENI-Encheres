@@ -12,13 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.ArticleEnchereManager;
 import fr.eni.encheres.bll.BusinessException;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
-import fr.eni.encheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ArticlesListe
@@ -46,9 +44,17 @@ public class ListeArticles extends HttpServlet {
 			if (listeArticles != null) {
 				request.setAttribute("listeArticles", listeArticles);
 			}
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception ex) {
+			if (ex instanceof BusinessException) {
+				request.setAttribute("listeCodesErreur", ((BusinessException) ex).getListeCodesErreur());
+				ex.printStackTrace();
+			} else {
+				List<Integer> listeCodesErreur = new ArrayList<>();
+				listeCodesErreur.add(CodesResultatServlets.FORMAT_CATEGORIE_ERREUR);
+				request.setAttribute("listeCodesErreur", listeCodesErreur);
+			}
+			List<Integer> listeCodesErreur = new ArrayList<>();
+			request.setAttribute("listeCodesErreur", listeCodesErreur);
 		}		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/article/listeArticles.jsp");
 		rd.forward(request, response);
@@ -64,13 +70,15 @@ public class ListeArticles extends HttpServlet {
 		List<Categorie> listeCategories = new ArrayList<>();
 		Map<ArticleVendu,String[]> listeArticles = new HashMap<>();
 		String categorieCheck = request.getParameter("categorie");
-		
+		String [] ventesCheck = request.getParameterValues("ventesCheck");
+		String [] achatsCheck = request.getParameterValues("achatsCheck");
+
 		try {
 			listeCategories = articleManager.selectAllCategorie();
 			if (listeCategories != null) {
 				request.setAttribute("listeCategories", listeCategories);
 			}
-			if (!categorieCheck.equalsIgnoreCase("toutes")) {
+			if (!categorieCheck.equalsIgnoreCase("toutes") || ventesCheck.length == 0 || achatsCheck.length == 0) {
 //				listeArticles = articleManager.getFilteredListeArticle(2);
 				int categorie_id = Integer.valueOf(categorieCheck);
 				listeArticles = articleManager.getFilteredListeArticle(categorie_id);

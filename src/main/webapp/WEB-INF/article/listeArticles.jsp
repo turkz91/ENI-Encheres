@@ -59,7 +59,7 @@
 								<div class="col-6" id="listeRadiosAchat">
 									<div class="row text-right" id="buttonRadioAchat">
 										<input type="radio" value="radioAchats" name="radioAchats"
-											id="radioAchats"> 
+											id="radioAchats" checked> 
 										<label
 											for="radioAchats" class="option form-check-label">Achats
 										</label>
@@ -68,8 +68,8 @@
 										<div class="col-1"></div>
 										<div class="col-11">
 											<input
-												type="checkbox" value="achatsActifs" name="achatsActifs"
-												id="achatsActifs">
+												type="checkbox" value="achatsActifs" name="achatsCheck"
+												id="achatsActifs" checked>
 											<label
 												for="achatsActifs" class="form-check-label">
 												enchères ouvertes
@@ -80,7 +80,7 @@
 										<div class="col-1"></div>
 										<div class="col-11">
 											<input 
-												type="checkbox" value="encheresActifs" name="encheresActifs"
+												type="checkbox" value="encheresActifs" name="achatsCheck"
 												id="encheresActifs">
 											<label
 												for="encheresActifs" class="form-check-label">
@@ -92,7 +92,7 @@
 										<div class="col-1"></div>
 										<div class="col-11">
 											<input
-												type="checkbox" value="encheresActifs" name="encheresFinis"
+												type="checkbox" value="encheresFinis" name="achatsCheck"
 												id="encheresFinis">
 											<label
 												for="encheresFinis" class="form-check-label">
@@ -115,7 +115,7 @@
 										<div class="col-1"></div>
 										<div class="col-11">
 											<input disabled="disabled"
-												type="checkbox" value="ventesActifs" name="ventesActifs"
+												type="checkbox" value="ventesActifs" name="ventesCheck"
 												id="ventesActifs">
 											<label
 												for="ventesActifs" class="form-check-label">
@@ -127,7 +127,7 @@
 										<div class="col-1"></div>
 										<div class="col-11">
 											<input disabled="disabled"
-												type="checkbox" value="ventesInactifs" name="ventesInactifs"
+												type="checkbox" value="ventesInactifs" name="ventesCheck"
 												id="ventesInactifs">
 											<label
 												for="ventesInactifs" class="form-check-label">
@@ -139,7 +139,7 @@
 										<div class="col-1"></div>
 										<div class="col-11">
 											<input disabled="disabled"
-												type="checkbox" value="ventesActifs" name="ventesFinis"
+												type="checkbox" value="ventesActifs" name="ventesCheck"
 												id="ventesFinis">
 											<label
 												for="ventesFinis" class="form-check-label">
@@ -164,23 +164,39 @@
 						<div class="col-12 col-md-6 my-3">
 							<div class="card">
 								<div class="row">
-									<div class="col-md-4 m-auto">
+									<div class="col-md-4 m-auto formArticle">
 										<img
 											src="<%=request.getContextPath()%>/images/articles/articleTest.png"
 											class="img-fluid rounded-start mx-3">
+										<form action="<%=request.getContextPath()%>/article/detail"
+														method="post">
+											<input type="hidden" value="${article.key.no_article}" name="no_article">													
+										
+										</form>
 									</div>
 									<div class="col-md-8">
 										<div class="card-body">
-											<p class="card-title h3">${article.key.nom_article}</p>
-											<p class="card-text">Prix : 
+											<p class="card-title h3  formArticle">${article.key.nom_article}</p>
+											<p class="card-text  formArticle">Prix : 
 											  ${ article.key.prix_vente != 0 ? article.key.prix_vente : article.key.prix_initial } points
 											 </p>
-											<p class="card-text">
+											<p class="card-text formArticle">
 												Fin de l'enchère :
 													${article.key.date_fin_encheres}
 												
-											</p>		
-											<p>Vendeur : ${article.value[0]}</p>	
+											</p>
+											<c:choose>
+												<c:when test="${!empty user}">
+													<form action="<%=request.getContextPath()%>/compte"
+														method="post">
+														<input type="hidden" value="${article.value[1]}" name="no_utilisateur">														
+														<p class="formConfirm"><span class="font-weight-bold">Vendeur :</span> <span class="font-italic text-info"> ${article.value[0]}</span></p>									
+													</form>
+												</c:when>
+												<c:otherwise>		
+													<p><span class="font-weight-bold">Vendeur</span> : <span class="font-italic text-info">${article.value[0]}</span></p>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
 								</div>

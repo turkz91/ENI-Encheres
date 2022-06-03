@@ -26,7 +26,7 @@ import fr.eni.encheres.dal.UtilisateurDAO;
 /**
  * Servlet implementation class ServletDetailVente
  */
-@WebServlet("/ServletDetailVente")
+@WebServlet("/article/detail")
 public class ServletDetailVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -70,7 +70,7 @@ public class ServletDetailVente extends HttpServlet {
 			{
 				
 			}
-		} catch (BusinessException ex) {
+		} catch (Exception ex) {
 			if (ex instanceof BusinessException) {
 				request.setAttribute("listeCodesErreur", ((BusinessException) ex).getListeCodesErreur());
 				ex.printStackTrace();
@@ -91,8 +91,34 @@ public class ServletDetailVente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		ArticleEnchereDAO daoArticle = DAOFactory.getArticleEnchereDAO();
+		ArticleVendu article = null;
+		
+		String infoArticle = request.getParameter("no_article");
+		if (infoArticle != null || infoArticle != "") {
+			int no_article = Integer.valueOf(infoArticle);
+			try {
+				article = daoArticle.selectArticle(no_article);
+				request.setAttribute("article", article);
+			} catch (Exception ex) {
+				if (ex instanceof BusinessException) {
+					request.setAttribute("listeCodesErreur", ((BusinessException) ex).getListeCodesErreur());
+					ex.printStackTrace();
+				} else {
+					List<Integer> listeCodesErreur = new ArrayList<>();
+					listeCodesErreur.add(CodesResultatServlets.FORMAT_CATEGORIE_ERREUR);
+					request.setAttribute("listeCodesErreur", listeCodesErreur);
+				}
+				List<Integer> listeCodesErreur = new ArrayList<>();
+				request.setAttribute("listeCodesErreur", listeCodesErreur);
+			}
+			
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encheres/DetailVente.jsp");
+		rd.forward(request, response);
+		
+		
 	}
 
 }

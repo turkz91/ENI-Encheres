@@ -77,14 +77,12 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			PreparedStatement pstmtUser = cnx.prepareStatement(SELECT_USER_BY_ID);
 			pstmtUser.setInt(1, no_utilisateur);
 
-			ResultSet rsUser = pstmtUser.getGeneratedKeys();
-			rsUser = pstmtUser.executeQuery();
-
+			ResultSet rsUser = pstmtUser.executeQuery();
 			while (rsUser.next()) {
 				utilisateur = new Utilisateur(rsUser.getInt("no_utilisateur"), rsUser.getString("pseudo"),
 						rsUser.getString("nom"), rsUser.getString("prenom"), rsUser.getString("email"),
-						rsUser.getString("email"), rsUser.getString("telephone"), rsUser.getString("rue"),
-						rsUser.getString("code_postal"), rsUser.getString("mot_de_passe"),
+						 rsUser.getString("telephone"), rsUser.getString("rue"),
+						rsUser.getString("code_postal"),rsUser.getString("ville"), rsUser.getString("mot_de_passe"),
 						rsUser.getInt("credit"), rsUser.getBoolean("administrateur"));
 			}
 			rsUser.close();
