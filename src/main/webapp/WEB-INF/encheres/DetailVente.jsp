@@ -1,3 +1,4 @@
+<%@page import="fr.eni.encheres.bo.ArticleVendu"%>
 <%@page import="javax.swing.text.Document"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -23,7 +24,7 @@
 		<jsp:param name="pageTitle" value='Vente' />
 	</jsp:include>
 
-	<main class="py-3">
+	<main clas  s="py-3">
 
 		<h1 class="text-center h3 mb-4">Détail vente</h1>
 
@@ -37,7 +38,11 @@
 				<div class="col-md-8">
 					<div class="row">
 						<label for="nom"
-							class="col-sm-7  col-form-label col-form-label-lg">Nom
+							class="col-sm-7  col-form-label col-form-label-lg"><% 
+							if(request.getAttribute("articleVendu") != null) {
+							ArticleVendu articleVendu = request.getAttribute("articleV");
+							}
+							%>Nom
 							Article </label> <label for="nom"
 							class="col-sm-1 col-form-label col-form-label-lg"> </label>
 					</div>
@@ -79,7 +84,7 @@
 							class="col-sm-5 col-md-6 col-form-label col-form-label-lg"></label>
 					</div>
 					<div class="row">
-						<label for="nom" class="col-sm-3 col-form-label col-form-label-lg">Vendeur
+						<label for="nom" class="col-sm-3 col-form-label col-form-label-lg" id="vendeur">Vendeur
 							: </label> <label for="nom"
 							class="col-sm-5 col-md-6 col-form-label col-form-label-lg">
 						</label>
@@ -92,7 +97,7 @@
 								min="0" class="form-control">
 						</div>
 						<div class="col-sm-1 col-md-2 col-form-label col-form-label-lg">
-							<button type="submit" class="btn btn-success">Enchérir</button>
+							<button type="submit" id=""class="btn btn-success">Enchérir</button>
 						</div>
 					</div>
 
@@ -101,7 +106,9 @@
 				</div>
 
 
-
+</div>
+</div>
+</main>
 
 
 				<%@ include file="/WEB-INF/partials/footer.jspf"%>
