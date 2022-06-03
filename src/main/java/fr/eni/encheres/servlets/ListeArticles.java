@@ -78,7 +78,7 @@ public class ListeArticles extends HttpServlet {
 			if (listeCategories != null) {
 				request.setAttribute("listeCategories", listeCategories);
 			}
-			if (!categorieCheck.equalsIgnoreCase("toutes") || ventesCheck.length == 0 || achatsCheck.length == 0) {
+			if (!categorieCheck.equalsIgnoreCase("toutes")) {
 //				listeArticles = articleManager.getFilteredListeArticle(2);
 				int categorie_id = Integer.valueOf(categorieCheck);
 				listeArticles = articleManager.getFilteredListeArticle(categorie_id);
