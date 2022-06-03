@@ -269,19 +269,19 @@
 	<%@ include file="/WEB-INF/partials/footer.jspf"%>
 	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
 	<script
-		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-<script>
-	function enable() {
-		var radio = document.getElementById("radioAchat");
-		var checkV = document.getELementByName("checkVentes");
-		var chackA = document.getELementByName("checkAchat");
-		if (radio.checked) {
-			checkV.removeAttribute("disabled");
-		} else {
-			checkA.removeAttribute("disabled");
+		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script><script>
+		function enable() {
+			var radio = document.getElementById("radioAchat");
+			var checkV = document.getELementByName("checkVentes");
+			var chackA = document.getELementByName("checkAchat");
+			if (radio.checked) {
+				checkV.removeAttribute("disabled");
+			} else {
+				checkA.removeAttribute("disabled");
+			}
 		}
-	}
-</script>
+	</script>
+</body>
+
 
 </html>
