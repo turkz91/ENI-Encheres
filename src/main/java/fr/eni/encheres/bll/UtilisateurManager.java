@@ -46,6 +46,20 @@ public class UtilisateurManager {
 
 		return utilisateur;
 	}
+
+	public Utilisateur findUserbyID(String no_utilisateur) throws BusinessException {
+		Utilisateur utilisateur = null;
+		if (no_utilisateur != null) {
+			int ID = Integer.valueOf(no_utilisateur);
+			utilisateur = utilisateurDAO.selectUserById(ID);			
+		}		
+		else {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MDP_FAUX);
+			throw businessException;
+		}
+		return utilisateur;
+	}
 	
 	public Utilisateur loginUtilisateur(String userDetails, String motDePasse) throws BusinessException {
 

@@ -24,7 +24,7 @@
 		<jsp:param name="pageTitle" value='Vente' />
 	</jsp:include>
 
-	<main clas  s="py-3">
+	<main class="py-3">
 
 		<h1 class="text-center h3 mb-4">Détail vente</h1>
 
@@ -38,21 +38,18 @@
 				<div class="col-md-8">
 					<div class="row">
 						<label for="nom"
-							class="col-sm-7  col-form-label col-form-label-lg"><% 
-							if(request.getAttribute("articleVendu") != null) {
-							ArticleVendu articleVendu = request.getAttribute("articleV");
-							}
-							%>Nom
-							Article </label> <label for="nom"
-							class="col-sm-1 col-form-label col-form-label-lg"> </label>
+							class="col-sm-7  col-form-label col-form-label-lg">
+							Nom Article </label> 
+						<label for="nom"
+							class="col-sm-1 col-form-label col-form-label-lg">
+						${article.nom_article}	
+							 </label>
 					</div>
 					<div class="row">
 						<label for="nom" class="col-sm-3 col-form-label col-form-label-lg">Description
 							: </label> <label for="nom"
 							class="col-sm-5 col-md-7 col-lg-6 col-form-label col-form-label-lg">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-							elementum ornare erat. Duis luctus mi at diam cursus vestibulum.
-							Fusce ac enim id diam auctor gravida non sit amet. </label>
+							${article.description} </label>
 					</div>
 					<div class="row">
 						<label for="nom" class="col-sm-3 col-form-label col-form-label-lg">Catégorie
@@ -70,12 +67,14 @@
 						<label for="nom" class="col-sm-3 col-form-label col-form-label-lg">Mise
 							à prix : : </label> <label for="nom"
 							class="col-sm-5 col-md-6 col-form-label col-form-label-lg">
+							${article.prix_initial}
 						</label>
 					</div>
 					<div class="row">
 						<label for="nom" class="col-sm-3 col-form-label col-form-label-lg">Fin
 							de l'enchère : </label> <label for="nom"
 							class="col-sm-5 col-md-6 col-form-label col-form-label-lg">
+							${article.date_fin_encheres}
 						</label>
 					</div>
 					<div class="row">

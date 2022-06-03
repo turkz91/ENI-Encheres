@@ -1,4 +1,13 @@
 $(document).ready(function () {
+	$(".formConfirm").click(function(){
+		$( this ).closest( "form" ).submit();		
+	});
+	
+	$(".formArticle").click(function(){
+		$( this ).closest( ".row" ).find( "form" ).submit();
+	});	
+	
+	
 	$("#buttonRadioAchat").click(function(){
 		if ($("#achatsActifs").attr( "disabled" )) {
 			$("#buttonRadioAchat").prop("checked", true);
